@@ -229,7 +229,7 @@ namespace ImperionBrowser
             }
         }
 
-        private WebBrowser GetCurrentBrowser()
+        public WebBrowser GetCurrentBrowser()
         {
             return (WebBrowser)tabControl.SelectedTab.Controls["browser"];
         }
@@ -256,6 +256,8 @@ namespace ImperionBrowser
         private void btnFindComets_Click(object sender, EventArgs e)
         {
             WebBrowser browser = GetCurrentBrowser();
+            Tools.SaveCookies(browser, "cookies.txt");
+
             if (browser.ReadyState != WebBrowserReadyState.Complete)
             {
                 MessageBox.Show("Das Universum ist noch nicht komplett geladen, bitte Vorgang später wiederholen", "Universum noch nicht bereit...", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -272,7 +274,7 @@ namespace ImperionBrowser
             }
 
             ImperionParser parser = new ImperionParser(browser);
-            parser.GetCometsInMap();
+            parser.ShowRecyclerTargets(this);
         }
 
         #endregion

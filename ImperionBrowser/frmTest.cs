@@ -17,7 +17,16 @@ namespace ImperionBrowser
 
         private void frmTest_Load(object sender, EventArgs e)
         {
-            ImperionParser.TestMap();
+            ImperionParser ip = new ImperionParser(new WebBrowser());
+            ip.TestMap();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //Tools.SaveCookies(webBrowser1, "cookies.txt");
+           
+        }
+
+    
     }
 }
