@@ -11,6 +11,8 @@ namespace ImperionBrowser
 {
     public partial class frmMain : Form
     {
+        List<string> _AllreadySendedAttacks = new List<string>();
+        
         public frmMain()
         {
             InitializeComponent();
@@ -278,6 +280,72 @@ namespace ImperionBrowser
         }
 
         #endregion
+
+        private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void einstellungenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConfiguration frmConfig = new frmConfiguration();
+            frmConfig.ShowDialog();
+        }
+
+        private void btnSMSAlert_Click(object sender, EventArgs e)
+        {
+            if (Properties.Settings.Default.gAccount == "" ||
+                Properties.Settings.Default.gPwd == "" ||
+                Properties.Settings.Default.gPostUrl == "")
+            {
+                MessageBox.Show("Bitte gehe erst in die Einstellungen und nehme die nötige Konfiguration vor", "Einstellungen nicht komplett", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            
+            if (btnSMSAlert.Checked)
+            {
+                btnSMSAlert.ToolTipText = "Handybenarchichtigung jetzt ausschalten";
+                _AllreadySendedAttacks.Clear();
+                timerHandyAlert.Enabled = true;
+            }
+            else
+            {
+                btnSMSAlert.ToolTipText = "Handybenarchichtigung jetzt einschalten";
+                timerHandyAlert.Enabled = false;
+            }
+        }
+
+        private void timerHandyAlert_Tick(object sender, EventArgs e)
+        {
+            WebBrowser browser = GetCurrentBrowser();
+            HtmlElement incomingAttackContent = browser.Document.GetElementById("incomingAttackContent");
+
+            if (incomingAttackContent == null)
+            {
+                browser.Refresh();
+                //there is no attack running
+                return;
+            }
+
+            GoogleSms gSms = new GoogleSms(Properties.Settings.Default.gAccount, Properties.Settings.Default.gPwd);
+
+            HtmlElementCollection links = incomingAttackContent.GetElementsByTagName("a");
+            HtmlElementCollection spans;
+            string text = "";
+
+            for (int i = 0; i < links.Count; i++)
+            {
+                if (_AllreadySendedAttacks.Contains(links[i].Id))
+                    continue;
+                else
+                    _AllreadySendedAttacks.Add(links[i].Id);
+                
+                spans = links[i].GetElementsByTagName("span");
+                text = spans[0].InnerText + " in " + spans[1].InnerText;
+                gSms.SendSms(Properties.Settings.Default.gPostUrl, text, "Imperion");
+            }
+            
+        }
 
     }
 }

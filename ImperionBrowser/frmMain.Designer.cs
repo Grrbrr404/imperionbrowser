@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolBarProgress = new System.Windows.Forms.ToolStripProgressBar();
@@ -49,6 +50,14 @@
             this.toolBarRight = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnFindComets = new System.Windows.Forms.ToolStripButton();
+            this.mainMenu = new System.Windows.Forms.MenuStrip();
+            this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.extrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSMSAlert = new System.Windows.Forms.ToolStripButton();
+            this.timerHandyAlert = new System.Windows.Forms.Timer(this.components);
             this.statusStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -60,6 +69,7 @@
             this.tabControl.SuspendLayout();
             this.tabMain.SuspendLayout();
             this.toolBarRight.SuspendLayout();
+            this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -87,7 +97,8 @@
             // splitContainer1
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.IsSplitterFixed = true;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 24);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -98,7 +109,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.ContentContainer);
-            this.splitContainer1.Size = new System.Drawing.Size(794, 552);
+            this.splitContainer1.Size = new System.Drawing.Size(794, 528);
             this.splitContainer1.SplitterDistance = 25;
             this.splitContainer1.TabIndex = 4;
             // 
@@ -152,7 +163,7 @@
             // lblAdress
             // 
             this.lblAdress.Name = "lblAdress";
-            this.lblAdress.Size = new System.Drawing.Size(46, 22);
+            this.lblAdress.Size = new System.Drawing.Size(48, 22);
             this.lblAdress.Text = "Adresse";
             // 
             // edtAdress
@@ -181,7 +192,8 @@
             // ContentContainer.Panel2
             // 
             this.ContentContainer.Panel2.Controls.Add(this.toolBarRight);
-            this.ContentContainer.Size = new System.Drawing.Size(794, 523);
+            this.ContentContainer.Panel2MinSize = 0;
+            this.ContentContainer.Size = new System.Drawing.Size(794, 499);
             this.ContentContainer.SplitterDistance = 764;
             this.ContentContainer.TabIndex = 0;
             // 
@@ -195,7 +207,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(764, 523);
+            this.tabControl.Size = new System.Drawing.Size(764, 499);
             this.tabControl.TabIndex = 4;
             this.tabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl_Selecting);
             this.tabControl.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tabControl_MouseDoubleClick);
@@ -207,7 +219,7 @@
             this.tabMain.Location = new System.Drawing.Point(4, 22);
             this.tabMain.Name = "tabMain";
             this.tabMain.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMain.Size = new System.Drawing.Size(756, 497);
+            this.tabMain.Size = new System.Drawing.Size(756, 473);
             this.tabMain.TabIndex = 0;
             this.tabMain.Text = "Main";
             this.tabMain.UseVisualStyleBackColor = true;
@@ -218,7 +230,7 @@
             this.browser.Location = new System.Drawing.Point(3, 3);
             this.browser.MinimumSize = new System.Drawing.Size(20, 20);
             this.browser.Name = "browser";
-            this.browser.Size = new System.Drawing.Size(750, 491);
+            this.browser.Size = new System.Drawing.Size(750, 467);
             this.browser.TabIndex = 1;
             this.browser.Url = new System.Uri("http://imperion.de", System.UriKind.Absolute);
             // 
@@ -238,13 +250,15 @@
             this.toolBarRight.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolBarRight.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator1,
-            this.btnFindComets});
+            this.btnFindComets,
+            this.toolStripSplitButton1,
+            this.btnSMSAlert});
             this.toolBarRight.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
             this.toolBarRight.Location = new System.Drawing.Point(0, 0);
             this.toolBarRight.Margin = new System.Windows.Forms.Padding(0, 20, 0, 0);
             this.toolBarRight.Name = "toolBarRight";
             this.toolBarRight.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolBarRight.Size = new System.Drawing.Size(26, 523);
+            this.toolBarRight.Size = new System.Drawing.Size(26, 499);
             this.toolBarRight.Stretch = true;
             this.toolBarRight.TabIndex = 0;
             this.toolBarRight.Text = "toolStrip2";
@@ -268,6 +282,68 @@
             this.btnFindComets.ToolTipText = "Aktuelle Map nach Kometen durchsuchen";
             this.btnFindComets.Click += new System.EventHandler(this.btnFindComets_Click);
             // 
+            // mainMenu
+            // 
+            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dateiToolStripMenuItem,
+            this.extrasToolStripMenuItem});
+            this.mainMenu.Location = new System.Drawing.Point(0, 0);
+            this.mainMenu.Name = "mainMenu";
+            this.mainMenu.Size = new System.Drawing.Size(794, 24);
+            this.mainMenu.TabIndex = 5;
+            this.mainMenu.Text = "menuStrip1";
+            // 
+            // dateiToolStripMenuItem
+            // 
+            this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.beendenToolStripMenuItem});
+            this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
+            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.dateiToolStripMenuItem.Text = "&Datei";
+            // 
+            // beendenToolStripMenuItem
+            // 
+            this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.beendenToolStripMenuItem.Text = "B&eenden";
+            this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
+            // 
+            // extrasToolStripMenuItem
+            // 
+            this.extrasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.einstellungenToolStripMenuItem});
+            this.extrasToolStripMenuItem.Name = "extrasToolStripMenuItem";
+            this.extrasToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.extrasToolStripMenuItem.Text = "E&xtras";
+            // 
+            // einstellungenToolStripMenuItem
+            // 
+            this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.einstellungenToolStripMenuItem.Text = "&Einstellungen...";
+            this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.einstellungenToolStripMenuItem_Click);
+            // 
+            // toolStripSplitButton1
+            // 
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(24, 6);
+            // 
+            // btnSMSAlert
+            // 
+            this.btnSMSAlert.CheckOnClick = true;
+            this.btnSMSAlert.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSMSAlert.Image = ((System.Drawing.Image)(resources.GetObject("btnSMSAlert.Image")));
+            this.btnSMSAlert.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSMSAlert.Name = "btnSMSAlert";
+            this.btnSMSAlert.Size = new System.Drawing.Size(24, 20);
+            this.btnSMSAlert.Text = "Handybenarchichtigung jetzt einschalten";
+            this.btnSMSAlert.Click += new System.EventHandler(this.btnSMSAlert_Click);
+            // 
+            // timerHandyAlert
+            // 
+            this.timerHandyAlert.Interval = 30000;
+            this.timerHandyAlert.Tick += new System.EventHandler(this.timerHandyAlert_Tick);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -275,8 +351,10 @@
             this.ClientSize = new System.Drawing.Size(794, 574);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.mainMenu);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.mainMenu;
             this.Name = "frmMain";
             this.Text = "Imperion Browser";
             this.Load += new System.EventHandler(this.frmMain_Load);
@@ -297,6 +375,8 @@
             this.tabMain.ResumeLayout(false);
             this.toolBarRight.ResumeLayout(false);
             this.toolBarRight.PerformLayout();
+            this.mainMenu.ResumeLayout(false);
+            this.mainMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -324,6 +404,14 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnFindComets;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.MenuStrip mainMenu;
+        private System.Windows.Forms.ToolStripMenuItem dateiToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem beendenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem extrasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem einstellungenToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSplitButton1;
+        private System.Windows.Forms.ToolStripButton btnSMSAlert;
+        private System.Windows.Forms.Timer timerHandyAlert;
     }
 }
 
