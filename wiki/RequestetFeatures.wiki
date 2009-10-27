@@ -1,5 +1,5 @@
 #labels Phase-Requirements
-= Requestet features =
+= Requested features =
 
 This section will hold requested features by users, feel free to enlarge the list below:)
 
