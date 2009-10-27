@@ -3,5 +3,5 @@
 
 This section will hold requested features by users, feel free to enlarge the list below:)
 
-
   * history back on mouse4 pressed
+  * Show balloon tooltip when opening fleet center. The tooltip contains sum of returning raids
