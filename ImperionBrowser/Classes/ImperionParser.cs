@@ -4,8 +4,8 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using Jayrock;
-using Jayrock.Json;
 using System.IO;
+using Jayrock.Json;
 
 namespace ImperionBrowser
 {
