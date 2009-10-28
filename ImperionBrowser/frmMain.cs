@@ -6,16 +6,47 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
+using DcamMouseGesture;
+using MouseKeyboardLibrary;
 
 namespace ImperionBrowser
 {
     public partial class frmMain : Form
     {
         List<string> _AllreadySendedAttacks = new List<string>();
-        
+        MouseGesture _mg;
+        MouseHook mouseHook = new MouseHook();
+
         public frmMain()
         {
             InitializeComponent();
+
+            // Capture mouse the events
+            mouseHook.MouseDown += new MouseEventHandler(mouseHook_MouseDown);
+            mouseHook.Start();
+
+            // b) Load a file with the commands and keys once in your application
+            MouseGestureData.Instance.Commands.ReadFile(Environment.CurrentDirectory + @"\Data\MouseGestureCommands.xml" );
+
+            // c) For each Form you want to use mouse gestures...
+            _mg = new MouseGesture(this, null); 
+            _mg.MouseGestureEntered += new MouseGestureEventHandler(OnMouseGestureEntered);
+        }
+
+        void mouseHook_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                pnlBrowserOverlay.Enabled = true;
+        }
+
+        private void OnMouseGestureEntered(object sender, MouseGestureEventArgs e)
+        {
+            if (e.Command == "Left")
+                GetCurrentBrowser().GoBack();
+            if (e.Command == "Right")
+                GetCurrentBrowser().GoForward();
+
+            pnlBrowserOverlay.Enabled = false;
         }
 
         #region browser events
@@ -118,6 +149,10 @@ namespace ImperionBrowser
             if (e.Button == MouseButtons.Right)
             {
                 CloseTab(clickedPage);
+            }
+            if (e.Button == MouseButtons.Middle)
+            {
+                GetCurrentBrowser().GoBack();
             }
         }
 
@@ -250,6 +285,7 @@ namespace ImperionBrowser
 
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            mouseHook.Stop();
             SaveOpendRegister();
         }
 
@@ -344,7 +380,17 @@ namespace ImperionBrowser
                 text = spans[0].InnerText + " in " + spans[1].InnerText;
                 gSms.SendSms(Properties.Settings.Default.gPostUrl, text, "Imperion");
             }
-            
+
+        }
+
+        private void pnlBrowserOverlay_MouseDown(object sender, MouseEventArgs e)
+        {
+            Text = "TEst";
+        }
+
+        private void pnlBrowserOverlay_MouseClick(object sender, MouseEventArgs e)
+        {
+            Text = "click";
         }
 
     }
