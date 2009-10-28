@@ -43,7 +43,6 @@
             this.edtAdress = new System.Windows.Forms.ToolStripTextBox();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.ContentContainer = new System.Windows.Forms.SplitContainer();
-            this.pnlBrowserOverlay = new ImperionBrowser.TransparentPanel();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabMain = new System.Windows.Forms.TabPage();
             this.browser = new System.Windows.Forms.WebBrowser();
@@ -59,6 +58,8 @@
             this.extrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timerHandyAlert = new System.Windows.Forms.Timer(this.components);
+            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.pnlBrowserOverlay = new ImperionBrowser.TransparentPanel();
             this.statusStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -78,7 +79,8 @@
             this.statusStrip1.BackColor = System.Drawing.SystemColors.Control;
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolBarProgress,
-            this.toolBarLabel});
+            this.toolBarLabel,
+            this.lblStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 552);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(794, 22);
@@ -88,7 +90,7 @@
             // toolBarProgress
             // 
             this.toolBarProgress.Name = "toolBarProgress";
-            this.toolBarProgress.Size = new System.Drawing.Size(100, 16);
+            this.toolBarProgress.Size = new System.Drawing.Size(300, 16);
             // 
             // toolBarLabel
             // 
@@ -199,17 +201,6 @@
             this.ContentContainer.Size = new System.Drawing.Size(794, 499);
             this.ContentContainer.SplitterDistance = 758;
             this.ContentContainer.TabIndex = 0;
-            // 
-            // pnlBrowserOverlay
-            // 
-            this.pnlBrowserOverlay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBrowserOverlay.Enabled = false;
-            this.pnlBrowserOverlay.Location = new System.Drawing.Point(0, 0);
-            this.pnlBrowserOverlay.Name = "pnlBrowserOverlay";
-            this.pnlBrowserOverlay.Size = new System.Drawing.Size(758, 499);
-            this.pnlBrowserOverlay.TabIndex = 2;
-            this.pnlBrowserOverlay.MouseClick += new System.Windows.Forms.MouseEventHandler(this.pnlBrowserOverlay_MouseClick);
-            this.pnlBrowserOverlay.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pnlBrowserOverlay_MouseDown);
             // 
             // tabControl
             // 
@@ -359,6 +350,22 @@
             this.timerHandyAlert.Interval = 30000;
             this.timerHandyAlert.Tick += new System.EventHandler(this.timerHandyAlert_Tick);
             // 
+            // lblStatus
+            // 
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(446, 17);
+            this.lblStatus.Spring = true;
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // pnlBrowserOverlay
+            // 
+            this.pnlBrowserOverlay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlBrowserOverlay.Enabled = false;
+            this.pnlBrowserOverlay.Location = new System.Drawing.Point(0, 0);
+            this.pnlBrowserOverlay.Name = "pnlBrowserOverlay";
+            this.pnlBrowserOverlay.Size = new System.Drawing.Size(758, 499);
+            this.pnlBrowserOverlay.TabIndex = 2;
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -429,6 +436,7 @@
         private System.Windows.Forms.ToolStripButton btnSMSAlert;
         private System.Windows.Forms.Timer timerHandyAlert;
         private TransparentPanel pnlBrowserOverlay;
+        private System.Windows.Forms.ToolStripStatusLabel lblStatus;
     }
 }
 

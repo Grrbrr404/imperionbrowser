@@ -13,32 +13,47 @@ namespace ImperionBrowser
 {
     public partial class frmMain : Form
     {
+
+        #region Member
         List<string> _AllreadySendedAttacks = new List<string>();
         MouseGesture _mg;
-        MouseHook mouseHook = new MouseHook();
+        MouseHook _mouseHook = new MouseHook();
+        #endregion
 
         public frmMain()
         {
             InitializeComponent();
+            InitMouseGestures();
+        }
 
-            // Capture mouse the events
-            mouseHook.MouseDown += new MouseEventHandler(mouseHook_MouseDown);
-            mouseHook.Start();
+        #region MouseGestures
 
-            // b) Load a file with the commands and keys once in your application
-            MouseGestureData.Instance.Commands.ReadFile(Environment.CurrentDirectory + @"\Data\MouseGestureCommands.xml" );
+        private void InitMouseGestures()
+        {
+            // Hook into mouse down event to enable overlay panel
+            _mouseHook.MouseDown += new MouseEventHandler(mouseHook_MouseDown);
+            _mouseHook.Start();
 
-            // c) For each Form you want to use mouse gestures...
-            _mg = new MouseGesture(this, null); 
+            //Load a file with the commands and keys once in your application
+            MouseGestureData.Instance.Commands.ReadFile(Environment.CurrentDirectory + @"\Data\MouseGestureCommands.xml");
+            
+            //For Init MouseGesture handler
+            _mg = new MouseGesture(this, null);
             _mg.MouseGestureEntered += new MouseGestureEventHandler(OnMouseGestureEntered);
         }
 
+        /// <summary>
+        /// enable mouse overlay
+        /// </summary>
         void mouseHook_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
                 pnlBrowserOverlay.Enabled = true;
         }
 
+        /// <summary>
+        /// Do Events and disable pnl overlay
+        /// </summary>
         private void OnMouseGestureEntered(object sender, MouseGestureEventArgs e)
         {
             if (e.Command == "Left")
@@ -49,7 +64,23 @@ namespace ImperionBrowser
             pnlBrowserOverlay.Enabled = false;
         }
 
+        #endregion
+
         #region browser events
+
+        private WebBrowser CreateCommonWebBrowserElement()
+        {
+            WebBrowser newBrowser = new WebBrowser();
+            newBrowser.Name = "browser";
+            newBrowser.Dock = DockStyle.Fill;
+            newBrowser.ProgressChanged += browser_ProgressChanged;
+            newBrowser.Navigating += new WebBrowserNavigatingEventHandler(newBrowser_Navigating);
+            newBrowser.DocumentTitleChanged += new EventHandler(newBrowser_DocumentTitleChanged);
+            newBrowser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(newBrowser_DocumentCompleted);
+
+            return newBrowser;
+        }
+
         private void browser_ProgressChanged(object sender, WebBrowserProgressChangedEventArgs e)
         {
             toolBarProgress.Maximum = Convert.ToInt32(e.MaximumProgress);
@@ -71,6 +102,14 @@ namespace ImperionBrowser
                 page.Text = browser.DocumentTitle;
             }
         }
+
+        void newBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            //the user opend fleet command center
+            if (e.Url.ToString().Contains("/fleetBase/"))
+                ParseFleetBaseAndShowResourceInformationTooltip();
+        }
+
 
         #endregion
 
@@ -130,17 +169,7 @@ namespace ImperionBrowser
             return page;
         }
 
-        private WebBrowser CreateCommonWebBrowserElement()
-        {
-            WebBrowser newBrowser = new WebBrowser();
-            newBrowser.Name = "browser";
-            newBrowser.Dock = DockStyle.Fill;
-            newBrowser.ProgressChanged += browser_ProgressChanged;
-            newBrowser.Navigating += new WebBrowserNavigatingEventHandler(newBrowser_Navigating);
-            newBrowser.DocumentTitleChanged += new EventHandler(newBrowser_DocumentTitleChanged);
-
-            return newBrowser;
-        }
+        
 
         private void tabControl_MouseClick(object sender, MouseEventArgs e)
         {
@@ -281,15 +310,26 @@ namespace ImperionBrowser
             GetCurrentBrowser().GoForward();
         }
 
-        #endregion
-
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            mouseHook.Stop();
+            _mouseHook.Stop();
             SaveOpendRegister();
         }
 
-        #region parsing
+        private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void einstellungenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmConfiguration frmConfig = new frmConfiguration();
+            frmConfig.ShowDialog();
+        }
+
+        #endregion
+
+        #region Comet parsing
 
         private void btnFindComets_Click(object sender, EventArgs e)
         {
@@ -317,17 +357,7 @@ namespace ImperionBrowser
 
         #endregion
 
-        private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void einstellungenToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            frmConfiguration frmConfig = new frmConfiguration();
-            frmConfig.ShowDialog();
-        }
-
+        #region GoogleSms
         private void btnSMSAlert_Click(object sender, EventArgs e)
         {
             if (Properties.Settings.Default.gAccount == "" ||
@@ -382,15 +412,24 @@ namespace ImperionBrowser
             }
 
         }
+        #endregion
 
-        private void pnlBrowserOverlay_MouseDown(object sender, MouseEventArgs e)
+        #region Fleetcenter parsing
+
+        private void ParseFleetBaseAndShowResourceInformationTooltip()
         {
-            Text = "TEst";
+            lblStatus.Text = ImperionParser.ParseFleetBaseAndGetResourceSum(GetCurrentBrowser().Document);
         }
+        #endregion
 
         private void pnlBrowserOverlay_MouseClick(object sender, MouseEventArgs e)
         {
-            Text = "click";
+
+        }
+
+        private void pnlBrowserOverlay_MouseDown(object sender, MouseEventArgs e)
+        {
+
         }
 
     }
