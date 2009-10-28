@@ -283,5 +283,33 @@ namespace ImperionBrowser
 
             return "00:00:00";
         }
+
+        public static string ParseFleetBaseAndGetResourceSum(HtmlDocument htmlDocument)
+        {
+            HtmlElement divFleetBase = htmlDocument.GetElementById("fleetBase");
+            HtmlElement divFleetSlots = divFleetBase.Children[0];
+            int amountOfReturningFleet = Convert.ToInt32(divFleetBase.GetElementsByTagName("span")[0].InnerText);
+
+            if (amountOfReturningFleet == 0)
+                return "Es kommen momentan keine Resourcen zurück";
+
+            HtmlElementCollection tables = divFleetBase.GetElementsByTagName("table");
+
+            int sumMetal = 0;
+            int sumCrystal = 0;
+            int sumDeut = 0;
+            HtmlElement listResource;
+
+            for (int i = 0; i < amountOfReturningFleet; i++)
+            {
+                listResource = tables[i].GetElementsByTagName("tr")[6].GetElementsByTagName("ul")[0];
+
+                sumMetal += Convert.ToInt32(listResource.Children[0].InnerText);
+                sumCrystal += Convert.ToInt32(listResource.Children[1].InnerText);
+                sumDeut += Convert.ToInt32(listResource.Children[2].InnerText);
+            }
+            
+            return String.Format("Es kommen insgesamt {0} Metall, {1} Kristall und {2} Deterium", sumMetal, sumCrystal, sumDeut);
+        }
     }
 }
