@@ -33,11 +33,13 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolBarProgress = new System.Windows.Forms.ToolStripProgressBar();
             this.toolBarLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.toolBarTop = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.Zurück = new System.Windows.Forms.ToolStripButton();
             this.btnHistoryForward = new System.Windows.Forms.ToolStripButton();
+            this.btnRefreshBrowser = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.lblAdress = new System.Windows.Forms.ToolStripLabel();
             this.edtAdress = new System.Windows.Forms.ToolStripTextBox();
@@ -45,7 +47,6 @@
             this.ContentContainer = new System.Windows.Forms.SplitContainer();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabMain = new System.Windows.Forms.TabPage();
-            this.browser = new System.Windows.Forms.WebBrowser();
             this.tabNewPage = new System.Windows.Forms.TabPage();
             this.toolBarRight = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -58,7 +59,6 @@
             this.extrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timerHandyAlert = new System.Windows.Forms.Timer(this.components);
-            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.pnlBrowserOverlay = new ImperionBrowser.TransparentPanel();
             this.statusStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -69,7 +69,6 @@
             this.ContentContainer.Panel2.SuspendLayout();
             this.ContentContainer.SuspendLayout();
             this.tabControl.SuspendLayout();
-            this.tabMain.SuspendLayout();
             this.toolBarRight.SuspendLayout();
             this.mainMenu.SuspendLayout();
             this.SuspendLayout();
@@ -83,7 +82,7 @@
             this.lblStatus});
             this.statusStrip1.Location = new System.Drawing.Point(0, 552);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(794, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(942, 22);
             this.statusStrip1.TabIndex = 1;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -96,6 +95,13 @@
             // 
             this.toolBarLabel.Name = "toolBarLabel";
             this.toolBarLabel.Size = new System.Drawing.Size(0, 17);
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(625, 17);
+            this.lblStatus.Spring = true;
+            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // splitContainer1
             // 
@@ -112,7 +118,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.ContentContainer);
-            this.splitContainer1.Size = new System.Drawing.Size(794, 528);
+            this.splitContainer1.Size = new System.Drawing.Size(942, 528);
             this.splitContainer1.SplitterDistance = 25;
             this.splitContainer1.TabIndex = 4;
             // 
@@ -123,13 +129,14 @@
             this.toolStripSeparator2,
             this.Zurück,
             this.btnHistoryForward,
+            this.btnRefreshBrowser,
             this.toolStripSeparator3,
             this.lblAdress,
             this.edtAdress,
             this.toolStripSeparator5});
             this.toolBarTop.Location = new System.Drawing.Point(0, 0);
             this.toolBarTop.Name = "toolBarTop";
-            this.toolBarTop.Size = new System.Drawing.Size(794, 25);
+            this.toolBarTop.Size = new System.Drawing.Size(942, 25);
             this.toolBarTop.TabIndex = 0;
             this.toolBarTop.Text = "toolStrip1";
             // 
@@ -159,6 +166,16 @@
             this.btnHistoryForward.Text = "Vorwärts";
             this.btnHistoryForward.Click += new System.EventHandler(this.btnForward_Click);
             // 
+            // btnRefreshBrowser
+            // 
+            this.btnRefreshBrowser.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRefreshBrowser.Image = ((System.Drawing.Image)(resources.GetObject("btnRefreshBrowser.Image")));
+            this.btnRefreshBrowser.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRefreshBrowser.Name = "btnRefreshBrowser";
+            this.btnRefreshBrowser.Size = new System.Drawing.Size(23, 22);
+            this.btnRefreshBrowser.Text = "Seite neu laden";
+            this.btnRefreshBrowser.Click += new System.EventHandler(this.btnRefreshBrowser_Click);
+            // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
@@ -175,7 +192,7 @@
             this.edtAdress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.edtAdress.Name = "edtAdress";
             this.edtAdress.Size = new System.Drawing.Size(600, 25);
-            this.edtAdress.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edtAdress_KeyPress);
+            this.edtAdress.KeyUp += new System.Windows.Forms.KeyEventHandler(this.edtAdress_KeyUp);
             // 
             // toolStripSeparator5
             // 
@@ -198,8 +215,8 @@
             // ContentContainer.Panel2
             // 
             this.ContentContainer.Panel2.Controls.Add(this.toolBarRight);
-            this.ContentContainer.Size = new System.Drawing.Size(794, 499);
-            this.ContentContainer.SplitterDistance = 758;
+            this.ContentContainer.Size = new System.Drawing.Size(942, 499);
+            this.ContentContainer.SplitterDistance = 906;
             this.ContentContainer.TabIndex = 0;
             // 
             // tabControl
@@ -212,7 +229,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(758, 499);
+            this.tabControl.Size = new System.Drawing.Size(906, 499);
             this.tabControl.TabIndex = 4;
             this.tabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl_Selecting);
             this.tabControl.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tabControl_MouseDoubleClick);
@@ -220,32 +237,20 @@
             // 
             // tabMain
             // 
-            this.tabMain.Controls.Add(this.browser);
             this.tabMain.Location = new System.Drawing.Point(4, 22);
             this.tabMain.Name = "tabMain";
             this.tabMain.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMain.Size = new System.Drawing.Size(750, 473);
+            this.tabMain.Size = new System.Drawing.Size(898, 473);
             this.tabMain.TabIndex = 0;
             this.tabMain.Text = "Main";
             this.tabMain.UseVisualStyleBackColor = true;
-            // 
-            // browser
-            // 
-            this.browser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.browser.IsWebBrowserContextMenuEnabled = false;
-            this.browser.Location = new System.Drawing.Point(3, 3);
-            this.browser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.browser.Name = "browser";
-            this.browser.Size = new System.Drawing.Size(744, 467);
-            this.browser.TabIndex = 1;
-            this.browser.Url = new System.Uri("http://imperion.de", System.UriKind.Absolute);
             // 
             // tabNewPage
             // 
             this.tabNewPage.Location = new System.Drawing.Point(4, 22);
             this.tabNewPage.Name = "tabNewPage";
             this.tabNewPage.Padding = new System.Windows.Forms.Padding(3);
-            this.tabNewPage.Size = new System.Drawing.Size(750, 473);
+            this.tabNewPage.Size = new System.Drawing.Size(898, 473);
             this.tabNewPage.TabIndex = 1;
             this.tabNewPage.UseVisualStyleBackColor = true;
             // 
@@ -311,7 +316,7 @@
             this.extrasToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(794, 24);
+            this.mainMenu.Size = new System.Drawing.Size(942, 24);
             this.mainMenu.TabIndex = 5;
             this.mainMenu.Text = "menuStrip1";
             // 
@@ -350,27 +355,20 @@
             this.timerHandyAlert.Interval = 30000;
             this.timerHandyAlert.Tick += new System.EventHandler(this.timerHandyAlert_Tick);
             // 
-            // lblStatus
-            // 
-            this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(446, 17);
-            this.lblStatus.Spring = true;
-            this.lblStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // pnlBrowserOverlay
             // 
             this.pnlBrowserOverlay.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlBrowserOverlay.Enabled = false;
             this.pnlBrowserOverlay.Location = new System.Drawing.Point(0, 0);
             this.pnlBrowserOverlay.Name = "pnlBrowserOverlay";
-            this.pnlBrowserOverlay.Size = new System.Drawing.Size(758, 499);
+            this.pnlBrowserOverlay.Size = new System.Drawing.Size(906, 499);
             this.pnlBrowserOverlay.TabIndex = 2;
             // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(794, 574);
+            this.ClientSize = new System.Drawing.Size(942, 574);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.mainMenu);
@@ -395,7 +393,6 @@
             this.ContentContainer.Panel2.PerformLayout();
             this.ContentContainer.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
-            this.tabMain.ResumeLayout(false);
             this.toolBarRight.ResumeLayout(false);
             this.toolBarRight.PerformLayout();
             this.mainMenu.ResumeLayout(false);
@@ -415,7 +412,6 @@
         private System.Windows.Forms.SplitContainer ContentContainer;
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabMain;
-        private System.Windows.Forms.WebBrowser browser;
         private System.Windows.Forms.TabPage tabNewPage;
         private System.Windows.Forms.ToolStrip toolBarRight;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
@@ -437,6 +433,7 @@
         private System.Windows.Forms.Timer timerHandyAlert;
         private TransparentPanel pnlBrowserOverlay;
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
+        private System.Windows.Forms.ToolStripButton btnRefreshBrowser;
     }
 }
 

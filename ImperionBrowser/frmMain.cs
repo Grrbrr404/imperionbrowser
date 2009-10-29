@@ -32,23 +32,29 @@ namespace ImperionBrowser
         {
             // Hook into mouse down event to enable overlay panel
             _mouseHook.MouseDown += new MouseEventHandler(mouseHook_MouseDown);
-            _mouseHook.Start();
+            //_mouseHook.Start();
 
             //Load a file with the commands and keys once in your application
             MouseGestureData.Instance.Commands.ReadFile(Environment.CurrentDirectory + @"\Data\MouseGestureCommands.xml");
             
             //For Init MouseGesture handler
+            List<Type> Lst = new List<Type>();
+            Lst.Add(typeof(WebBrowser));
             _mg = new MouseGesture(this, null);
             _mg.MouseGestureEntered += new MouseGestureEventHandler(OnMouseGestureEntered);
+           
         }
-
         /// <summary>
         /// enable mouse overlay
         /// </summary>
         void mouseHook_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Right)
-                pnlBrowserOverlay.Enabled = true;
+            try
+            {
+                if (e.Button == MouseButtons.Right && ActiveForm != null)
+                    pnlBrowserOverlay.Enabled = true;
+            }
+            catch { }
         }
 
         /// <summary>
@@ -77,9 +83,12 @@ namespace ImperionBrowser
             newBrowser.Navigating += new WebBrowserNavigatingEventHandler(newBrowser_Navigating);
             newBrowser.DocumentTitleChanged += new EventHandler(newBrowser_DocumentTitleChanged);
             newBrowser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(newBrowser_DocumentCompleted);
-
+            newBrowser.IsWebBrowserContextMenuEnabled = false;
+            
             return newBrowser;
         }
+
+        
 
         private void browser_ProgressChanged(object sender, WebBrowserProgressChangedEventArgs e)
         {
@@ -90,6 +99,7 @@ namespace ImperionBrowser
         void newBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
             edtAdress.Text = e.Url.ToString();
+            lblStatus.Text = "";
         }
 
         void newBrowser_DocumentTitleChanged(object sender, EventArgs e)
@@ -108,8 +118,21 @@ namespace ImperionBrowser
             //the user opend fleet command center
             if (e.Url.ToString().Contains("/fleetBase/"))
                 ParseFleetBaseAndShowResourceInformationTooltip();
+
+            GetCurrentBrowser().Document.Window.Error +=new HtmlElementErrorEventHandler(Window_Error);
+            GetCurrentBrowser().Document.MouseDown += new HtmlElementEventHandler(Document_MouseDown);
         }
 
+        private void Window_Error(object sender, HtmlElementErrorEventArgs e)
+        {
+            e.Handled = true;
+        }
+        
+        private void Document_MouseDown(object sender, HtmlElementEventArgs e)
+        {
+            if (e.MouseButtonsPressed == MouseButtons.Right)
+                pnlBrowserOverlay.Enabled = true;
+        }
 
         #endregion
 
@@ -168,8 +191,6 @@ namespace ImperionBrowser
 
             return page;
         }
-
-        
 
         private void tabControl_MouseClick(object sender, MouseEventArgs e)
         {
@@ -284,15 +305,11 @@ namespace ImperionBrowser
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            LoadSavedRegister();
-        }
+            WebBrowser browser = CreateCommonWebBrowserElement();
+            tabMain.Controls.Add(browser);
+            browser.Navigate("http://imperion.de");
 
-        private void edtAdress_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == '\r')
-            {
-                GetCurrentBrowser().Navigate(edtAdress.Text);
-            }
+            LoadSavedRegister();
         }
 
         public WebBrowser GetCurrentBrowser()
@@ -325,6 +342,20 @@ namespace ImperionBrowser
         {
             frmConfiguration frmConfig = new frmConfiguration();
             frmConfig.ShowDialog();
+        }
+
+        private void btnRefreshBrowser_Click(object sender, EventArgs e)
+        {
+            GetCurrentBrowser().Refresh();
+        }
+
+        private void edtAdress_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                GetCurrentBrowser().Navigate(edtAdress.Text);
+                e.Handled = true;
+            }
         }
 
         #endregion
@@ -422,15 +453,8 @@ namespace ImperionBrowser
         }
         #endregion
 
-        private void pnlBrowserOverlay_MouseClick(object sender, MouseEventArgs e)
-        {
+        
 
-        }
-
-        private void pnlBrowserOverlay_MouseDown(object sender, MouseEventArgs e)
-        {
-
-        }
 
     }
 }

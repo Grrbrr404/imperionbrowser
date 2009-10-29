@@ -267,7 +267,6 @@ namespace ImperionBrowser
             return galaxyMap;
         }
 
-
         public static string json_extractFlightTime(string jsonData)
         {
             JsonTextReader jsonReader = new JsonTextReader(new StringReader(jsonData));
@@ -286,28 +285,39 @@ namespace ImperionBrowser
 
         public static string ParseFleetBaseAndGetResourceSum(HtmlDocument htmlDocument)
         {
+            float sumMetal = 0;
+            float sumCrystal = 0;
+            float sumDeut = 0;
+            
             HtmlElement divFleetBase = htmlDocument.GetElementById("fleetBase");
             HtmlElement divFleetSlots = divFleetBase.Children[0];
-            int amountOfReturningFleet = Convert.ToInt32(divFleetBase.GetElementsByTagName("span")[0].InnerText);
 
-            if (amountOfReturningFleet == 0)
-                return "Es kommen momentan keine Resourcen zurück";
+            HtmlElementCollection tableCells = divFleetBase.GetElementsByTagName("td");
+            List<HtmlElement> ResourceTableCells = new List<HtmlElement>();
 
-            HtmlElementCollection tables = divFleetBase.GetElementsByTagName("table");
-
-            int sumMetal = 0;
-            int sumCrystal = 0;
-            int sumDeut = 0;
-            HtmlElement listResource;
-
-            for (int i = 0; i < amountOfReturningFleet; i++)
+            if (tableCells.Count > 0)
             {
-                listResource = tables[i].GetElementsByTagName("tr")[6].GetElementsByTagName("ul")[0];
-
-                sumMetal += Convert.ToInt32(listResource.Children[0].InnerText);
-                sumCrystal += Convert.ToInt32(listResource.Children[1].InnerText);
-                sumDeut += Convert.ToInt32(listResource.Children[2].InnerText);
+                foreach (HtmlElement cell in tableCells)
+                {
+                    if (cell.InnerText == "Rohstoffe")
+                        ResourceTableCells.Add(cell.NextSibling);
+                }
             }
+
+            if (ResourceTableCells.Count > 0)
+            {
+                for (int i = 0; i < ResourceTableCells.Count; i++)
+                {
+                    sumMetal += float.Parse(ResourceTableCells[i].Children[0].GetElementsByTagName("li")[0].InnerText);
+                    sumCrystal += float.Parse(ResourceTableCells[i].Children[0].GetElementsByTagName("li")[1].InnerText);
+                    sumDeut += float.Parse(ResourceTableCells[i].Children[0].GetElementsByTagName("li")[2].InnerText);
+                }
+            }
+            else
+            {
+                return "Es kommen momentan keine Resourcen zurück";
+            }
+            
             
             return String.Format("Es kommen insgesamt {0} Metall, {1} Kristall und {2} Deterium", sumMetal, sumCrystal, sumDeut);
         }
