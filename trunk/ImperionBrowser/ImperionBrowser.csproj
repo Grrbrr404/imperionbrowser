@@ -102,6 +102,7 @@
     <Compile Include="Classes\Comet.cs" />
     <Compile Include="Classes\Debris.cs" />
     <Compile Include="Classes\GoogleSms.cs" />
+    <Compile Include="Classes\MouseGestureFilter.cs" />
     <Compile Include="Classes\Tools.cs" />
     <Compile Include="frmConfiguration.cs">
       <SubType>Form</SubType>
