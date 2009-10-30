@@ -8,13 +8,13 @@ using System.Windows.Forms;
 
 namespace ImperionBrowser
 {
-    public partial class frmRecyclerTargets : Form
+    public partial class frmRaidTargets : Form
     {
 
         GalaxyMap _GalaxyMap;
         frmMain _ownerForm;
 
-        public frmRecyclerTargets(GalaxyMap iGalaxyMap, frmMain iOwnerForm)
+        public frmRaidTargets(GalaxyMap iGalaxyMap, frmMain iOwnerForm)
         {
             InitializeComponent();
             _GalaxyMap = iGalaxyMap;
