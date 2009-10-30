@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E8138773-6E7C-4B60-BBB0-03966BAC836D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -86,7 +86,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>GoogleApi\Google.GData.Extensions.dll</HintPath>
     </Reference>
-    <Reference Include="Jayrock.Json, Version=0.9.8316.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="Jayrock.Json, Version=0.9.8316.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>jayrock\Jayrock.Json.dll</HintPath>
+    </Reference>
     <Reference Include="MouseKeyboardLibrary, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>DcamMouseGesture\MouseKeyboardLibrary.dll</HintPath>
@@ -131,10 +133,17 @@
     <Compile Include="Classes\GalaxyMap.cs" />
     <Compile Include="Classes\ImperionParser.cs" />
     <Compile Include="Classes\Planet.cs" />
+    <Compile Include="frmRaidTargets.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRaidTargets.Designer.cs">
+      <DependentUpon>frmRaidTargets.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmConfiguration.resx">
       <DependentUpon>frmConfiguration.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
@@ -142,9 +151,14 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmRecyclerTargets.resx">
       <DependentUpon>frmRecyclerTargets.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="frmTest.resx">
       <DependentUpon>frmTest.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRaidTargets.resx">
+      <DependentUpon>frmRaidTargets.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -159,6 +173,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="app.config" />
     <None Include="Properties\DataSources\GalaxyMap.datasource" />
@@ -222,6 +237,7 @@
     <Content Include="Data\MouseGestureCommands.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\terranStripe.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
