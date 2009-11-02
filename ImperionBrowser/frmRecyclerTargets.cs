@@ -42,7 +42,7 @@ namespace ImperionBrowser
                     DataRow row = dataTable.Rows.Add();
                     row["Name"] = _GalaxyMap.Systems[i].Comets[j]._Name;
                     row["Typ"] = "Komet";
-                    row["Flugzeit"] = _GalaxyMap.GetFlightTime(_GalaxyMap.Systems[i].Comets[j]._Id, typeof(Comet), SpaceShip.ssRecycler);
+                    row["Flugzeit"] = FlightTime.GetFlightTime(_ownerForm._CurSystemId, _GalaxyMap.Systems[i]._system_id, _GalaxyMap.Systems[i].Comets[j]._Id, (int)TerranSpaceShip.ssRecycler, typeof(Comet));  //_GalaxyMap.GetFlightTime(_GalaxyMap.Systems[i].Comets[j]._Id, typeof(Comet), TerranSpaceShip.ssRecycler);
                     row["Metall"] = _GalaxyMap.Systems[i].Comets[j].Resources._metalFields;
                     row["Kristall"] = _GalaxyMap.Systems[i].Comets[j].Resources._crystalFields;
                     row["Deuterium"] = _GalaxyMap.Systems[i].Comets[j].Resources._deutriFields;
@@ -54,7 +54,7 @@ namespace ImperionBrowser
                     DataRow row = dataTable.Rows.Add();
                     row["Name"] = "Trüfld. an " + _GalaxyMap.Systems[i].Debris[j]._planetId;
                     row["Typ"] = "Trümmerfeld";
-                    row["Flugzeit"] = _GalaxyMap.GetFlightTime(_GalaxyMap.Systems[i].Debris[j]._planetId, typeof(Debris), SpaceShip.ssRecycler);
+                    row["Flugzeit"] = FlightTime.GetFlightTime(_ownerForm._CurSystemId, _GalaxyMap.Systems[i]._system_id, _GalaxyMap.Systems[i].Debris[j]._planetId, (int)TerranSpaceShip.ssRecycler, typeof(Debris));
                     row["Metall"] = _GalaxyMap.Systems[i].Debris[j].Resource._metalFields;
                     row["Kristall"] = _GalaxyMap.Systems[i].Debris[j].Resource._crystalFields;
                     row["Deuterium"] = _GalaxyMap.Systems[i].Debris[j].Resource._deutriFields;

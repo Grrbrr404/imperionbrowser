@@ -30,44 +30,44 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRaidTargets));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.cmbx = new System.Windows.Forms.ComboBox();
+            this.grpbxShip = new System.Windows.Forms.GroupBox();
+            this.ship12 = new System.Windows.Forms.NumericUpDown();
+            this.ship4 = new System.Windows.Forms.NumericUpDown();
+            this.ship3 = new System.Windows.Forms.NumericUpDown();
+            this.ship2 = new System.Windows.Forms.NumericUpDown();
+            this.ship8 = new System.Windows.Forms.NumericUpDown();
+            this.ship9 = new System.Windows.Forms.NumericUpDown();
+            this.ship7 = new System.Windows.Forms.NumericUpDown();
+            this.ship11 = new System.Windows.Forms.NumericUpDown();
+            this.ship6 = new System.Windows.Forms.NumericUpDown();
+            this.ship10 = new System.Windows.Forms.NumericUpDown();
+            this.ship5 = new System.Windows.Forms.NumericUpDown();
+            this.ship1 = new System.Windows.Forms.NumericUpDown();
+            this.pctrbxSprite = new System.Windows.Forms.PictureBox();
+            this.cmbxRace = new System.Windows.Forms.ComboBox();
             this.pnlProgress = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.dataGrid = new System.Windows.Forms.DataGridView();
-            this.grpbxShip = new System.Windows.Forms.GroupBox();
-            this.numericUpDown9 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown10 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown11 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown12 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown6 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown7 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown8 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.grpbxShip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ship12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctrbxSprite)).BeginInit();
             this.pnlProgress.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).BeginInit();
-            this.grpbxShip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -81,28 +81,145 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.grpbxShip);
-            this.splitContainer1.Panel1.Controls.Add(this.cmbx);
+            this.splitContainer1.Panel1.Controls.Add(this.cmbxRace);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.pnlProgress);
             this.splitContainer1.Panel2.Controls.Add(this.dataGrid);
-            this.splitContainer1.Size = new System.Drawing.Size(660, 420);
+            this.splitContainer1.Size = new System.Drawing.Size(648, 420);
             this.splitContainer1.SplitterDistance = 151;
             this.splitContainer1.TabIndex = 1;
             // 
-            // cmbx
+            // grpbxShip
             // 
-            this.cmbx.FormattingEnabled = true;
-            this.cmbx.Items.AddRange(new object[] {
+            this.grpbxShip.Controls.Add(this.ship12);
+            this.grpbxShip.Controls.Add(this.ship4);
+            this.grpbxShip.Controls.Add(this.ship3);
+            this.grpbxShip.Controls.Add(this.ship2);
+            this.grpbxShip.Controls.Add(this.ship8);
+            this.grpbxShip.Controls.Add(this.ship9);
+            this.grpbxShip.Controls.Add(this.ship7);
+            this.grpbxShip.Controls.Add(this.ship11);
+            this.grpbxShip.Controls.Add(this.ship6);
+            this.grpbxShip.Controls.Add(this.ship10);
+            this.grpbxShip.Controls.Add(this.ship5);
+            this.grpbxShip.Controls.Add(this.ship1);
+            this.grpbxShip.Controls.Add(this.pctrbxSprite);
+            this.grpbxShip.Location = new System.Drawing.Point(15, 39);
+            this.grpbxShip.Name = "grpbxShip";
+            this.grpbxShip.Size = new System.Drawing.Size(508, 80);
+            this.grpbxShip.TabIndex = 2;
+            this.grpbxShip.TabStop = false;
+            this.grpbxShip.Text = "Ich möchte beim Angriff folgende Schiffe hinzufügen";
+            // 
+            // ship12
+            // 
+            this.ship12.Location = new System.Drawing.Point(457, 53);
+            this.ship12.Name = "ship12";
+            this.ship12.Size = new System.Drawing.Size(40, 20);
+            this.ship12.TabIndex = 27;
+            // 
+            // ship4
+            // 
+            this.ship4.Location = new System.Drawing.Point(416, 53);
+            this.ship4.Name = "ship4";
+            this.ship4.Size = new System.Drawing.Size(40, 20);
+            this.ship4.TabIndex = 26;
+            // 
+            // ship3
+            // 
+            this.ship3.Location = new System.Drawing.Point(375, 53);
+            this.ship3.Name = "ship3";
+            this.ship3.Size = new System.Drawing.Size(40, 20);
+            this.ship3.TabIndex = 25;
+            // 
+            // ship2
+            // 
+            this.ship2.Location = new System.Drawing.Point(334, 53);
+            this.ship2.Name = "ship2";
+            this.ship2.Size = new System.Drawing.Size(40, 20);
+            this.ship2.TabIndex = 24;
+            // 
+            // ship8
+            // 
+            this.ship8.Location = new System.Drawing.Point(293, 53);
+            this.ship8.Name = "ship8";
+            this.ship8.Size = new System.Drawing.Size(40, 20);
+            this.ship8.TabIndex = 23;
+            // 
+            // ship9
+            // 
+            this.ship9.Location = new System.Drawing.Point(252, 53);
+            this.ship9.Name = "ship9";
+            this.ship9.Size = new System.Drawing.Size(40, 20);
+            this.ship9.TabIndex = 22;
+            // 
+            // ship7
+            // 
+            this.ship7.Location = new System.Drawing.Point(211, 53);
+            this.ship7.Name = "ship7";
+            this.ship7.Size = new System.Drawing.Size(40, 20);
+            this.ship7.TabIndex = 21;
+            // 
+            // ship11
+            // 
+            this.ship11.Location = new System.Drawing.Point(170, 53);
+            this.ship11.Name = "ship11";
+            this.ship11.Size = new System.Drawing.Size(40, 20);
+            this.ship11.TabIndex = 20;
+            // 
+            // ship6
+            // 
+            this.ship6.Location = new System.Drawing.Point(129, 53);
+            this.ship6.Name = "ship6";
+            this.ship6.Size = new System.Drawing.Size(40, 20);
+            this.ship6.TabIndex = 19;
+            // 
+            // ship10
+            // 
+            this.ship10.Location = new System.Drawing.Point(88, 53);
+            this.ship10.Name = "ship10";
+            this.ship10.Size = new System.Drawing.Size(40, 20);
+            this.ship10.TabIndex = 18;
+            // 
+            // ship5
+            // 
+            this.ship5.Location = new System.Drawing.Point(47, 53);
+            this.ship5.Name = "ship5";
+            this.ship5.Size = new System.Drawing.Size(40, 20);
+            this.ship5.TabIndex = 17;
+            // 
+            // ship1
+            // 
+            this.ship1.Location = new System.Drawing.Point(6, 53);
+            this.ship1.Name = "ship1";
+            this.ship1.Size = new System.Drawing.Size(40, 20);
+            this.ship1.TabIndex = 16;
+            // 
+            // pctrbxSprite
+            // 
+            this.pctrbxSprite.Image = ((System.Drawing.Image)(resources.GetObject("pctrbxSprite.Image")));
+            this.pctrbxSprite.InitialImage = null;
+            this.pctrbxSprite.Location = new System.Drawing.Point(6, 19);
+            this.pctrbxSprite.Name = "pctrbxSprite";
+            this.pctrbxSprite.Size = new System.Drawing.Size(496, 28);
+            this.pctrbxSprite.TabIndex = 15;
+            this.pctrbxSprite.TabStop = false;
+            // 
+            // cmbxRace
+            // 
+            this.cmbxRace.FormattingEnabled = true;
+            this.cmbxRace.Items.AddRange(new object[] {
             "Ich bin ein Terraner",
             "Ich bin ein Xen",
             "Ich bin ein Titan"});
-            this.cmbx.Location = new System.Drawing.Point(15, 12);
-            this.cmbx.Name = "cmbx";
-            this.cmbx.Size = new System.Drawing.Size(201, 21);
-            this.cmbx.TabIndex = 1;
-            this.cmbx.Tag = "Ich bin ein Terraner";
+            this.cmbxRace.Location = new System.Drawing.Point(15, 12);
+            this.cmbxRace.Name = "cmbxRace";
+            this.cmbxRace.Size = new System.Drawing.Size(201, 21);
+            this.cmbxRace.TabIndex = 1;
+            this.cmbxRace.Tag = "Ich bin ein Terraner";
+            this.cmbxRace.SelectedIndexChanged += new System.EventHandler(this.cmbxRace_SelectedIndexChanged);
             // 
             // pnlProgress
             // 
@@ -112,7 +229,7 @@
             this.pnlProgress.Controls.Add(this.progressBar);
             this.pnlProgress.Location = new System.Drawing.Point(0, 61);
             this.pnlProgress.Name = "pnlProgress";
-            this.pnlProgress.Size = new System.Drawing.Size(660, 44);
+            this.pnlProgress.Size = new System.Drawing.Size(648, 44);
             this.pnlProgress.TabIndex = 2;
             this.pnlProgress.Visible = false;
             // 
@@ -121,7 +238,7 @@
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.label2.Location = new System.Drawing.Point(0, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(660, 21);
+            this.label2.Size = new System.Drawing.Size(648, 21);
             this.label2.TabIndex = 1;
             this.label2.Text = "Daten werden vorbereitet, bitte habe einen Moment geduld";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -131,7 +248,7 @@
             this.progressBar.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.progressBar.Location = new System.Drawing.Point(0, 21);
             this.progressBar.Name = "progressBar";
-            this.progressBar.Size = new System.Drawing.Size(660, 23);
+            this.progressBar.Size = new System.Drawing.Size(648, 23);
             this.progressBar.TabIndex = 0;
             // 
             // dataGrid
@@ -144,155 +261,39 @@
             this.dataGrid.MultiSelect = false;
             this.dataGrid.Name = "dataGrid";
             this.dataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGrid.Size = new System.Drawing.Size(660, 265);
+            this.dataGrid.Size = new System.Drawing.Size(648, 265);
             this.dataGrid.TabIndex = 1;
             this.dataGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGrid_CellDoubleClick);
-            // 
-            // grpbxShip
-            // 
-            this.grpbxShip.Controls.Add(this.numericUpDown9);
-            this.grpbxShip.Controls.Add(this.numericUpDown10);
-            this.grpbxShip.Controls.Add(this.numericUpDown11);
-            this.grpbxShip.Controls.Add(this.numericUpDown12);
-            this.grpbxShip.Controls.Add(this.numericUpDown5);
-            this.grpbxShip.Controls.Add(this.numericUpDown6);
-            this.grpbxShip.Controls.Add(this.numericUpDown7);
-            this.grpbxShip.Controls.Add(this.numericUpDown8);
-            this.grpbxShip.Controls.Add(this.numericUpDown3);
-            this.grpbxShip.Controls.Add(this.numericUpDown4);
-            this.grpbxShip.Controls.Add(this.numericUpDown2);
-            this.grpbxShip.Controls.Add(this.numericUpDown1);
-            this.grpbxShip.Controls.Add(this.pictureBox1);
-            this.grpbxShip.Location = new System.Drawing.Point(15, 39);
-            this.grpbxShip.Name = "grpbxShip";
-            this.grpbxShip.Size = new System.Drawing.Size(508, 80);
-            this.grpbxShip.TabIndex = 2;
-            this.grpbxShip.TabStop = false;
-            this.grpbxShip.Text = "Ich möchte beim Angriff folgende Schiffe hinzufügen";
-            // 
-            // numericUpDown9
-            // 
-            this.numericUpDown9.Location = new System.Drawing.Point(457, 53);
-            this.numericUpDown9.Name = "numericUpDown9";
-            this.numericUpDown9.Size = new System.Drawing.Size(40, 20);
-            this.numericUpDown9.TabIndex = 27;
-            // 
-            // numericUpDown10
-            // 
-            this.numericUpDown10.Location = new System.Drawing.Point(416, 53);
-            this.numericUpDown10.Name = "numericUpDown10";
-            this.numericUpDown10.Size = new System.Drawing.Size(40, 20);
-            this.numericUpDown10.TabIndex = 26;
-            // 
-            // numericUpDown11
-            // 
-            this.numericUpDown11.Location = new System.Drawing.Point(375, 53);
-            this.numericUpDown11.Name = "numericUpDown11";
-            this.numericUpDown11.Size = new System.Drawing.Size(40, 20);
-            this.numericUpDown11.TabIndex = 25;
-            // 
-            // numericUpDown12
-            // 
-            this.numericUpDown12.Location = new System.Drawing.Point(334, 53);
-            this.numericUpDown12.Name = "numericUpDown12";
-            this.numericUpDown12.Size = new System.Drawing.Size(40, 20);
-            this.numericUpDown12.TabIndex = 24;
-            // 
-            // numericUpDown5
-            // 
-            this.numericUpDown5.Location = new System.Drawing.Point(293, 53);
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(40, 20);
-            this.numericUpDown5.TabIndex = 23;
-            // 
-            // numericUpDown6
-            // 
-            this.numericUpDown6.Location = new System.Drawing.Point(252, 53);
-            this.numericUpDown6.Name = "numericUpDown6";
-            this.numericUpDown6.Size = new System.Drawing.Size(40, 20);
-            this.numericUpDown6.TabIndex = 22;
-            // 
-            // numericUpDown7
-            // 
-            this.numericUpDown7.Location = new System.Drawing.Point(211, 53);
-            this.numericUpDown7.Name = "numericUpDown7";
-            this.numericUpDown7.Size = new System.Drawing.Size(40, 20);
-            this.numericUpDown7.TabIndex = 21;
-            // 
-            // numericUpDown8
-            // 
-            this.numericUpDown8.Location = new System.Drawing.Point(170, 53);
-            this.numericUpDown8.Name = "numericUpDown8";
-            this.numericUpDown8.Size = new System.Drawing.Size(40, 20);
-            this.numericUpDown8.TabIndex = 20;
-            // 
-            // numericUpDown3
-            // 
-            this.numericUpDown3.Location = new System.Drawing.Point(129, 53);
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(40, 20);
-            this.numericUpDown3.TabIndex = 19;
-            // 
-            // numericUpDown4
-            // 
-            this.numericUpDown4.Location = new System.Drawing.Point(88, 53);
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(40, 20);
-            this.numericUpDown4.TabIndex = 18;
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(47, 53);
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(40, 20);
-            this.numericUpDown2.TabIndex = 17;
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(6, 53);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(40, 20);
-            this.numericUpDown1.TabIndex = 16;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.InitialImage = null;
-            this.pictureBox1.Location = new System.Drawing.Point(6, 19);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(496, 28);
-            this.pictureBox1.TabIndex = 15;
-            this.pictureBox1.TabStop = false;
             // 
             // frmRaidTargets
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 420);
+            this.ClientSize = new System.Drawing.Size(648, 420);
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmRaidTargets";
-            this.Text = "Recycler Ziele...";
+            this.Text = "Raid Ziele...";
             this.TopMost = true;
             this.Shown += new System.EventHandler(this.frmRecyclerTargets_Shown);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
+            this.grpbxShip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.ship12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pctrbxSprite)).EndInit();
             this.pnlProgress.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dataGrid)).EndInit();
-            this.grpbxShip.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown12)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -304,20 +305,20 @@
         private System.Windows.Forms.Panel pnlProgress;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ProgressBar progressBar;
-        private System.Windows.Forms.ComboBox cmbx;
+        private System.Windows.Forms.ComboBox cmbxRace;
         private System.Windows.Forms.GroupBox grpbxShip;
-        private System.Windows.Forms.NumericUpDown numericUpDown9;
-        private System.Windows.Forms.NumericUpDown numericUpDown10;
-        private System.Windows.Forms.NumericUpDown numericUpDown11;
-        private System.Windows.Forms.NumericUpDown numericUpDown12;
-        private System.Windows.Forms.NumericUpDown numericUpDown5;
-        private System.Windows.Forms.NumericUpDown numericUpDown6;
-        private System.Windows.Forms.NumericUpDown numericUpDown7;
-        private System.Windows.Forms.NumericUpDown numericUpDown8;
-        private System.Windows.Forms.NumericUpDown numericUpDown3;
-        private System.Windows.Forms.NumericUpDown numericUpDown4;
-        private System.Windows.Forms.NumericUpDown numericUpDown2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.NumericUpDown ship12;
+        private System.Windows.Forms.NumericUpDown ship4;
+        private System.Windows.Forms.NumericUpDown ship3;
+        private System.Windows.Forms.NumericUpDown ship2;
+        private System.Windows.Forms.NumericUpDown ship8;
+        private System.Windows.Forms.NumericUpDown ship9;
+        private System.Windows.Forms.NumericUpDown ship7;
+        private System.Windows.Forms.NumericUpDown ship11;
+        private System.Windows.Forms.NumericUpDown ship6;
+        private System.Windows.Forms.NumericUpDown ship10;
+        private System.Windows.Forms.NumericUpDown ship5;
+        private System.Windows.Forms.NumericUpDown ship1;
+        private System.Windows.Forms.PictureBox pctrbxSprite;
     }
 }

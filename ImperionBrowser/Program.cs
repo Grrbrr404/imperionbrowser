@@ -14,7 +14,7 @@ namespace ImperionBrowser
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmRaidTargets(new GalaxyMap(), new frmMain()));
+            Application.Run(new frmTest());
         }
     }
 }

@@ -20,13 +20,11 @@ namespace ImperionBrowser
 
         private void frmTest_Load(object sender, EventArgs e)
         {
-            ImperionParser ip = new ImperionParser(new WebBrowser());
-            ip.TestMap();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //Tools.SaveCookies(webBrowser1, "cookies.txt");
+            Tools.SaveCookies(webBrowser1, "cookies.txt");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -40,6 +38,13 @@ namespace ImperionBrowser
             GoogleSms googleSms = new GoogleSms("enteruserhere", "enterpwdhere");
             CalendarEntry targetCal = (CalendarEntry)comboBox1.SelectedItem;
             googleSms.SendSms(GoogleSms.buildCalendarUri(targetCal), "Imperion Test", "Galaxy U1");
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            SqLight sq = new SqLight();
+            
+            sq.ExecuteSql("insert into FlightTimeCache (ID) values('"+ Guid.NewGuid() + "')");
         }
     
     }

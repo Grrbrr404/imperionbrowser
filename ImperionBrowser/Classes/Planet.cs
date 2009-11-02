@@ -20,18 +20,17 @@ namespace ImperionBrowser
 
         private Climate _climate = new Climate();
         private Resources _resources = new Resources();
-        private Reports _reports = new Reports();
-
+        private List<Report> _reports = new List<Report>();
+        
         public Resources Resources
         {
             get { return _resources; }
             set { _resources = value; }
         }
 
-        public Reports Reports
+        public List<Report> Reports
         {
             get { return _reports; }
-            set { _reports = value; }
         }
         
         public Climate Climate
@@ -40,6 +39,32 @@ namespace ImperionBrowser
             set { _climate = value; }
         }
 
+        /// <summary>
+        /// Gets the Report with highest _time. if there is no report, it will return null
+        /// </summary>
+        /// <returns></returns>
+        public Report GetLatestReport()
+        {
+            Report result = new Report();
+
+            for (int i = 0; i < Reports.Count; i++)
+            {
+                if (Reports[i]._time > result._time)
+                    result = Reports[i];
+            }
+
+            return result;
+        }
+
+        public string GetLatestReportTimeAsString(string iDateTimeFormatString)
+        {
+            DateTime dt = GetLatestReport()._time;
+
+            if (dt == DateTime.MinValue)
+                return "-";
+            else
+                return dt.ToString(iDateTimeFormatString);
+        }
     }
 
     public class Climate
@@ -59,8 +84,17 @@ namespace ImperionBrowser
         public string _deutriFields = String.Empty;
     }
 
-    public class Reports 
-    { 
-        public Reports() {}
+    public class Report
+    {
+        public DateTime _time;
+        public string _planet_id_target;
+        public string _header_id;
+        public string _type;
+
+        public Report()
+        {
+            _time = new DateTime();
+            _time = DateTime.MinValue;
+        }
     }
 }        

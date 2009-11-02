@@ -58,5 +58,14 @@ namespace ImperionBrowser
         }
 
 
+        public static string GetShipInputId(TerranSpaceShip iShip, RaceTypes iRace)
+        {
+            if (iRace == RaceTypes.rtTerran)
+                return "shipInput_" + ((int)iShip).ToString();
+            else if (iRace == RaceTypes.rtXen)
+                return "shipInput_" + ((int)(XenSaceShip)(int)iShip).ToString();
+
+            return "";
+        }
     }
 }

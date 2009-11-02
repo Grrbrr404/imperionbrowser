@@ -52,6 +52,7 @@
             this.toolBarRight = new System.Windows.Forms.ToolStrip();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnFindComets = new System.Windows.Forms.ToolStripButton();
+            this.btnFindEmptyNotRadedPlanets = new System.Windows.Forms.ToolStripButton();
             this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSeparator();
             this.btnSMSAlert = new System.Windows.Forms.ToolStripButton();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
@@ -60,7 +61,6 @@
             this.extrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timerHandyAlert = new System.Windows.Forms.Timer(this.components);
-            this.btnFindEmptyNotRadedPlanets = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -304,6 +304,16 @@
             this.btnFindComets.ToolTipText = "Aktuelle Map nach Kometen durchsuchen";
             this.btnFindComets.Click += new System.EventHandler(this.btnFindComets_Click);
             // 
+            // btnFindEmptyNotRadedPlanets
+            // 
+            this.btnFindEmptyNotRadedPlanets.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnFindEmptyNotRadedPlanets.Image = ((System.Drawing.Image)(resources.GetObject("btnFindEmptyNotRadedPlanets.Image")));
+            this.btnFindEmptyNotRadedPlanets.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnFindEmptyNotRadedPlanets.Name = "btnFindEmptyNotRadedPlanets";
+            this.btnFindEmptyNotRadedPlanets.Size = new System.Drawing.Size(30, 20);
+            this.btnFindEmptyNotRadedPlanets.Text = "Leere Planeten anzeigen, die heute noch nicht geraidet wurden";
+            this.btnFindEmptyNotRadedPlanets.Click += new System.EventHandler(this.btnFindEmptyNotRadedPlanets_Click);
+            // 
             // toolStripSplitButton1
             // 
             this.toolStripSplitButton1.Name = "toolStripSplitButton1";
@@ -365,15 +375,6 @@
             // 
             this.timerHandyAlert.Interval = 30000;
             this.timerHandyAlert.Tick += new System.EventHandler(this.timerHandyAlert_Tick);
-            // 
-            // btnFindEmptyNotRadedPlanets
-            // 
-            this.btnFindEmptyNotRadedPlanets.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnFindEmptyNotRadedPlanets.Image = ((System.Drawing.Image)(resources.GetObject("btnFindEmptyNotRadedPlanets.Image")));
-            this.btnFindEmptyNotRadedPlanets.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnFindEmptyNotRadedPlanets.Name = "btnFindEmptyNotRadedPlanets";
-            this.btnFindEmptyNotRadedPlanets.Size = new System.Drawing.Size(30, 20);
-            this.btnFindEmptyNotRadedPlanets.Text = "Leere Planeten anzeigen, die heute noch nicht geraidet wurden";
             // 
             // frmMain
             // 
