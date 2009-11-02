@@ -19,9 +19,9 @@ namespace ImperionBrowser
             mBrowser = iBrowser;
         }
         
-        public void TestMap()
+        public GalaxyMap TestMap()
         {
-            StreamReader sr = new StreamReader("mapdata_stefan.txt");
+            StreamReader sr = new StreamReader("map.txt");
             StringBuilder sb = new StringBuilder(sr.ReadToEnd());
 
             GalaxyMap galaxyMap = json_parseMap(sb);
@@ -41,6 +41,7 @@ namespace ImperionBrowser
             }
 
             MessageBox.Show(String.Format("Es wurden {0} Systeme durchsucht: \r Es wurden {1} Planeten, {2} Kometen und {3} Trümmerfelder gefunden", galaxyMap.Systems.Count, pcount, ccount, dcount));*/
+            return galaxyMap;
         }
 
         private void json_AddDebrisToSystem(JsonTextReader jsonReader, GalaxySystem galaxySystem)
@@ -155,6 +156,30 @@ namespace ImperionBrowser
                         MessageBox.Show("error:" + jsonReader.Text + " | line: " + jsonReader.LineNumber + " | pos: " + jsonReader.LinePosition);
                     }
                 }
+
+                if (jsonReader.ReadMember() == "reports")
+                {
+                    int depth = jsonReader.Depth;
+                    Report report = null;
+                    if (jsonReader.TokenClass != JsonTokenClass.Array)
+                    {
+                        while (jsonReader.TokenClass != JsonTokenClass.EndObject)
+                        {
+                            jsonReader.Read();
+                            if (jsonReader.Text == "time")
+                            {
+                                report = new Report();
+                                report._time = DateTime.Parse(json_readMemberIntoString(jsonReader));
+                                report._planet_id_target = json_readMemberIntoString(jsonReader);
+                                report._header_id = json_readMemberIntoString(jsonReader);
+                                report._type = json_readMemberIntoString(jsonReader);
+                                curPlanet.Reports.Add(report);
+                                
+                                jsonReader.Read(); //skip end object of report
+                            }
+                        }
+                    } 
+                }
             }
             catch
             {
@@ -212,16 +237,28 @@ namespace ImperionBrowser
 
         public void ShowRecyclerTargets(frmMain frmMain)
         {
+            GalaxyMap galaxyMap = json_parseMap(json_getMapData());
+            frmRecyclerTargets rt = new frmRecyclerTargets(galaxyMap, frmMain);
+            rt.Show();
+           
+        }
+
+        public void ShowRaidTargets(frmMain frmMain)
+        {
+            GalaxyMap galaxyMap = json_parseMap(json_getMapData());
+            frmRaidTargets rt = new frmRaidTargets(galaxyMap, frmMain);
+            rt.Show();
+        }
+
+        private StringBuilder json_getMapData()
+        {
             string searchStr = "mapData = JSON.decode('";
             int posStart = mBrowser.DocumentText.LastIndexOf(searchStr) + searchStr.Length;
             int posEnd = mBrowser.DocumentText.IndexOf("');", posStart);
 
             StringBuilder jsonData = new StringBuilder(mBrowser.DocumentText.Substring(posStart, posEnd - posStart));
-            GalaxyMap galaxyMap = json_parseMap(jsonData);
 
-            frmRecyclerTargets rt = new frmRecyclerTargets(galaxyMap, frmMain);
-            rt.Show();
-           
+            return jsonData;
         }
 
         private GalaxyMap json_parseMap(StringBuilder jsonData)
@@ -320,6 +357,16 @@ namespace ImperionBrowser
             
             
             return String.Format("Es kommen insgesamt {0} Metall, {1} Kristall und {2} Deterium", sumMetal, sumCrystal, sumDeut);
+        }
+
+        public static string GetCurrentSystemId(HtmlDocument htmlDocument)
+        {
+            HtmlElement NavigationDiv = htmlDocument.GetElementById("navigation");
+            string linkPlanet = NavigationDiv.Children[0].GetElementsByTagName("a")[0].GetAttribute("href");
+            linkPlanet = linkPlanet.Replace("http://u1.imperion.de/planet/buildings/", "");
+
+            //planet id is always systemid + number with leading zero. so if we cut the number, we have the system id :)
+            return linkPlanet.Substring(0, linkPlanet.Length - 2); 
         }
     }
 }

@@ -15,60 +15,27 @@ namespace ImperionBrowser
     {
 
         #region Member
-        List<string> _AllreadySendedAttacks = new List<string>();
-        MouseGesture _mg;
-        MouseHook _mouseHook = new MouseHook();
+        private List<string> _AllreadySendedAttacks = new List<string>();
+        private MouseGesture _mg;
+        private MouseHook _mouseHook = new MouseHook();
+        public string _CurSystemId;
+
         #endregion
 
         public frmMain()
         {
             InitializeComponent();
-            InitMouseGestures();
+            _mouseHook.MouseDown += new MouseEventHandler(_mouseHook_MouseDown);
+            _mouseHook.Start();
+        }
+
+        void _mouseHook_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (ActiveForm != null && e.Button == MouseButtons.Right)
+                GetCurrentBrowser().GoBack();
         }
 
         #region MouseGestures
-
-        private void InitMouseGestures()
-        {
-            // Hook into mouse down event to enable overlay panel
-            _mouseHook.MouseDown += new MouseEventHandler(mouseHook_MouseDown);
-            //_mouseHook.Start();
-
-            //Load a file with the commands and keys once in your application
-            MouseGestureData.Instance.Commands.ReadFile(Environment.CurrentDirectory + @"\Data\MouseGestureCommands.xml");
-            
-            //For Init MouseGesture handler
-            List<Type> Lst = new List<Type>();
-            Lst.Add(typeof(WebBrowser));
-            _mg = new MouseGesture(this, null);
-            _mg.MouseGestureEntered += new MouseGestureEventHandler(OnMouseGestureEntered);
-           
-        }
-        /// <summary>
-        /// enable mouse overlay
-        /// </summary>
-        void mouseHook_MouseDown(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                if (e.Button == MouseButtons.Right && ActiveForm != null)
-                    pnlBrowserOverlay.Enabled = true;
-            }
-            catch { }
-        }
-
-        /// <summary>
-        /// Do Events and disable pnl overlay
-        /// </summary>
-        private void OnMouseGestureEntered(object sender, MouseGestureEventArgs e)
-        {
-            if (e.Command == "Left")
-                GetCurrentBrowser().GoBack();
-            if (e.Command == "Right")
-                GetCurrentBrowser().GoForward();
-
-            pnlBrowserOverlay.Enabled = false;
-        }
 
         #endregion
 
@@ -87,7 +54,6 @@ namespace ImperionBrowser
             
             return newBrowser;
         }
-
         
 
         private void browser_ProgressChanged(object sender, WebBrowserProgressChangedEventArgs e)
@@ -119,8 +85,8 @@ namespace ImperionBrowser
             if (e.Url.ToString().Contains("/fleetBase/"))
                 ParseFleetBaseAndShowResourceInformationTooltip();
 
+            _CurSystemId = ImperionParser.GetCurrentSystemId(GetCurrentBrowser().Document);
             GetCurrentBrowser().Document.Window.Error +=new HtmlElementErrorEventHandler(Window_Error);
-            GetCurrentBrowser().Document.MouseDown += new HtmlElementEventHandler(Document_MouseDown);
         }
 
         private void Window_Error(object sender, HtmlElementErrorEventArgs e)
@@ -309,6 +275,9 @@ namespace ImperionBrowser
             tabMain.Controls.Add(browser);
             browser.Navigate("http://imperion.de");
 
+            if (!File.Exists("data/DATABASE.FDB"))
+                Firebird.CreateDatabaseStructure();
+
             LoadSavedRegister();
         }
 
@@ -386,6 +355,35 @@ namespace ImperionBrowser
             parser.ShowRecyclerTargets(this);
         }
 
+        #endregion
+
+        #region Raid Parsing
+        
+        private void btnFindEmptyNotRadedPlanets_Click(object sender, EventArgs e)
+        {
+            WebBrowser browser = GetCurrentBrowser();
+            Tools.SaveCookies(browser, "cookies.txt");
+
+            if (browser.ReadyState != WebBrowserReadyState.Complete)
+            {
+                MessageBox.Show("Das Universum ist noch nicht komplett geladen, bitte Vorgang später wiederholen", "Universum noch nicht bereit...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (!browser.Url.ToString().Contains("map"))
+            {
+                DialogResult res = MessageBox.Show("Für diese Funktion muss zur Universumskarte navigiert werden. Navigation durchführen?", "Navigation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                    browser.Navigate("http://u1.imperion.de/map/index");
+
+                return;
+            }
+
+            ImperionParser parser = new ImperionParser(browser);
+            parser.ShowRaidTargets(this);
+            
+        }
+        
         #endregion
 
         #region GoogleSms
