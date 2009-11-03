@@ -61,6 +61,18 @@ namespace ImperionBrowser
                     row["object"] = _GalaxyMap.Systems[i].Debris[j];
                 }
 
+                for (int j = 0; j < _GalaxyMap.Systems[i].Asteroids.Count; j++)
+                {
+                    DataRow row = dataTable.Rows.Add();
+                    row["Name"] = _GalaxyMap.Systems[i].Asteroids[j]._id;
+                    row["Typ"] = "Asteroid";
+                    row["Flugzeit"] = FlightTime.GetFlightTime(_ownerForm._CurSystemId, _GalaxyMap.Systems[i]._system_id, _GalaxyMap.Systems[i].Asteroids[j]._id, (int)TerranSpaceShip.ssRecycler, typeof(Asteroid));
+                    row["Metall"] = _GalaxyMap.Systems[i].Asteroids[j].Resources._metalFields;
+                    row["Kristall"] = _GalaxyMap.Systems[i].Asteroids[j].Resources._crystalFields;
+                    row["Deuterium"] = _GalaxyMap.Systems[i].Asteroids[j].Resources._deutriFields;
+                    row["object"] = _GalaxyMap.Systems[i].Asteroids[j];
+                }
+
                 progressBar.Value = i;
                 Application.DoEvents();
             }
@@ -100,6 +112,11 @@ namespace ImperionBrowser
             {
                 debris = (Debris)target;
                 url = String.Format("http://u1.imperion.de/fleetBase/mission/1/planetId/d{0}/m/301", debris._planetId);
+            }
+            else if (target.GetType() == typeof(Asteroid))
+            {
+                debris = (Debris)target;
+                url = String.Format("http://u1.imperion.de/fleetBase/mission/1/planetId/a{0}/m/301", debris._planetId);
             }
 
             _ownerForm.GetCurrentBrowser().Navigate(new Uri(url));

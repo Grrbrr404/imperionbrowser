@@ -18,14 +18,15 @@ namespace ImperionBrowser
         {
             mBrowser = iBrowser;
         }
-        
+
+        public ImperionParser() { }
+
         public GalaxyMap TestMap()
         {
             StreamReader sr = new StreamReader("my_system.txt");
             StringBuilder sb = new StringBuilder(sr.ReadToEnd());
 
             GalaxyMap galaxyMap = json_parseMap(sb);
-
 
             int pcount = 0;
             int ccount = 0;
@@ -252,16 +253,21 @@ namespace ImperionBrowser
 
         private StringBuilder json_getMapData()
         {
-            string searchStr = "mapData = JSON.decode('";
-            int posStart = mBrowser.DocumentText.LastIndexOf(searchStr) + searchStr.Length;
-            int posEnd = mBrowser.DocumentText.IndexOf("');", posStart);
+            return json_getMapData(mBrowser.DocumentText);
+        }
 
-            StringBuilder jsonData = new StringBuilder(mBrowser.DocumentText.Substring(posStart, posEnd - posStart));
+        private StringBuilder json_getMapData(string iSourceString)
+        {
+            string searchStr = "mapData = JSON.decode('";
+            int posStart = iSourceString.LastIndexOf(searchStr) + searchStr.Length;
+            int posEnd = iSourceString.IndexOf("');", posStart);
+
+            StringBuilder jsonData = new StringBuilder(iSourceString.Substring(posStart, posEnd - posStart));
 
             return jsonData;
         }
 
-        private GalaxyMap json_parseMap(StringBuilder jsonData)
+        public GalaxyMap json_parseMap(StringBuilder jsonData)
         {
             JsonTextReader jsonReader = new JsonTextReader(new StringReader(jsonData.ToString()));
             GalaxyMap galaxyMap = new GalaxyMap();

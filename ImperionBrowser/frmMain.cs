@@ -62,13 +62,7 @@ namespace ImperionBrowser
 
         void newBrowser_DocumentTitleChanged(object sender, EventArgs e)
         {
-            WebBrowser browser = (WebBrowser)sender;
-            TabPage page = (TabPage)browser.Parent;
-            if (page.Tag == null || page.Tag.ToString() != "1")
-            {
-                edtAdress.Text = GetCurrentBrowser().Url.ToString();
-                page.Text = browser.DocumentTitle;
-            }
+
         }
 
         void newBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -333,6 +327,19 @@ namespace ImperionBrowser
             }
         }
 
+        private void frmMain_Resize(object sender, EventArgs e)
+        {
+            edtAdress.Width = ContentContainer.Panel1.Width - 130;
+        }
+
+        private void btnGrowingStatistic_Click(object sender, EventArgs e)
+        {
+            Tools.SaveCookies(GetCurrentBrowser(), "cookies.txt");
+            StringBuilder mapData = Tools.DoWebRequestAndGetData("http://u1.imperion.de/map/index/");
+            ImperionParser parser = new ImperionParser();
+            GalaxyMap galaxyMap = parser.json_parseMap(mapData);
+        }
+
         #endregion
 
         #region Comet parsing
@@ -457,10 +464,9 @@ namespace ImperionBrowser
         }
         #endregion
 
-        private void frmMain_Resize(object sender, EventArgs e)
-        {
-            edtAdress.Width = ContentContainer.Panel1.Width - 130;
-        }
+
+      
+        
 
 
         
