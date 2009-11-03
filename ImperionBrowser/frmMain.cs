@@ -6,20 +6,16 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
-using DcamMouseGesture;
 using MouseKeyboardLibrary;
 
 namespace ImperionBrowser
 {
     public partial class frmMain : Form
     {
-
         #region Member
         private List<string> _AllreadySendedAttacks = new List<string>();
-        private MouseGesture _mg;
         private MouseHook _mouseHook = new MouseHook();
         public string _CurSystemId;
-
         #endregion
 
         public frmMain()
@@ -34,10 +30,6 @@ namespace ImperionBrowser
             if (ActiveForm != null && e.Button == MouseButtons.Right)
                 GetCurrentBrowser().GoBack();
         }
-
-        #region MouseGestures
-
-        #endregion
 
         #region browser events
 
@@ -94,12 +86,6 @@ namespace ImperionBrowser
             e.Handled = true;
         }
         
-        private void Document_MouseDown(object sender, HtmlElementEventArgs e)
-        {
-            if (e.MouseButtonsPressed == MouseButtons.Right)
-                pnlBrowserOverlay.Enabled = true;
-        }
-
         #endregion
 
         #region generel interface
@@ -275,10 +261,8 @@ namespace ImperionBrowser
             tabMain.Controls.Add(browser);
             browser.Navigate("http://imperion.de");
 
-            if (!File.Exists("data/DATABASE.FDB"))
-                Firebird.CreateDatabaseStructure();
-
             LoadSavedRegister();
+            LoadWindowPosition();
         }
 
         public WebBrowser GetCurrentBrowser()
@@ -300,6 +284,28 @@ namespace ImperionBrowser
         {
             _mouseHook.Stop();
             SaveOpendRegister();
+            SaveWindowPosition();
+        }
+
+        private void SaveWindowPosition()
+        {
+            Properties.Settings.Default.formWidth = Width;
+            Properties.Settings.Default.formHeight = Height;
+            Properties.Settings.Default.formLeft = Left;
+            Properties.Settings.Default.formTop = Top;
+            Properties.Settings.Default.Save();
+        }
+
+        private void LoadWindowPosition()
+        {
+            if (Properties.Settings.Default.formWidth != 0 &&
+                Properties.Settings.Default.formHeight != 0)
+            {
+                Width = Properties.Settings.Default.formWidth;
+                Height = Properties.Settings.Default.formHeight;
+                Left = Properties.Settings.Default.formLeft;
+                Top = Properties.Settings.Default.formTop;
+            }
         }
 
         private void beendenToolStripMenuItem_Click(object sender, EventArgs e)
@@ -450,6 +456,12 @@ namespace ImperionBrowser
             lblStatus.Text = ImperionParser.ParseFleetBaseAndGetResourceSum(GetCurrentBrowser().Document);
         }
         #endregion
+
+        private void frmMain_Resize(object sender, EventArgs e)
+        {
+            edtAdress.Width = ContentContainer.Panel1.Width - 130;
+        }
+
 
         
 

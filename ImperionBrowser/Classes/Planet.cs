@@ -12,12 +12,13 @@ namespace ImperionBrowser
         public string _alliance_id;
         public string _user_id;
         public string _system_id;
-        public string _planet_type_id;
+        private string _planet_type_id;
         public string _kind_id;
         public string _planet_name;
         public string _inhabitants;
         public string _alliance_status;
 
+        private PlanetType _PlanetType;
         private Climate _climate = new Climate();
         private Resources _resources = new Resources();
         private List<Report> _reports = new List<Report>();
@@ -37,6 +38,11 @@ namespace ImperionBrowser
         {
             get { return _climate; }
             set { _climate = value; }
+        }
+
+        public PlanetType Type
+        {
+            get { return _PlanetType; }
         }
 
         /// <summary>
@@ -64,6 +70,12 @@ namespace ImperionBrowser
                 return "-";
             else
                 return dt.ToString(iDateTimeFormatString);
+        }
+
+        public void SetPlanetType(string iIdOfType)
+        {
+            _planet_type_id = iIdOfType;
+            _PlanetType = (PlanetType)Convert.ToInt32(iIdOfType);
         }
     }
 

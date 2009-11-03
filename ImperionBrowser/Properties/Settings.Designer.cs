@@ -93,5 +93,53 @@ namespace ImperionBrowser.Properties {
                 return ((string)(this["databaseConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int formWidth {
+            get {
+                return ((int)(this["formWidth"]));
+            }
+            set {
+                this["formWidth"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int formHeight {
+            get {
+                return ((int)(this["formHeight"]));
+            }
+            set {
+                this["formHeight"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int formLeft {
+            get {
+                return ((int)(this["formLeft"]));
+            }
+            set {
+                this["formLeft"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int formTop {
+            get {
+                return ((int)(this["formTop"]));
+            }
+            set {
+                this["formTop"] = value;
+            }
+        }
     }
 }

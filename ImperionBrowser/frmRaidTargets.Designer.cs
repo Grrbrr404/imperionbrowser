@@ -32,16 +32,16 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.grpbxShip = new System.Windows.Forms.GroupBox();
             this.ship12 = new System.Windows.Forms.NumericUpDown();
+            this.ship11 = new System.Windows.Forms.NumericUpDown();
+            this.ship10 = new System.Windows.Forms.NumericUpDown();
+            this.ship9 = new System.Windows.Forms.NumericUpDown();
+            this.ship8 = new System.Windows.Forms.NumericUpDown();
+            this.ship7 = new System.Windows.Forms.NumericUpDown();
+            this.ship6 = new System.Windows.Forms.NumericUpDown();
+            this.ship5 = new System.Windows.Forms.NumericUpDown();
             this.ship4 = new System.Windows.Forms.NumericUpDown();
             this.ship3 = new System.Windows.Forms.NumericUpDown();
             this.ship2 = new System.Windows.Forms.NumericUpDown();
-            this.ship8 = new System.Windows.Forms.NumericUpDown();
-            this.ship9 = new System.Windows.Forms.NumericUpDown();
-            this.ship7 = new System.Windows.Forms.NumericUpDown();
-            this.ship11 = new System.Windows.Forms.NumericUpDown();
-            this.ship6 = new System.Windows.Forms.NumericUpDown();
-            this.ship10 = new System.Windows.Forms.NumericUpDown();
-            this.ship5 = new System.Windows.Forms.NumericUpDown();
             this.ship1 = new System.Windows.Forms.NumericUpDown();
             this.pctrbxSprite = new System.Windows.Forms.PictureBox();
             this.cmbxRace = new System.Windows.Forms.ComboBox();
@@ -54,16 +54,16 @@
             this.splitContainer1.SuspendLayout();
             this.grpbxShip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ship12)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship10)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship8)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship7)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship6)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ship4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ship3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ship2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ship8)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ship9)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ship7)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ship11)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ship6)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ship10)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ship5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ship1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctrbxSprite)).BeginInit();
             this.pnlProgress.SuspendLayout();
@@ -94,16 +94,16 @@
             // grpbxShip
             // 
             this.grpbxShip.Controls.Add(this.ship12);
+            this.grpbxShip.Controls.Add(this.ship11);
+            this.grpbxShip.Controls.Add(this.ship10);
+            this.grpbxShip.Controls.Add(this.ship9);
+            this.grpbxShip.Controls.Add(this.ship8);
+            this.grpbxShip.Controls.Add(this.ship7);
+            this.grpbxShip.Controls.Add(this.ship6);
+            this.grpbxShip.Controls.Add(this.ship5);
             this.grpbxShip.Controls.Add(this.ship4);
             this.grpbxShip.Controls.Add(this.ship3);
             this.grpbxShip.Controls.Add(this.ship2);
-            this.grpbxShip.Controls.Add(this.ship8);
-            this.grpbxShip.Controls.Add(this.ship9);
-            this.grpbxShip.Controls.Add(this.ship7);
-            this.grpbxShip.Controls.Add(this.ship11);
-            this.grpbxShip.Controls.Add(this.ship6);
-            this.grpbxShip.Controls.Add(this.ship10);
-            this.grpbxShip.Controls.Add(this.ship5);
             this.grpbxShip.Controls.Add(this.ship1);
             this.grpbxShip.Controls.Add(this.pctrbxSprite);
             this.grpbxShip.Location = new System.Drawing.Point(15, 39);
@@ -120,26 +120,26 @@
             this.ship12.Size = new System.Drawing.Size(40, 20);
             this.ship12.TabIndex = 27;
             // 
-            // ship4
+            // ship11
             // 
-            this.ship4.Location = new System.Drawing.Point(416, 53);
-            this.ship4.Name = "ship4";
-            this.ship4.Size = new System.Drawing.Size(40, 20);
-            this.ship4.TabIndex = 26;
+            this.ship11.Location = new System.Drawing.Point(416, 53);
+            this.ship11.Name = "ship11";
+            this.ship11.Size = new System.Drawing.Size(40, 20);
+            this.ship11.TabIndex = 26;
             // 
-            // ship3
+            // ship10
             // 
-            this.ship3.Location = new System.Drawing.Point(375, 53);
-            this.ship3.Name = "ship3";
-            this.ship3.Size = new System.Drawing.Size(40, 20);
-            this.ship3.TabIndex = 25;
+            this.ship10.Location = new System.Drawing.Point(375, 53);
+            this.ship10.Name = "ship10";
+            this.ship10.Size = new System.Drawing.Size(40, 20);
+            this.ship10.TabIndex = 25;
             // 
-            // ship2
+            // ship9
             // 
-            this.ship2.Location = new System.Drawing.Point(334, 53);
-            this.ship2.Name = "ship2";
-            this.ship2.Size = new System.Drawing.Size(40, 20);
-            this.ship2.TabIndex = 24;
+            this.ship9.Location = new System.Drawing.Point(334, 53);
+            this.ship9.Name = "ship9";
+            this.ship9.Size = new System.Drawing.Size(40, 20);
+            this.ship9.TabIndex = 24;
             // 
             // ship8
             // 
@@ -148,47 +148,47 @@
             this.ship8.Size = new System.Drawing.Size(40, 20);
             this.ship8.TabIndex = 23;
             // 
-            // ship9
-            // 
-            this.ship9.Location = new System.Drawing.Point(252, 53);
-            this.ship9.Name = "ship9";
-            this.ship9.Size = new System.Drawing.Size(40, 20);
-            this.ship9.TabIndex = 22;
-            // 
             // ship7
             // 
-            this.ship7.Location = new System.Drawing.Point(211, 53);
+            this.ship7.Location = new System.Drawing.Point(252, 53);
             this.ship7.Name = "ship7";
             this.ship7.Size = new System.Drawing.Size(40, 20);
-            this.ship7.TabIndex = 21;
-            // 
-            // ship11
-            // 
-            this.ship11.Location = new System.Drawing.Point(170, 53);
-            this.ship11.Name = "ship11";
-            this.ship11.Size = new System.Drawing.Size(40, 20);
-            this.ship11.TabIndex = 20;
+            this.ship7.TabIndex = 22;
             // 
             // ship6
             // 
-            this.ship6.Location = new System.Drawing.Point(129, 53);
+            this.ship6.Location = new System.Drawing.Point(211, 53);
             this.ship6.Name = "ship6";
             this.ship6.Size = new System.Drawing.Size(40, 20);
-            this.ship6.TabIndex = 19;
-            // 
-            // ship10
-            // 
-            this.ship10.Location = new System.Drawing.Point(88, 53);
-            this.ship10.Name = "ship10";
-            this.ship10.Size = new System.Drawing.Size(40, 20);
-            this.ship10.TabIndex = 18;
+            this.ship6.TabIndex = 21;
             // 
             // ship5
             // 
-            this.ship5.Location = new System.Drawing.Point(47, 53);
+            this.ship5.Location = new System.Drawing.Point(170, 53);
             this.ship5.Name = "ship5";
             this.ship5.Size = new System.Drawing.Size(40, 20);
-            this.ship5.TabIndex = 17;
+            this.ship5.TabIndex = 20;
+            // 
+            // ship4
+            // 
+            this.ship4.Location = new System.Drawing.Point(129, 53);
+            this.ship4.Name = "ship4";
+            this.ship4.Size = new System.Drawing.Size(40, 20);
+            this.ship4.TabIndex = 19;
+            // 
+            // ship3
+            // 
+            this.ship3.Location = new System.Drawing.Point(88, 53);
+            this.ship3.Name = "ship3";
+            this.ship3.Size = new System.Drawing.Size(40, 20);
+            this.ship3.TabIndex = 18;
+            // 
+            // ship2
+            // 
+            this.ship2.Location = new System.Drawing.Point(47, 53);
+            this.ship2.Name = "ship2";
+            this.ship2.Size = new System.Drawing.Size(40, 20);
+            this.ship2.TabIndex = 17;
             // 
             // ship1
             // 
@@ -280,16 +280,16 @@
             this.splitContainer1.ResumeLayout(false);
             this.grpbxShip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ship12)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship10)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship8)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship7)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship6)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.ship5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ship4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ship3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ship2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ship8)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ship9)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ship7)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ship11)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ship6)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ship10)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.ship5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ship1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pctrbxSprite)).EndInit();
             this.pnlProgress.ResumeLayout(false);
@@ -308,16 +308,16 @@
         private System.Windows.Forms.ComboBox cmbxRace;
         private System.Windows.Forms.GroupBox grpbxShip;
         private System.Windows.Forms.NumericUpDown ship12;
+        private System.Windows.Forms.NumericUpDown ship11;
+        private System.Windows.Forms.NumericUpDown ship10;
+        private System.Windows.Forms.NumericUpDown ship9;
+        private System.Windows.Forms.NumericUpDown ship8;
+        private System.Windows.Forms.NumericUpDown ship7;
+        private System.Windows.Forms.NumericUpDown ship6;
+        private System.Windows.Forms.NumericUpDown ship5;
         private System.Windows.Forms.NumericUpDown ship4;
         private System.Windows.Forms.NumericUpDown ship3;
         private System.Windows.Forms.NumericUpDown ship2;
-        private System.Windows.Forms.NumericUpDown ship8;
-        private System.Windows.Forms.NumericUpDown ship9;
-        private System.Windows.Forms.NumericUpDown ship7;
-        private System.Windows.Forms.NumericUpDown ship11;
-        private System.Windows.Forms.NumericUpDown ship6;
-        private System.Windows.Forms.NumericUpDown ship10;
-        private System.Windows.Forms.NumericUpDown ship5;
         private System.Windows.Forms.NumericUpDown ship1;
         private System.Windows.Forms.PictureBox pctrbxSprite;
     }

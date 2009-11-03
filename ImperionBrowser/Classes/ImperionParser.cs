@@ -21,26 +21,26 @@ namespace ImperionBrowser
         
         public GalaxyMap TestMap()
         {
-            StreamReader sr = new StreamReader("map.txt");
+            StreamReader sr = new StreamReader("my_system.txt");
             StringBuilder sb = new StringBuilder(sr.ReadToEnd());
 
             GalaxyMap galaxyMap = json_parseMap(sb);
 
-            frmRecyclerTargets rt = new frmRecyclerTargets(galaxyMap, null);
-            rt.Show();
 
-            /*int pcount = 0;
+            int pcount = 0;
             int ccount = 0;
             int dcount = 0;
+            int acount = 0;
 
             for (int i = 0; i < galaxyMap.Systems.Count; i++)
             {
                 pcount += galaxyMap.Systems[i].Planets.Count;
                 ccount += galaxyMap.Systems[i].Comets.Count;
                 dcount += galaxyMap.Systems[i].Debris.Count;
+                acount += galaxyMap.Systems[i].Asteroids.Count;
             }
 
-            MessageBox.Show(String.Format("Es wurden {0} Systeme durchsucht: \r Es wurden {1} Planeten, {2} Kometen und {3} Trümmerfelder gefunden", galaxyMap.Systems.Count, pcount, ccount, dcount));*/
+            MessageBox.Show(String.Format("Es wurden {0} Systeme durchsucht: \r Es wurden {1} Planeten, {2} Kometen, {4} Asteroiden und {3} Trümmerfelder gefunden", galaxyMap.Systems.Count, pcount, ccount, dcount, acount));
             return galaxyMap;
         }
 
@@ -118,7 +118,7 @@ namespace ImperionBrowser
                 curPlanet._alliance_id = json_readMemberIntoString(jsonReader);
                 curPlanet._user_id = json_readMemberIntoString(jsonReader);
                 curPlanet._system_id = json_readMemberIntoString(jsonReader);
-                curPlanet._planet_type_id = json_readMemberIntoString(jsonReader);
+                curPlanet.SetPlanetType(json_readMemberIntoString(jsonReader));
                 curPlanet._kind_id = json_readMemberIntoString(jsonReader);
                 curPlanet._planet_name = json_readMemberIntoString(jsonReader);
                 curPlanet._inhabitants = json_readMemberIntoString(jsonReader);
@@ -293,6 +293,11 @@ namespace ImperionBrowser
                     json_AddCometsToSystem(jsonReader, galaxyMap.Systems[galaxyMap.Systems.Count - 1]); //Add comets as Comet objects to the last found system
                 }
 
+                if (text == "asteroids")
+                {
+                    json_AddAsteroidsToSystem(jsonReader, galaxyMap.Systems[galaxyMap.Systems.Count - 1]); //Add Asteroids
+                }
+
                 if (text == "planet_id")
                 {
                     curPlanet = json_ParsePlanet(jsonReader);
@@ -302,6 +307,29 @@ namespace ImperionBrowser
             }
 
             return galaxyMap;
+        }
+
+        private void json_AddAsteroidsToSystem(JsonTextReader jsonReader, GalaxySystem galaxySystem)
+        {
+            while (jsonReader.TokenClass != JsonTokenClass.EndArray)
+            {
+                jsonReader.Read();
+                if (jsonReader.Text == "id")
+                {
+                    Asteroid asteroid = new Asteroid();
+                    asteroid._id = json_readMemberIntoString(jsonReader);
+                    asteroid._system_id = json_readMemberIntoString(jsonReader);
+                    asteroid._user_id = json_readMemberIntoString(jsonReader);
+                    asteroid._planet_id = json_readMemberIntoString(jsonReader);
+                    asteroid._arrival = json_readMemberIntoString(jsonReader);
+                    asteroid._disappearance = json_readMemberIntoString(jsonReader);
+                    asteroid.Resources._metalFields = json_readMemberIntoNumber(jsonReader).ToString();
+                    asteroid.Resources._crystalFields = json_readMemberIntoNumber(jsonReader).ToString();
+                    asteroid.Resources._deutriFields = json_readMemberIntoNumber(jsonReader).ToString();
+
+                    galaxySystem.Asteroids.Add(asteroid);
+                }
+            }
         }
 
         public static string json_extractFlightTime(string jsonData)
