@@ -43,9 +43,7 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.lblAdress = new System.Windows.Forms.ToolStripLabel();
             this.edtAdress = new System.Windows.Forms.ToolStripTextBox();
-            this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.ContentContainer = new System.Windows.Forms.SplitContainer();
-            this.pnlBrowserOverlay = new ImperionBrowser.TransparentPanel();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabMain = new System.Windows.Forms.TabPage();
             this.tabNewPage = new System.Windows.Forms.TabPage();
@@ -133,8 +131,7 @@
             this.btnRefreshBrowser,
             this.toolStripSeparator3,
             this.lblAdress,
-            this.edtAdress,
-            this.toolStripSeparator5});
+            this.edtAdress});
             this.toolBarTop.Location = new System.Drawing.Point(0, 0);
             this.toolBarTop.Name = "toolBarTop";
             this.toolBarTop.Size = new System.Drawing.Size(942, 25);
@@ -190,15 +187,11 @@
             // 
             // edtAdress
             // 
+            this.edtAdress.AutoSize = false;
             this.edtAdress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.edtAdress.Name = "edtAdress";
-            this.edtAdress.Size = new System.Drawing.Size(600, 25);
+            this.edtAdress.Size = new System.Drawing.Size(776, 21);
             this.edtAdress.KeyUp += new System.Windows.Forms.KeyEventHandler(this.edtAdress_KeyUp);
-            // 
-            // toolStripSeparator5
-            // 
-            this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
             // 
             // ContentContainer
             // 
@@ -210,7 +203,6 @@
             // 
             // ContentContainer.Panel1
             // 
-            this.ContentContainer.Panel1.Controls.Add(this.pnlBrowserOverlay);
             this.ContentContainer.Panel1.Controls.Add(this.tabControl);
             // 
             // ContentContainer.Panel2
@@ -219,15 +211,6 @@
             this.ContentContainer.Size = new System.Drawing.Size(942, 499);
             this.ContentContainer.SplitterDistance = 906;
             this.ContentContainer.TabIndex = 0;
-            // 
-            // pnlBrowserOverlay
-            // 
-            this.pnlBrowserOverlay.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlBrowserOverlay.Enabled = false;
-            this.pnlBrowserOverlay.Location = new System.Drawing.Point(0, 0);
-            this.pnlBrowserOverlay.Name = "pnlBrowserOverlay";
-            this.pnlBrowserOverlay.Size = new System.Drawing.Size(906, 499);
-            this.pnlBrowserOverlay.TabIndex = 2;
             // 
             // tabControl
             // 
@@ -388,10 +371,12 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenu;
             this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Imperion Browser";
             this.TransparencyKey = System.Drawing.Color.Purple;
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
+            this.Resize += new System.EventHandler(this.frmMain_Resize);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -434,7 +419,6 @@
         private System.Windows.Forms.ToolStripTextBox edtAdress;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton btnFindComets;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
         private System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.ToolStripMenuItem dateiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem beendenToolStripMenuItem;
@@ -443,7 +427,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSplitButton1;
         private System.Windows.Forms.ToolStripButton btnSMSAlert;
         private System.Windows.Forms.Timer timerHandyAlert;
-        private TransparentPanel pnlBrowserOverlay;
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
         private System.Windows.Forms.ToolStripButton btnRefreshBrowser;
         private System.Windows.Forms.ToolStripButton btnFindEmptyNotRadedPlanets;

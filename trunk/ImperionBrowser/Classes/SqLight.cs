@@ -5,7 +5,7 @@ using System.Data.SQLite;
 
 namespace ImperionBrowser
 {
-    class SqLight: IDisposable
+    public class SqLight: IDisposable
     {
         private SQLiteConnection _Conn;
 
@@ -71,5 +71,17 @@ namespace ImperionBrowser
         }
 
         #endregion
+
+        public SQLiteDataReader ExecuteQuery(string sql)
+        {
+            SQLiteDataReader reader;
+
+            if (_Conn.State != System.Data.ConnectionState.Open)
+                Open();
+
+            SQLiteCommand cmd = new SQLiteCommand(sql, _Conn);
+            reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+            return reader;
+        }
     }
 }

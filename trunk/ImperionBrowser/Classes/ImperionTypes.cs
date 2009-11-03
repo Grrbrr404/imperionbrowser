@@ -22,7 +22,7 @@ namespace ImperionBrowser
         ssKolonieschiff = 12
     }
 
-    public enum XenSaceShip
+    public enum XenSpaceShip
     {
         xsSonde = 1,
         xsJaeger = 8,
@@ -44,5 +44,15 @@ namespace ImperionBrowser
         rtTerran,
         rtXen,
         rtTitan
+    }
+
+    public enum PlanetType
+    {
+        ptGas = 1,
+        ptIce = 2,
+        ptWater = 3,
+        ptEarth = 4,
+        ptDesert = 5,
+        ptVulcan = 6
     }
 }

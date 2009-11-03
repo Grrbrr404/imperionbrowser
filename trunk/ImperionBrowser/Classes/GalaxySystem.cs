@@ -11,6 +11,7 @@ namespace ImperionBrowser
         private List<Planet> _Planets = new List<Planet>();
         private List<Comet> _Comets = new List<Comet>();
         private List<Debris> _Debris = new List<Debris>();
+        private List<Asteroid> _Asteroids = new List<Asteroid>();
         
 
         public GalaxySystem(string iSystemId) 
@@ -47,7 +48,10 @@ namespace ImperionBrowser
             get { return _Comets; }
         }
 
-        
+        public List<Asteroid> Asteroids
+        {
+            get { return _Asteroids; }
+        }
 
     }
 }

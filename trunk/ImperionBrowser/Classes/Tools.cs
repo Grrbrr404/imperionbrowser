@@ -4,6 +4,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Net;
+using System.Drawing;
 
 namespace ImperionBrowser
 {
@@ -57,15 +58,77 @@ namespace ImperionBrowser
             return cc;
         }
 
-
-        public static string GetShipInputId(TerranSpaceShip iShip, RaceTypes iRace)
+        public static int[] GetInputIds(RaceTypes race)
         {
-            if (iRace == RaceTypes.rtTerran)
-                return "shipInput_" + ((int)iShip).ToString();
-            else if (iRace == RaceTypes.rtXen)
-                return "shipInput_" + ((int)(XenSaceShip)(int)iShip).ToString();
+            int[] inputIds = new int[12];
+            if (race == RaceTypes.rtTerran || race == RaceTypes.rtTitan)
+            {
+                inputIds[0] = (int)TerranSpaceShip.ssSonde;
+                inputIds[1] = (int)TerranSpaceShip.ssJaeger;
+                inputIds[2] = (int)TerranSpaceShip.ssSchlachtschiff;
+                inputIds[3] = (int)TerranSpaceShip.ssZerstoerer;
+                inputIds[4] = (int)TerranSpaceShip.ssSchwererKreuzer;
+                inputIds[5] = (int)TerranSpaceShip.ssPulsar;
+                inputIds[6] = (int)TerranSpaceShip.ssBomber;
+                inputIds[7] = (int)TerranSpaceShip.ssTankSchiff;
+                inputIds[8] = (int)TerranSpaceShip.ssKleinerTransporter;
+                inputIds[9] = (int)TerranSpaceShip.ssGrosserRecycler;
+                inputIds[10] = (int)TerranSpaceShip.ssRecycler;
+                inputIds[11] = (int)TerranSpaceShip.ssKolonieschiff;
+            }
+            else if (race == RaceTypes.rtXen)
+            {
+                inputIds[0] = (int)XenSpaceShip.xsSonde;
+                inputIds[1] = (int)XenSpaceShip.xsJaeger;
+                inputIds[2] = (int)XenSpaceShip.xsSchlachtschiff;
+                inputIds[3] = (int)XenSpaceShip.xsZerstoerer;
+                inputIds[4] = (int)XenSpaceShip.xsSchwererKreuzer;
+                inputIds[5] = (int)XenSpaceShip.xsPulsar;
+                inputIds[6] = (int)XenSpaceShip.xsBomber;
+                inputIds[7] = (int)XenSpaceShip.xsTankSchiff;
+                inputIds[8] = (int)XenSpaceShip.xsKleinerTransporter;
+                inputIds[9] = (int)XenSpaceShip.xsGrosserRecycler;
+                inputIds[10] = (int)XenSpaceShip.xsRecycler;
+                inputIds[11] = (int)XenSpaceShip.xsKolonieschiff;
+            }
 
-            return "";
+            return inputIds;
+        }
+
+        /// <summary>
+        /// Returns an Image Object based on the type of the planet
+        /// </summary>
+        /// <param name="planet"></param>
+        /// <returns></returns>
+        public static Image GetImageOfPlanet(Planet iSourcePlanet)
+        {
+            Image result;
+            switch (iSourcePlanet.Type)
+            {
+                case PlanetType.ptDesert:
+                    result = Image.FromFile("Data/image/desert.gif");
+                    break;
+                case PlanetType.ptEarth:
+                    result = Image.FromFile("Data/image/earth.gif");
+                    break;
+                case PlanetType.ptGas:
+                    result = Image.FromFile("Data/image/gas.gif");
+                    break;
+                case PlanetType.ptIce:
+                    result = Image.FromFile("Data/image/ice.gif");
+                    break;
+                case PlanetType.ptVulcan:
+                    result = Image.FromFile("Data/image/vulcan.gif");
+                    break;
+                case PlanetType.ptWater:
+                    result = Image.FromFile("Data/image/water.gif");
+                    break;
+                default:
+                    result = Image.FromFile("Data/image/desert.gif");
+                    break;
+            }
+
+            return result;
         }
     }
 }

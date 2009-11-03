@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Net;
 using System.IO;
-using FirebirdSql.Data.FirebirdClient;
+using System.Data.SQLite;
 
 namespace ImperionBrowser
 {
@@ -29,23 +29,22 @@ namespace ImperionBrowser
         private string GetFlightTimeFromCache(string iSourceSystem, string iDestinationSystem, int iSlowestShip)
         {
             string time = "-1";
-            using (Firebird fb = new Firebird())
+            using (SqLight sqLight = new SqLight())
             {
                 string sql = String.Format("Select FlightTime from FlightTimeCache where SourceSystemId = '{0}' and DestSystemId = '{1}' and ShipType = {2}", iSourceSystem, iDestinationSystem, iSlowestShip);
-                using (FbDataReader reader = fb.ExecuteQuery(sql))
+                using (SQLiteDataReader reader = sqLight.ExecuteQuery(sql))
                 {
                     try
                     {
                         if (reader.Read())
                         {
-                                time = reader.GetString(0);
+                            time = reader.GetString(0);
                         }
                     }
-                    catch(FbException e)
+                    catch (Exception e)
                     {
                         throw new Exception(e.Message);
                     }
-                    
                     reader.Close();
                 }
             }
@@ -55,9 +54,9 @@ namespace ImperionBrowser
 
         private void AddFlightTimeToCache(string iSourceSystem, string iDestinationSystem, int iSlowestShip, string iFlytime)
         {
-            using (Firebird fb = new Firebird())
+            using (SqLight sqLight = new SqLight())
             {
-                fb.executeSql(String.Format("Insert Into FlightTimeCache (ID, SourceSystemId, DestSystemId, ShipType, FlightTime) VALUES ('{0}','{1}','{2}','{3}','{4}')", Guid.NewGuid(), iSourceSystem, iDestinationSystem, iSlowestShip, iFlytime));
+                sqLight.ExecuteSql(String.Format("Insert Into FlightTimeCache (ID, SourceSystemId, DestSystemId, ShipType, FlightTime) VALUES ('{0}','{1}','{2}','{3}','{4}')", Guid.NewGuid(), iSourceSystem, iDestinationSystem, iSlowestShip, iFlytime));
             }
         }
 

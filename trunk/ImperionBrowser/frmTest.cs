@@ -8,6 +8,7 @@ using System.Windows.Forms;
 using Google.GData.Calendar;
 using Google.GData.Extensions;
 using Google.GData.Client;
+using System.IO;
 
 namespace ImperionBrowser
 {
@@ -45,6 +46,13 @@ namespace ImperionBrowser
             SqLight sq = new SqLight();
             
             sq.ExecuteSql("insert into FlightTimeCache (ID) values('"+ Guid.NewGuid() + "')");
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            ImperionParser ip = new ImperionParser(new WebBrowser());
+
+            GalaxyMap gm = ip.TestMap();
         }
     
     }
