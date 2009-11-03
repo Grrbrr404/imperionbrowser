@@ -130,5 +130,45 @@ namespace ImperionBrowser
 
             return result;
         }
+
+        public static StringBuilder ReadWebsite(string url)
+        {
+            return new StringBuilder();
+        }
+
+        public static StringBuilder DoWebRequestAndGetData(string url)
+        {
+            StringBuilder sb = new StringBuilder();
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.CookieContainer = Tools.ReadCookiesAsCollection(new Uri(url), "cookies.txt");
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            Stream resStream = response.GetResponseStream();
+
+            byte[] buf = new byte[8192];
+            string tempString = null;
+            int count = 0;
+
+            try
+            {
+                do
+                {
+                    count = resStream.Read(buf, 0, buf.Length);
+                    if (count != 0)
+                    {
+                        tempString = Encoding.ASCII.GetString(buf, 0, count);
+                        sb.Append(tempString);
+                    }
+                }
+                while (count > 0); // any more data to read?
+            }
+            finally
+            {
+                response.Close();
+                resStream.Close();
+                resStream.Dispose();
+            }
+
+            return sb;
+        }
     }
 }
