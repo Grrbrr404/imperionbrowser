@@ -238,7 +238,7 @@ namespace ImperionBrowser
 
         public void ShowRecyclerTargets(frmMain frmMain)
         {
-            GalaxyMap galaxyMap = json_parseMap(json_getMapData());
+            GalaxyMap galaxyMap = json_parseMap(json_ExtractMapdata());
             frmRecyclerTargets rt = new frmRecyclerTargets(galaxyMap, frmMain);
             rt.Show();
            
@@ -246,17 +246,22 @@ namespace ImperionBrowser
 
         public void ShowRaidTargets(frmMain frmMain)
         {
-            GalaxyMap galaxyMap = json_parseMap(json_getMapData());
+            GalaxyMap galaxyMap = json_parseMap(json_ExtractMapdata());
             frmRaidTargets rt = new frmRaidTargets(galaxyMap, frmMain);
             rt.Show();
         }
 
-        private StringBuilder json_getMapData()
+        private StringBuilder json_ExtractMapdata()
         {
-            return json_getMapData(mBrowser.DocumentText);
+            return json_ExtractMapdata(mBrowser.DocumentText);
         }
 
-        private StringBuilder json_getMapData(string iSourceString)
+        /// <summary>
+        /// Extract the json array from a source string (e.g. source code of universe website)
+        /// </summary>
+        /// <param name="iSourceString">Source string where the mapdata will be searched for</param>
+        /// <returns>json object</returns>
+        public StringBuilder json_ExtractMapdata(string iSourceString)
         {
             string searchStr = "mapData = JSON.decode('";
             int posStart = iSourceString.LastIndexOf(searchStr) + searchStr.Length;

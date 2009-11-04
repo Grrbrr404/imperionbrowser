@@ -67,6 +67,7 @@ namespace ImperionBrowser
                     if (_GalaxyMap.Systems[i].Planets[j].Type == PlanetType.ptGas)
                         continue;
 
+
                     DataRow row = dataTable.Rows.Add();
                     row["Name"] = _GalaxyMap.Systems[i].Planets[j]._planet_id;
                     row["Typ"] = Tools.GetImageOfPlanet(_GalaxyMap.Systems[i].Planets[j]);

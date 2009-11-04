@@ -18,68 +18,21 @@ namespace ImperionBrowser
         public string _CurSystemId;
         #endregion
 
+        #region Constructor
         public frmMain()
         {
             InitializeComponent();
             _mouseHook.MouseDown += new MouseEventHandler(_mouseHook_MouseDown);
             _mouseHook.Start();
         }
+        #endregion
 
+        #region mouse hooks
         void _mouseHook_MouseDown(object sender, MouseEventArgs e)
         {
             if (ActiveForm != null && e.Button == MouseButtons.Right)
                 GetCurrentBrowser().GoBack();
         }
-
-        #region browser events
-
-        private WebBrowser CreateCommonWebBrowserElement()
-        {
-            WebBrowser newBrowser = new WebBrowser();
-            newBrowser.Name = "browser";
-            newBrowser.Dock = DockStyle.Fill;
-            newBrowser.ProgressChanged += browser_ProgressChanged;
-            newBrowser.Navigating += new WebBrowserNavigatingEventHandler(newBrowser_Navigating);
-            newBrowser.DocumentTitleChanged += new EventHandler(newBrowser_DocumentTitleChanged);
-            newBrowser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(newBrowser_DocumentCompleted);
-            newBrowser.IsWebBrowserContextMenuEnabled = false;
-            
-            return newBrowser;
-        }
-        
-
-        private void browser_ProgressChanged(object sender, WebBrowserProgressChangedEventArgs e)
-        {
-            toolBarProgress.Maximum = Convert.ToInt32(e.MaximumProgress);
-            toolBarProgress.Value = Convert.ToInt32(e.CurrentProgress);
-        }
-
-        void newBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
-        {
-            edtAdress.Text = e.Url.ToString();
-            lblStatus.Text = "";
-        }
-
-        void newBrowser_DocumentTitleChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        void newBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            //the user opend fleet command center
-            if (e.Url.ToString().Contains("/fleetBase/"))
-                ParseFleetBaseAndShowResourceInformationTooltip();
-
-            _CurSystemId = ImperionParser.GetCurrentSystemId(GetCurrentBrowser().Document);
-            GetCurrentBrowser().Document.Window.Error +=new HtmlElementErrorEventHandler(Window_Error);
-        }
-
-        private void Window_Error(object sender, HtmlElementErrorEventArgs e)
-        {
-            e.Handled = true;
-        }
-        
         #endregion
 
         #region generel interface
@@ -98,10 +51,6 @@ namespace ImperionBrowser
             if (e.TabPage == tabNewPage)
             {
                 InsertNewPage(e.TabPageIndex, ((WebBrowser)tabControl.TabPages[e.TabPageIndex - 1].Controls["browser"]).Url);
-            }
-            else
-            {
-                
             }
         }
 
@@ -141,7 +90,7 @@ namespace ImperionBrowser
         private void tabControl_MouseClick(object sender, MouseEventArgs e)
         {
             TabPage clickedPage = GetClickedPage(e);
-            
+
             if (e.Button == MouseButtons.Right)
             {
                 CloseTab(clickedPage);
@@ -190,7 +139,7 @@ namespace ImperionBrowser
             frmRnmTab.TabName = tabPage.Text;
             if (frmRnmTab.ShowDialog() == DialogResult.OK)
                 tabPage.Text = frmRnmTab.TabName;
-            
+
         }
 
         /// <summary>
@@ -218,16 +167,16 @@ namespace ImperionBrowser
                 if (tab == tabNewPage || tab == tabMain) // we dont need to save this tab
                     continue;
 
-                sb.AppendLine(tab.Text + ";" + ((WebBrowser)tab.Controls["browser"]).Url.ToString()); 
+                sb.AppendLine(tab.Text + ";" + ((WebBrowser)tab.Controls["browser"]).Url.ToString());
             }
 
-            using (StreamWriter sw = new StreamWriter(TabSaveFilePath,false))
+            using (StreamWriter sw = new StreamWriter(TabSaveFilePath, false))
             {
                 sw.Write(sb.ToString());
                 sw.Close();
             }
         }
-        
+
         /// <summary>
         /// Load registers by stored text file
         /// </summary>
@@ -332,14 +281,52 @@ namespace ImperionBrowser
             edtAdress.Width = ContentContainer.Panel1.Width - 130;
         }
 
-        private void btnGrowingStatistic_Click(object sender, EventArgs e)
+
+
+        #endregion
+
+        #region browser events
+
+        private WebBrowser CreateCommonWebBrowserElement()
         {
-            Tools.SaveCookies(GetCurrentBrowser(), "cookies.txt");
-            StringBuilder mapData = Tools.DoWebRequestAndGetData("http://u1.imperion.de/map/index/");
-            ImperionParser parser = new ImperionParser();
-            GalaxyMap galaxyMap = parser.json_parseMap(mapData);
+            WebBrowser newBrowser = new WebBrowser();
+            newBrowser.Name = "browser";
+            newBrowser.Dock = DockStyle.Fill;
+            newBrowser.ProgressChanged += browser_ProgressChanged;
+            newBrowser.Navigating += new WebBrowserNavigatingEventHandler(newBrowser_Navigating);
+            newBrowser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(newBrowser_DocumentCompleted);
+            newBrowser.IsWebBrowserContextMenuEnabled = false;
+            
+            return newBrowser;
         }
 
+        private void browser_ProgressChanged(object sender, WebBrowserProgressChangedEventArgs e)
+        {
+            toolBarProgress.Maximum = Convert.ToInt32(e.MaximumProgress);
+            toolBarProgress.Value = Convert.ToInt32(e.CurrentProgress);
+        }
+
+        void newBrowser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+            edtAdress.Text = e.Url.ToString();
+            lblStatus.Text = "";
+        }
+
+        void newBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            //the user opend fleet command center
+            if (e.Url.ToString().Contains("/fleetBase/"))
+                ParseFleetBaseAndShowResourceInformationTooltip();
+
+            _CurSystemId = ImperionParser.GetCurrentSystemId(GetCurrentBrowser().Document);
+            GetCurrentBrowser().Document.Window.Error +=new HtmlElementErrorEventHandler(Window_Error);
+        }
+
+        private void Window_Error(object sender, HtmlElementErrorEventArgs e)
+        {
+            e.Handled = true;
+        }
+        
         #endregion
 
         #region Comet parsing
@@ -349,23 +336,11 @@ namespace ImperionBrowser
             WebBrowser browser = GetCurrentBrowser();
             Tools.SaveCookies(browser, "cookies.txt");
 
-            if (browser.ReadyState != WebBrowserReadyState.Complete)
+            if (Tools.UniverseMapIsLoaded(browser))
             {
-                MessageBox.Show("Das Universum ist noch nicht komplett geladen, bitte Vorgang später wiederholen", "Universum noch nicht bereit...", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                ImperionParser parser = new ImperionParser(browser);
+                parser.ShowRecyclerTargets(this);
             }
-
-            if (!browser.Url.ToString().Contains("map"))
-            {
-                DialogResult res = MessageBox.Show("Für diese Funktion muss zur Universumskarte navigiert werden. Navigation durchführen?", "Navigation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (res == DialogResult.Yes)
-                    browser.Navigate("http://u1.imperion.de/map/index");
-
-                return;
-            }
-
-            ImperionParser parser = new ImperionParser(browser);
-            parser.ShowRecyclerTargets(this);
         }
 
         #endregion
@@ -377,23 +352,11 @@ namespace ImperionBrowser
             WebBrowser browser = GetCurrentBrowser();
             Tools.SaveCookies(browser, "cookies.txt");
 
-            if (browser.ReadyState != WebBrowserReadyState.Complete)
+            if (Tools.UniverseMapIsLoaded(browser))
             {
-                MessageBox.Show("Das Universum ist noch nicht komplett geladen, bitte Vorgang später wiederholen", "Universum noch nicht bereit...", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
+                ImperionParser parser = new ImperionParser(browser);
+                parser.ShowRaidTargets(this);
             }
-
-            if (!browser.Url.ToString().Contains("map"))
-            {
-                DialogResult res = MessageBox.Show("Für diese Funktion muss zur Universumskarte navigiert werden. Navigation durchführen?", "Navigation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (res == DialogResult.Yes)
-                    browser.Navigate("http://u1.imperion.de/map/index");
-
-                return;
-            }
-
-            ImperionParser parser = new ImperionParser(browser);
-            parser.ShowRaidTargets(this);
             
         }
         
@@ -464,13 +427,20 @@ namespace ImperionBrowser
         }
         #endregion
 
+        #region Planet Growing
 
-      
-        
+        private void btnGrowingStatistic_Click(object sender, EventArgs e)
+        {
+            WebBrowser browser = GetCurrentBrowser();
+            Tools.SaveCookies(browser, "cookies.txt");
 
+            if (Tools.UniverseMapIsLoaded(browser))
+            {
+                ImperionParser parser = new ImperionParser(browser);
+            }
+        }
 
-        
-
+        #endregion
 
     }
 }

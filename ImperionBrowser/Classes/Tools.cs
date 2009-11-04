@@ -131,11 +131,6 @@ namespace ImperionBrowser
             return result;
         }
 
-        public static StringBuilder ReadWebsite(string url)
-        {
-            return new StringBuilder();
-        }
-
         public static StringBuilder DoWebRequestAndGetData(string url)
         {
             StringBuilder sb = new StringBuilder();
@@ -169,6 +164,26 @@ namespace ImperionBrowser
             }
 
             return sb;
+        }
+
+        public static bool UniverseMapIsLoaded(WebBrowser browser)
+        {
+            if (browser.ReadyState != WebBrowserReadyState.Complete)
+            {
+                MessageBox.Show("Das Universum ist noch nicht komplett geladen, bitte Vorgang später wiederholen", "Universum noch nicht bereit...", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+
+            if (!browser.Url.ToString().Contains("map"))
+            {
+                DialogResult res = MessageBox.Show("Für diese Funktion muss zur Universumskarte navigiert werden. Navigation durchführen?", "Navigation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (res == DialogResult.Yes)
+                    browser.Navigate("http://u1.imperion.de/map/index");
+
+                return false;
+            }
+
+            return true;
         }
     }
 }
