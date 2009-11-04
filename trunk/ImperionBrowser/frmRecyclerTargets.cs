@@ -35,6 +35,7 @@ namespace ImperionBrowser
             progressBar.Value = 0;
             progressBar.Maximum = _GalaxyMap.Systems.Count;
             pnlProgress.Visible = true;
+
             for (int i = 0; i < _GalaxyMap.Systems.Count; i++)
             {
                 for (int j = 0; j < _GalaxyMap.Systems[i].Comets.Count; j++)
