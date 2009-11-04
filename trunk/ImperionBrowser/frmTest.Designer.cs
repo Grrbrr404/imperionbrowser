@@ -42,7 +42,7 @@
             this.webBrowser1.Location = new System.Drawing.Point(0, 48);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(577, 400);
+            this.webBrowser1.Size = new System.Drawing.Size(594, 61);
             this.webBrowser1.TabIndex = 0;
             this.webBrowser1.Url = new System.Uri("http://imperion.de", System.UriKind.Absolute);
             // 
