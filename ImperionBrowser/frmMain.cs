@@ -318,8 +318,18 @@ namespace ImperionBrowser
             if (e.Url.ToString().Contains("/fleetBase/"))
                 ParseFleetBaseAndShowResourceInformationTooltip();
 
+            //user opend market place to sell resources
+            if (e.Url.ToString().Contains("/market/formMakeOffer"))
+                ExtendMarketPlaceSubmitButton((WebBrowser)sender);
+
             _CurSystemId = ImperionParser.GetCurrentSystemId(GetCurrentBrowser().Document);
             GetCurrentBrowser().Document.Window.Error +=new HtmlElementErrorEventHandler(Window_Error);
+        }
+
+        private void ExtendMarketPlaceSubmitButton(WebBrowser sender)
+        {
+            HtmlElement button = sender.Document.GetElementById("submitOffer");
+            button.SetAttribute("href", "javascript:document.forms[0].submit();");
         }
 
         private void Window_Error(object sender, HtmlElementErrorEventArgs e)
@@ -330,19 +340,16 @@ namespace ImperionBrowser
         #endregion
 
         #region Comet parsing
-
         private void btnFindComets_Click(object sender, EventArgs e)
         {
             WebBrowser browser = GetCurrentBrowser();
-            Tools.SaveCookies(browser, "cookies.txt");
-
             if (Tools.UniverseMapIsLoaded(browser))
             {
                 ImperionParser parser = new ImperionParser(browser);
-                parser.ShowRecyclerTargets(this);
+                frmRecyclerTargets frmRT = new frmRecyclerTargets(parser.GetGalaxyMap(), this);
+                frmRT.Show();
             }
         }
-
         #endregion
 
         #region Raid Parsing
@@ -350,14 +357,12 @@ namespace ImperionBrowser
         private void btnFindEmptyNotRadedPlanets_Click(object sender, EventArgs e)
         {
             WebBrowser browser = GetCurrentBrowser();
-            Tools.SaveCookies(browser, "cookies.txt");
-
             if (Tools.UniverseMapIsLoaded(browser))
             {
                 ImperionParser parser = new ImperionParser(browser);
-                parser.ShowRaidTargets(this);
+                frmRaidTargets frmRT = new frmRaidTargets(parser.GetGalaxyMap(), this);
+                frmRT.Show();
             }
-            
         }
         
         #endregion
@@ -432,15 +437,20 @@ namespace ImperionBrowser
         private void btnGrowingStatistic_Click(object sender, EventArgs e)
         {
             WebBrowser browser = GetCurrentBrowser();
-            Tools.SaveCookies(browser, "cookies.txt");
-
             if (Tools.UniverseMapIsLoaded(browser))
             {
                 ImperionParser parser = new ImperionParser(browser);
+                frmPlanetGrowing frmPG = new frmPlanetGrowing(parser.GetGalaxyMap(), this);
+                frmPG.Show();
             }
         }
 
         #endregion
+
+        private void datenbankErzeugenPrüfenToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SqLight.CheckDatabaseStructure();
+        }
 
     }
 }

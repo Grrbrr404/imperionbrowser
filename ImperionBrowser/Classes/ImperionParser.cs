@@ -19,29 +19,31 @@ namespace ImperionBrowser
             mBrowser = iBrowser;
         }
 
-        public ImperionParser() { }
-
-        public GalaxyMap TestMap()
+        public GalaxyMap TestMap(bool showDebugInfo)
         {
             StreamReader sr = new StreamReader("my_system.txt");
             StringBuilder sb = new StringBuilder(sr.ReadToEnd());
 
             GalaxyMap galaxyMap = json_parseMap(sb);
 
-            int pcount = 0;
-            int ccount = 0;
-            int dcount = 0;
-            int acount = 0;
-
-            for (int i = 0; i < galaxyMap.Systems.Count; i++)
+            if (showDebugInfo)
             {
-                pcount += galaxyMap.Systems[i].Planets.Count;
-                ccount += galaxyMap.Systems[i].Comets.Count;
-                dcount += galaxyMap.Systems[i].Debris.Count;
-                acount += galaxyMap.Systems[i].Asteroids.Count;
-            }
+                int pcount = 0;
+                int ccount = 0;
+                int dcount = 0;
+                int acount = 0;
 
-            MessageBox.Show(String.Format("Es wurden {0} Systeme durchsucht: \r Es wurden {1} Planeten, {2} Kometen, {4} Asteroiden und {3} Trümmerfelder gefunden", galaxyMap.Systems.Count, pcount, ccount, dcount, acount));
+                for (int i = 0; i < galaxyMap.Systems.Count; i++)
+                {
+                    pcount += galaxyMap.Systems[i].Planets.Count;
+                    ccount += galaxyMap.Systems[i].Comets.Count;
+                    dcount += galaxyMap.Systems[i].Debris.Count;
+                    acount += galaxyMap.Systems[i].Asteroids.Count;
+                }
+
+                MessageBox.Show(String.Format("Es wurden {0} Systeme durchsucht: \r Es wurden {1} Planeten, {2} Kometen, {4} Asteroiden und {3} Trümmerfelder gefunden", galaxyMap.Systems.Count, pcount, ccount, dcount, acount));
+            }
+            
             return galaxyMap;
         }
 
@@ -63,7 +65,7 @@ namespace ImperionBrowser
             }
         }
 
-        private static void json_AddCometsToSystem(JsonTextReader jsonReader, GalaxySystem galaxySystem)
+        private void json_AddCometsToSystem(JsonTextReader jsonReader, GalaxySystem galaxySystem)
         {
             JsonTokenClass tc = jsonReader.TokenClass;
             Comet comet;
@@ -77,7 +79,6 @@ namespace ImperionBrowser
 
             while (tc != JsonTokenClass.EndArray)
             {
-
                 try
                 {
                     jsonReader.Read();
@@ -101,13 +102,13 @@ namespace ImperionBrowser
                 }
                 catch
                 {
-                    MessageBox.Show("error:" + jsonReader.Text + " | line: " + jsonReader.LineNumber + " | pos: " + jsonReader.LinePosition);
+                    MessageBox.Show("Map parsing error:" + jsonReader.Text + " | line: " + jsonReader.LineNumber + " | pos: " + jsonReader.LinePosition);
                 }
             }
             
         }
 
-        private static Planet json_ParsePlanet(JsonTextReader jsonReader)
+        private Planet json_ParsePlanet(JsonTextReader jsonReader)
         {
             Planet curPlanet = new Planet();
             // read whole planet
@@ -138,7 +139,7 @@ namespace ImperionBrowser
                     }
                     catch
                     {
-                        MessageBox.Show("error:" + jsonReader.Text + " | line: " + jsonReader.LineNumber + " | pos: " + jsonReader.LinePosition);
+                        MessageBox.Show("Map parsing error:" + jsonReader.Text + " | line: " + jsonReader.LineNumber + " | pos: " + jsonReader.LinePosition);
                     }
                 }
 
@@ -154,7 +155,7 @@ namespace ImperionBrowser
                     }
                     catch
                     {
-                        MessageBox.Show("error:" + jsonReader.Text + " | line: " + jsonReader.LineNumber + " | pos: " + jsonReader.LinePosition);
+                        MessageBox.Show("Map parsing error:" + jsonReader.Text + " | line: " + jsonReader.LineNumber + " | pos: " + jsonReader.LinePosition);
                     }
                 }
 
@@ -173,9 +174,9 @@ namespace ImperionBrowser
                                 report._time = DateTime.Parse(json_readMemberIntoString(jsonReader));
                                 report._planet_id_target = json_readMemberIntoString(jsonReader);
                                 report._header_id = json_readMemberIntoString(jsonReader);
-                                report._type = json_readMemberIntoString(jsonReader);
+                                report.SetType(json_readMemberIntoString(jsonReader));
                                 curPlanet.Reports.Add(report);
-                                
+
                                 jsonReader.Read(); //skip end object of report
                             }
                         }
@@ -184,14 +185,14 @@ namespace ImperionBrowser
             }
             catch
             {
-                MessageBox.Show("error:" + jsonReader.Text + " | line: " + jsonReader.LineNumber + " | pos: " + jsonReader.LinePosition);
+                MessageBox.Show("Map parsing error:" + jsonReader.Text + " | line: " + jsonReader.LineNumber + " | pos: " + jsonReader.LinePosition);
             }
 
             return curPlanet;
 
         }
 
-        private static void json_ContinueToNextObject(JsonTextReader jsonReader)
+        private void json_ContinueToNextObject(JsonTextReader jsonReader)
         {
             int depth = jsonReader.Depth;
             string text;
@@ -202,7 +203,6 @@ namespace ImperionBrowser
                 jsonReader.Read();
                 tc = jsonReader.TokenClass;
             }
-
             
         }
 
@@ -217,7 +217,7 @@ namespace ImperionBrowser
             return String.Empty;
         }
 
-        private static int json_readMemberIntoNumber(JsonTextReader jsonReader)
+        private int json_readMemberIntoNumber(JsonTextReader jsonReader)
         {
             try
             {
@@ -236,19 +236,9 @@ namespace ImperionBrowser
             }
         }
 
-        public void ShowRecyclerTargets(frmMain frmMain)
+        public GalaxyMap GetGalaxyMap()
         {
-            GalaxyMap galaxyMap = json_parseMap(json_ExtractMapdata());
-            frmRecyclerTargets rt = new frmRecyclerTargets(galaxyMap, frmMain);
-            rt.Show();
-           
-        }
-
-        public void ShowRaidTargets(frmMain frmMain)
-        {
-            GalaxyMap galaxyMap = json_parseMap(json_ExtractMapdata());
-            frmRaidTargets rt = new frmRaidTargets(galaxyMap, frmMain);
-            rt.Show();
+            return json_parseMap(json_ExtractMapdata());
         }
 
         private StringBuilder json_ExtractMapdata()
@@ -272,7 +262,7 @@ namespace ImperionBrowser
             return jsonData;
         }
 
-        public GalaxyMap json_parseMap(StringBuilder jsonData)
+        private GalaxyMap json_parseMap(StringBuilder jsonData)
         {
             JsonTextReader jsonReader = new JsonTextReader(new StringReader(jsonData.ToString()));
             GalaxyMap galaxyMap = new GalaxyMap();

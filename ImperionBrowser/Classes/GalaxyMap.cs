@@ -11,7 +11,6 @@ namespace ImperionBrowser
     public class GalaxyMap
     {
         private List<GalaxySystem> _Systems = new List<GalaxySystem>();
-        Dictionary<string, string> _FlightTimeCache = new Dictionary<string, string>();
         public List<GalaxySystem> Systems
         {
             get { return _Systems; }
@@ -46,104 +45,6 @@ namespace ImperionBrowser
 
             return null; //Comet coudnt be found
         }
-
-        public void ResetFlightTimeCache()
-        {
-            _FlightTimeCache.Clear();
-        }
-
-        public string GetFlightTime(string idOfTarget, Type targetType, TerranSpaceShip slowestShip)
-        {
-            string url = String.Empty;
-
-            if (_FlightTimeCache.ContainsKey(idOfTarget))
-                return _FlightTimeCache[idOfTarget];
-
-            if (targetType == typeof(Comet))
-                url = String.Format("http://u1.imperion.de/fleetBase/route/1?ajaxRequest=1&planetId=c{0}&ships[{1}]=1", idOfTarget, (int)slowestShip);
-            else if (targetType == typeof(Debris))
-                url = String.Format("http://u1.imperion.de/fleetBase/route/1?ajaxRequest=1&planetId=d{0}&ships[{1}]=1", idOfTarget, (int)slowestShip);
-            else if (targetType == typeof(Planet))
-                url = String.Format("http://u1.imperion.de/fleetBase/route/1?ajaxRequest=1&planetId={0}&ships[{1}]=1", idOfTarget, (int)slowestShip);
-            
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.CookieContainer = Tools.ReadCookiesAsCollection(new Uri(url), "cookies.txt");
-
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            Stream resStream = response.GetResponseStream();
-            StringBuilder sb = new StringBuilder();
-
-            byte[] buf = new byte[8192];
-            string tempString = null;
-            int count = 0;
-
-            try
-            {
-                do
-                {
-                    count = resStream.Read(buf, 0, buf.Length);
-                    if (count != 0)
-                    {
-                        tempString = Encoding.ASCII.GetString(buf, 0, count);
-                        sb.Append(tempString);
-                    }
-                }
-                while (count > 0); // any more data to read?
-            }
-            finally
-            {
-                response.Close();
-                resStream.Close();
-                resStream.Dispose();
-            }
-
-            _FlightTimeCache.Add(idOfTarget, ImperionParser.json_extractFlightTime(sb.ToString()));
-
-            return _FlightTimeCache[idOfTarget];
-        }
-
-        public string GetFlightTime(Planet planet, TerranSpaceShip spaceShip)
-        {
-
-            if (_FlightTimeCache.ContainsKey(planet._system_id))
-                return _FlightTimeCache[planet._system_id];
-
-            string url = String.Format("http://u1.imperion.de/fleetBase/route/1?ajaxRequest=1&planetId={0}&ships[{1}]=1", planet._planet_id, (int)spaceShip);
-
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.CookieContainer = Tools.ReadCookiesAsCollection(new Uri(url), "cookies.txt");
-
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            Stream resStream = response.GetResponseStream();
-            StringBuilder sb = new StringBuilder();
-
-            byte[] buf = new byte[8192];
-            string tempString = null;
-            int count = 0;
-
-            try
-            {
-                do
-                {
-                    count = resStream.Read(buf, 0, buf.Length);
-                    if (count != 0)
-                    {
-                        tempString = Encoding.ASCII.GetString(buf, 0, count);
-                        sb.Append(tempString);
-                    }
-                }
-                while (count > 0); // any more data to read?
-            }
-            finally
-            {
-                response.Close();
-                resStream.Close();
-                resStream.Dispose();
-            }
-
-            _FlightTimeCache.Add(planet._system_id, ImperionParser.json_extractFlightTime(sb.ToString()));
-
-            return _FlightTimeCache[planet._system_id];
-        }
+       
     }
 }

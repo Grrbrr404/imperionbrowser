@@ -60,6 +60,7 @@
             this.extrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timerHandyAlert = new System.Windows.Forms.Timer(this.components);
+            this.datenbankErzeugenPrüfenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -183,7 +184,7 @@
             // lblAdress
             // 
             this.lblAdress.Name = "lblAdress";
-            this.lblAdress.Size = new System.Drawing.Size(48, 22);
+            this.lblAdress.Size = new System.Drawing.Size(46, 22);
             this.lblAdress.Text = "Adresse";
             // 
             // edtAdress
@@ -191,7 +192,7 @@
             this.edtAdress.AutoSize = false;
             this.edtAdress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.edtAdress.Name = "edtAdress";
-            this.edtAdress.Size = new System.Drawing.Size(776, 23);
+            this.edtAdress.Size = new System.Drawing.Size(776, 21);
             this.edtAdress.KeyUp += new System.Windows.Forms.KeyEventHandler(this.edtAdress_KeyUp);
             // 
             // ContentContainer
@@ -341,28 +342,29 @@
             this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.beendenToolStripMenuItem});
             this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
-            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.dateiToolStripMenuItem.Text = "&Datei";
             // 
             // beendenToolStripMenuItem
             // 
             this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
             this.beendenToolStripMenuItem.Text = "B&eenden";
             this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
             // 
             // extrasToolStripMenuItem
             // 
             this.extrasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.einstellungenToolStripMenuItem});
+            this.einstellungenToolStripMenuItem,
+            this.datenbankErzeugenPrüfenToolStripMenuItem});
             this.extrasToolStripMenuItem.Name = "extrasToolStripMenuItem";
-            this.extrasToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.extrasToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
             this.extrasToolStripMenuItem.Text = "E&xtras";
             // 
             // einstellungenToolStripMenuItem
             // 
             this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
-            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(154, 22);
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
             this.einstellungenToolStripMenuItem.Text = "&Einstellungen...";
             this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.einstellungenToolStripMenuItem_Click);
             // 
@@ -370,6 +372,14 @@
             // 
             this.timerHandyAlert.Interval = 30000;
             this.timerHandyAlert.Tick += new System.EventHandler(this.timerHandyAlert_Tick);
+            // 
+            // datenbankErzeugenPrüfenToolStripMenuItem
+            // 
+            this.datenbankErzeugenPrüfenToolStripMenuItem.Name = "datenbankErzeugenPrüfenToolStripMenuItem";
+            this.datenbankErzeugenPrüfenToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
+            this.datenbankErzeugenPrüfenToolStripMenuItem.Text = "Datenbank erzeugen / prüfen";
+            this.datenbankErzeugenPrüfenToolStripMenuItem.ToolTipText = "Die Datenbank wird auf vollständigkeit Überprüft und fehlende Tabellen erzeugt";
+            this.datenbankErzeugenPrüfenToolStripMenuItem.Click += new System.EventHandler(this.datenbankErzeugenPrüfenToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -443,6 +453,7 @@
         private System.Windows.Forms.ToolStripButton btnRefreshBrowser;
         private System.Windows.Forms.ToolStripButton btnFindEmptyNotRadedPlanets;
         private System.Windows.Forms.ToolStripButton btnGrowingStatistic;
+        private System.Windows.Forms.ToolStripMenuItem datenbankErzeugenPrüfenToolStripMenuItem;
     }
 }
 

@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Net;
 using System.Drawing;
+using System.Data;
 
 namespace ImperionBrowser
 {
@@ -185,5 +186,19 @@ namespace ImperionBrowser
 
             return true;
         }
+
+        public static DataColumn CreateDataColumn(Type colType, string name, string caption, bool autoInc, bool readOnly, bool unique)
+        {
+            DataColumn column = new DataColumn();
+            column.DataType = colType;
+            column.ColumnName = name;
+            column.Caption = caption;
+            column.AutoIncrement = autoInc;
+            column.ReadOnly = readOnly;
+            column.Unique = unique;
+
+            return column;
+        } 
+
     }
 }

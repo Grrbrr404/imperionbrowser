@@ -4,8 +4,6 @@ using System.Text;
 
 namespace ImperionBrowser
 {
-    public enum PlanetTypes { }
-
     public enum TerranSpaceShip
     {
         ssSonde = 1,
@@ -54,5 +52,15 @@ namespace ImperionBrowser
         ptEarth = 4,
         ptDesert = 5,
         ptVulcan = 6
+    }
+
+    public enum MissionTypes
+    {
+        mtAttack = 301,
+        mtRaid = 302,
+        mtSupport = 303,
+        mtSpy = 304,
+        mtHoldPosition = 306,
+        mtColonize = 307
     }
 }
