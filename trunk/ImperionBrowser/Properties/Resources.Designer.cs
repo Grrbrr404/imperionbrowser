@@ -59,5 +59,40 @@ namespace ImperionBrowser.Properties {
                 resourceCulture = value;
             }
         }
+        
+        internal static System.Drawing.Bitmap desert {
+            get {
+                object obj = ResourceManager.GetObject("desert", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap earth {
+            get {
+                object obj = ResourceManager.GetObject("earth", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap ice {
+            get {
+                object obj = ResourceManager.GetObject("ice", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap vulcan {
+            get {
+                object obj = ResourceManager.GetObject("vulcan", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        internal static System.Drawing.Bitmap water {
+            get {
+                object obj = ResourceManager.GetObject("water", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

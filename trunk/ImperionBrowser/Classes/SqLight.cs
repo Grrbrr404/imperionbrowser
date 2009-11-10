@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Data.SQLite;
+using System.IO;
+using System.Windows.Forms;
 
 namespace ImperionBrowser
 {
@@ -13,7 +15,6 @@ namespace ImperionBrowser
         {
             SQLiteConnectionStringBuilder csb = new SQLiteConnectionStringBuilder();
             csb.DataSource = @"Data\database";
-            csb.Password = "imperion";
             _Conn = new SQLiteConnection(csb.ToString());
         }
 
@@ -38,7 +39,7 @@ namespace ImperionBrowser
 
             using (SQLiteCommand cmd = new SQLiteCommand(iSql, _Conn))
             {
-                cmd.ExecuteNonQuery();    
+                cmd.ExecuteNonQuery();
             }
         }
 
@@ -52,25 +53,10 @@ namespace ImperionBrowser
 
                     mycommand.CommandText = iPreparedSql;
                     mycommand.Parameters.Add(myparam);
-
-                    /*for (n = 0; n < 100000; n++)
-                    {
-                        myparam.Value = n + 1;
-                        mycommand.ExecuteNonQuery();
-                    }*/
                 }
                 mytransaction.Commit();
             } 
         }
-
-        #region IDisposable Member
-
-        public void Dispose()
-        {
-            Close();
-        }
-
-        #endregion
 
         public SQLiteDataReader ExecuteQuery(string sql)
         {
@@ -80,8 +66,74 @@ namespace ImperionBrowser
                 Open();
 
             SQLiteCommand cmd = new SQLiteCommand(sql, _Conn);
-            reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
-            return reader;
+
+            return reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+        }
+
+        public void Dispose()
+        {
+            Close();
+        }
+
+        /// <summary>
+        /// Checks the database structure and will alter it if something is missing
+        /// </summary>
+        public static void CheckDatabaseStructure()
+        {
+            if (!File.Exists("Data/database"))
+                SQLiteConnection.CreateFile("Data/database");
+
+            SqLight sqlight = new SqLight();
+            string sql = String.Empty;
+            StringBuilder sb = new StringBuilder("Datenbank wurde erfolgreich überprüft\r\n");
+
+            #region Table FlightTime
+            if (!sqlight.TableExist("FlightTimeCache"))
+            {
+                sql = @"CREATE TABLE [FlightTimeCache] (
+                        [ID] guid NOT NULL,
+                        [SourceSystemId] varchar(50),
+                        [DestSystemId] varchar(50),
+                        [ShipType] integer,
+                        [FlightTime] varchar(20) NOT NULL);";
+
+                sqlight.ExecuteSql(sql);
+                sb.AppendLine("- Tabelle FlightTimeCache wurde erzeugt");
+            }
+            else
+            {
+                sb.AppendLine("- Tabelle FlightTimeCache OK");
+            }
+            #endregion
+
+            #region Table PlanetGrowing
+            if (!sqlight.TableExist("PlanetGrowing"))
+            {
+                sql = @"CREATE TABLE [PlanetGrowing] (
+                        [ID] guid NOT NULL,
+                        [PlanetId] varchar(50),
+                        [PlanetPoints] integer,
+                        [OwnerId] varchar(20),
+                        [OwnerName] varchar(50),
+                        [OwnerAllianceName varchar(50),
+                        [ScanDate] DateTime;";
+
+                sqlight.ExecuteSql(sql);
+                sb.AppendLine("- Tabelle PlanetGrowing wurde erzeugt");
+            }
+            else
+            {
+                sb.AppendLine("- Tabelle PlanetGrowing OK");
+            }
+            #endregion
+
+            MessageBox.Show(sb.ToString(),"Datenbank erzeugen / prüfen");
+        }
+
+        private bool TableExist(string iTableName)
+        {
+ 	        SQLiteDataReader reader = ExecuteQuery("SELECT name FROM sqlite_master WHERE name='" + iTableName + "'");
+            return reader.HasRows;
         }
     }
 }

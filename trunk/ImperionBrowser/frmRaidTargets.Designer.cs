@@ -30,6 +30,13 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRaidTargets));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.grpbxFilter = new System.Windows.Forms.GroupBox();
+            this.btnFilterNow = new System.Windows.Forms.Button();
+            this.chckbxWaterFilter = new System.Windows.Forms.CheckBox();
+            this.chckbxVulcanFilter = new System.Windows.Forms.CheckBox();
+            this.chckbxIceFilter = new System.Windows.Forms.CheckBox();
+            this.chckbxDesertFilter = new System.Windows.Forms.CheckBox();
+            this.chckbxEarthFilter = new System.Windows.Forms.CheckBox();
             this.grpbxShip = new System.Windows.Forms.GroupBox();
             this.ship12 = new System.Windows.Forms.NumericUpDown();
             this.ship11 = new System.Windows.Forms.NumericUpDown();
@@ -52,6 +59,7 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.grpbxFilter.SuspendLayout();
             this.grpbxShip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ship12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ship11)).BeginInit();
@@ -80,6 +88,7 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.grpbxFilter);
             this.splitContainer1.Panel1.Controls.Add(this.grpbxShip);
             this.splitContainer1.Panel1.Controls.Add(this.cmbxRace);
             // 
@@ -88,8 +97,98 @@
             this.splitContainer1.Panel2.Controls.Add(this.pnlProgress);
             this.splitContainer1.Panel2.Controls.Add(this.dataGrid);
             this.splitContainer1.Size = new System.Drawing.Size(648, 420);
-            this.splitContainer1.SplitterDistance = 151;
+            this.splitContainer1.SplitterDistance = 177;
             this.splitContainer1.TabIndex = 1;
+            // 
+            // grpbxFilter
+            // 
+            this.grpbxFilter.Controls.Add(this.btnFilterNow);
+            this.grpbxFilter.Controls.Add(this.chckbxWaterFilter);
+            this.grpbxFilter.Controls.Add(this.chckbxVulcanFilter);
+            this.grpbxFilter.Controls.Add(this.chckbxIceFilter);
+            this.grpbxFilter.Controls.Add(this.chckbxDesertFilter);
+            this.grpbxFilter.Controls.Add(this.chckbxEarthFilter);
+            this.grpbxFilter.Location = new System.Drawing.Point(16, 125);
+            this.grpbxFilter.Name = "grpbxFilter";
+            this.grpbxFilter.Size = new System.Drawing.Size(507, 47);
+            this.grpbxFilter.TabIndex = 9;
+            this.grpbxFilter.TabStop = false;
+            this.grpbxFilter.Text = "Ich möchte folgende Planetentypen anzeigen";
+            // 
+            // btnFilterNow
+            // 
+            this.btnFilterNow.Location = new System.Drawing.Point(421, 15);
+            this.btnFilterNow.Name = "btnFilterNow";
+            this.btnFilterNow.Size = new System.Drawing.Size(75, 23);
+            this.btnFilterNow.TabIndex = 14;
+            this.btnFilterNow.Text = "Filtern";
+            this.btnFilterNow.UseVisualStyleBackColor = true;
+            this.btnFilterNow.Click += new System.EventHandler(this.btnFilterNow_Click);
+            // 
+            // chckbxWaterFilter
+            // 
+            this.chckbxWaterFilter.AutoSize = true;
+            this.chckbxWaterFilter.Checked = true;
+            this.chckbxWaterFilter.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chckbxWaterFilter.Image = global::ImperionBrowser.Properties.Resources.water;
+            this.chckbxWaterFilter.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.chckbxWaterFilter.Location = new System.Drawing.Point(170, 19);
+            this.chckbxWaterFilter.Name = "chckbxWaterFilter";
+            this.chckbxWaterFilter.Size = new System.Drawing.Size(32, 17);
+            this.chckbxWaterFilter.TabIndex = 13;
+            this.chckbxWaterFilter.UseVisualStyleBackColor = true;
+            // 
+            // chckbxVulcanFilter
+            // 
+            this.chckbxVulcanFilter.AutoSize = true;
+            this.chckbxVulcanFilter.Checked = true;
+            this.chckbxVulcanFilter.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chckbxVulcanFilter.Image = global::ImperionBrowser.Properties.Resources.vulcan;
+            this.chckbxVulcanFilter.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.chckbxVulcanFilter.Location = new System.Drawing.Point(132, 19);
+            this.chckbxVulcanFilter.Name = "chckbxVulcanFilter";
+            this.chckbxVulcanFilter.Size = new System.Drawing.Size(32, 17);
+            this.chckbxVulcanFilter.TabIndex = 12;
+            this.chckbxVulcanFilter.UseVisualStyleBackColor = true;
+            // 
+            // chckbxIceFilter
+            // 
+            this.chckbxIceFilter.AutoSize = true;
+            this.chckbxIceFilter.Checked = true;
+            this.chckbxIceFilter.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chckbxIceFilter.Image = global::ImperionBrowser.Properties.Resources.ice;
+            this.chckbxIceFilter.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.chckbxIceFilter.Location = new System.Drawing.Point(91, 19);
+            this.chckbxIceFilter.Name = "chckbxIceFilter";
+            this.chckbxIceFilter.Size = new System.Drawing.Size(32, 17);
+            this.chckbxIceFilter.TabIndex = 11;
+            this.chckbxIceFilter.UseVisualStyleBackColor = true;
+            // 
+            // chckbxDesertFilter
+            // 
+            this.chckbxDesertFilter.AutoSize = true;
+            this.chckbxDesertFilter.Checked = true;
+            this.chckbxDesertFilter.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chckbxDesertFilter.Image = global::ImperionBrowser.Properties.Resources.desert;
+            this.chckbxDesertFilter.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.chckbxDesertFilter.Location = new System.Drawing.Point(50, 19);
+            this.chckbxDesertFilter.Name = "chckbxDesertFilter";
+            this.chckbxDesertFilter.Size = new System.Drawing.Size(32, 17);
+            this.chckbxDesertFilter.TabIndex = 10;
+            this.chckbxDesertFilter.UseVisualStyleBackColor = true;
+            // 
+            // chckbxEarthFilter
+            // 
+            this.chckbxEarthFilter.AutoSize = true;
+            this.chckbxEarthFilter.Checked = true;
+            this.chckbxEarthFilter.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chckbxEarthFilter.Image = global::ImperionBrowser.Properties.Resources.earth;
+            this.chckbxEarthFilter.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
+            this.chckbxEarthFilter.Location = new System.Drawing.Point(12, 19);
+            this.chckbxEarthFilter.Name = "chckbxEarthFilter";
+            this.chckbxEarthFilter.Size = new System.Drawing.Size(32, 17);
+            this.chckbxEarthFilter.TabIndex = 9;
+            this.chckbxEarthFilter.UseVisualStyleBackColor = true;
             // 
             // grpbxShip
             // 
@@ -261,7 +360,7 @@
             this.dataGrid.MultiSelect = false;
             this.dataGrid.Name = "dataGrid";
             this.dataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGrid.Size = new System.Drawing.Size(648, 265);
+            this.dataGrid.Size = new System.Drawing.Size(648, 239);
             this.dataGrid.TabIndex = 1;
             this.dataGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGrid_CellDoubleClick);
             // 
@@ -278,6 +377,8 @@
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
+            this.grpbxFilter.ResumeLayout(false);
+            this.grpbxFilter.PerformLayout();
             this.grpbxShip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ship12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ship11)).EndInit();
@@ -320,5 +421,12 @@
         private System.Windows.Forms.NumericUpDown ship2;
         private System.Windows.Forms.NumericUpDown ship1;
         private System.Windows.Forms.PictureBox pctrbxSprite;
+        private System.Windows.Forms.GroupBox grpbxFilter;
+        private System.Windows.Forms.CheckBox chckbxWaterFilter;
+        private System.Windows.Forms.CheckBox chckbxVulcanFilter;
+        private System.Windows.Forms.CheckBox chckbxIceFilter;
+        private System.Windows.Forms.CheckBox chckbxDesertFilter;
+        private System.Windows.Forms.CheckBox chckbxEarthFilter;
+        private System.Windows.Forms.Button btnFilterNow;
     }
 }

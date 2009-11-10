@@ -52,7 +52,16 @@ namespace ImperionBrowser
         {
             ImperionParser ip = new ImperionParser(new WebBrowser());
 
-            GalaxyMap gm = ip.TestMap();
+            GalaxyMap gm = ip.TestMap(true);
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            ImperionParser ip = new ImperionParser(new WebBrowser());
+            GalaxyMap gm = ip.TestMap(false);
+            
+            frmRaidTargets raidTargets = new frmRaidTargets(gm, new frmMain());
+            raidTargets.Show();
         }
     
     }

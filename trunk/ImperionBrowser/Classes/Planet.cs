@@ -79,34 +79,5 @@ namespace ImperionBrowser
         }
     }
 
-    public class Climate
-    {
-        public int _solar = 0;
-        public int _wind = 0;
-        public int _water = 0;
-        public int _thermal = 0;
-
-        public Climate() { }
-    }
-
-    public class Resources
-    {
-        public string _metalFields = String.Empty;
-        public string _crystalFields = String.Empty;
-        public string _deutriFields = String.Empty;
-    }
-
-    public class Report
-    {
-        public DateTime _time;
-        public string _planet_id_target;
-        public string _header_id;
-        public string _type;
-
-        public Report()
-        {
-            _time = new DateTime();
-            _time = DateTime.MinValue;
-        }
-    }
+    
 }        

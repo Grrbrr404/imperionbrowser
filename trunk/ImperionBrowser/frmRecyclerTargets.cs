@@ -10,7 +10,6 @@ namespace ImperionBrowser
 {
     public partial class frmRecyclerTargets : Form
     {
-
         GalaxyMap _GalaxyMap;
         frmMain _ownerForm;
 
@@ -24,13 +23,13 @@ namespace ImperionBrowser
         private void InitDataGrid()
         {
             DataTable dataTable = new DataTable("GalaxyMap");
-            dataTable.Columns.Add(CreateDataColumn(typeof(string), "Name", "Name", false, false, false));
-            dataTable.Columns.Add(CreateDataColumn(typeof(string), "Typ", "Typ", false, false, false));
-            dataTable.Columns.Add(CreateDataColumn(typeof(string), "Flugzeit", "Flugzeit", false, false, false));
-            dataTable.Columns.Add(CreateDataColumn(typeof(string), "Metall", "Metal", false, false, false));
-            dataTable.Columns.Add(CreateDataColumn(typeof(string), "Kristall", "Kristall", false, false, false));
-            dataTable.Columns.Add(CreateDataColumn(typeof(string), "Deuterium", "Deuterium", false, false, false));
-            dataTable.Columns.Add(CreateDataColumn(typeof(object), "Object", "Object", false, false, false));
+            dataTable.Columns.Add(Tools.CreateDataColumn(typeof(string), "Name", "Name", false, false, false));
+            dataTable.Columns.Add(Tools.CreateDataColumn(typeof(string), "Typ", "Typ", false, false, false));
+            dataTable.Columns.Add(Tools.CreateDataColumn(typeof(string), "Flugzeit", "Flugzeit", false, false, false));
+            dataTable.Columns.Add(Tools.CreateDataColumn(typeof(string), "Metall", "Metal", false, false, false));
+            dataTable.Columns.Add(Tools.CreateDataColumn(typeof(string), "Kristall", "Kristall", false, false, false));
+            dataTable.Columns.Add(Tools.CreateDataColumn(typeof(string), "Deuterium", "Deuterium", false, false, false));
+            dataTable.Columns.Add(Tools.CreateDataColumn(typeof(object), "Object", "Object", false, false, false));
 
             progressBar.Value = 0;
             progressBar.Maximum = _GalaxyMap.Systems.Count;
@@ -82,20 +81,7 @@ namespace ImperionBrowser
             dataGrid.Columns["Object"].Visible = false;
             dataGrid.Sort(dataGrid.Columns[2], ListSortDirection.Ascending);
         }
-
-        private DataColumn CreateDataColumn(Type colType, string name, string caption, bool autoInc, bool readOnly, bool unique)
-        {
-            DataColumn column = new DataColumn();
-            column.DataType = colType;
-            column.ColumnName = name;
-            column.Caption = caption;
-            column.AutoIncrement = autoInc;
-            column.ReadOnly = readOnly;
-            column.Unique = unique;
-            
-            return column;
-        } 
-
+        
         private void dataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             Object target = dataGrid.Rows[e.RowIndex].Cells["object"].Value;

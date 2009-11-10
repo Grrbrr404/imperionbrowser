@@ -44,17 +44,19 @@ namespace ImperionBrowser
 
         private void InitDataGrid()
         {
+            dataGrid.SelectAll();
+            dataGrid.ClearSelection();
             DataTable dataTable = new DataTable("GalaxyMap");
-            dataTable.Columns.Add(CreateDataColumn(typeof(string), "Name", "Name", false, false, false));
-            dataTable.Columns.Add(CreateDataColumn(typeof(Image), "Typ", "Typ", false, false, false));
-            dataTable.Columns.Add(CreateDataColumn(typeof(string), "Flugzeit", "Flugzeit", false, false, false));
-            dataTable.Columns.Add(CreateDataColumn(typeof(string), "LetzterAngriff", "LetzterAngriff", false, false, false));
-            dataTable.Columns.Add(CreateDataColumn(typeof(object), "Object", "Object", false, false, false));
+            dataTable.Columns.Add(Tools.CreateDataColumn(typeof(string), "Name", "Name", false, false, false));
+            dataTable.Columns.Add(Tools.CreateDataColumn(typeof(Image), "Typ", "Typ", false, false, false));
+            dataTable.Columns.Add(Tools.CreateDataColumn(typeof(string), "Flugzeit", "Flugzeit", false, false, false));
+            dataTable.Columns.Add(Tools.CreateDataColumn(typeof(string), "LetzterAngriff", "LetzterAngriff", false, false, false));
+            dataTable.Columns.Add(Tools.CreateDataColumn(typeof(object), "Object", "Object", false, false, false));
 
             progressBar.Value = 0;
             progressBar.Maximum = _GalaxyMap.Systems.Count;
             pnlProgress.Visible = true;
-            _GalaxyMap.ResetFlightTimeCache();
+
             for (int i = 0; i < _GalaxyMap.Systems.Count; i++)
             {
                 for (int j = 0; j < _GalaxyMap.Systems[i].Planets.Count; j++)
@@ -67,6 +69,9 @@ namespace ImperionBrowser
                     if (_GalaxyMap.Systems[i].Planets[j].Type == PlanetType.ptGas)
                         continue;
 
+                    //skip planets if filter checkbox is unchecked
+                    if (!isPlanetFilterActive(_GalaxyMap.Systems[i].Planets[j].Type))
+                        continue;
 
                     DataRow row = dataTable.Rows.Add();
                     row["Name"] = _GalaxyMap.Systems[i].Planets[j]._planet_id;
@@ -89,22 +94,37 @@ namespace ImperionBrowser
             dataGrid.Columns["Object"].Visible = false;
             dataGrid.Columns["Typ"].Width = 30;
             dataGrid.Columns["LetzterAngriff"].Width = 359;
-            
-
 
         }
 
-        private DataColumn CreateDataColumn(Type colType, string name, string caption, bool autoInc, bool readOnly, bool unique)
+        private bool isPlanetFilterActive(PlanetType planetType)
         {
-            DataColumn column = new DataColumn();
-            column.DataType = colType;
-            column.ColumnName = name;
-            column.Caption = caption;
-            column.AutoIncrement = autoInc;
-            column.ReadOnly = readOnly;
-            column.Unique = unique;
-            return column;
-        } 
+            bool result;
+
+            switch (planetType)
+            {
+                case PlanetType.ptDesert:
+                    result = chckbxDesertFilter.Checked;
+                    break;
+                case PlanetType.ptEarth:
+                    result = chckbxEarthFilter.Checked;
+                    break;
+                case PlanetType.ptIce:
+                    result = chckbxIceFilter.Checked;
+                    break;
+                case PlanetType.ptVulcan:
+                    result = chckbxVulcanFilter.Checked;
+                    break;
+                case PlanetType.ptWater:
+                    result = chckbxWaterFilter.Checked;
+                    break;
+                default:
+                    result = false;
+                    break;
+            }
+
+            return result;
+        }
 
         private void dataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -173,6 +193,11 @@ namespace ImperionBrowser
             SetRace((RaceTypes)cmbxRace.SelectedIndex);
 
             Properties.Settings.Default.Race = cmbxRace.SelectedIndex;
+        }
+
+        private void btnFilterNow_Click(object sender, EventArgs e)
+        {
+            InitDataGrid();
         }
     }
 }
