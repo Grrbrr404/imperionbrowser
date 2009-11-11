@@ -116,7 +116,7 @@ namespace ImperionBrowser
                         [OwnerId] varchar(20),
                         [OwnerName] varchar(50),
                         [OwnerAllianceName varchar(50),
-                        [ScanDate] DateTime;";
+                        [ScanDate] DateTime);";
 
                 sqlight.ExecuteSql(sql);
                 sb.AppendLine("- Tabelle PlanetGrowing wurde erzeugt");

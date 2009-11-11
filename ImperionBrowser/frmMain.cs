@@ -314,6 +314,8 @@ namespace ImperionBrowser
 
         void newBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
+            Tools.SaveCookies((WebBrowser)sender, "cookies.txt");
+
             //the user opend fleet command center
             if (e.Url.ToString().Contains("/fleetBase/"))
                 ParseFleetBaseAndShowResourceInformationTooltip();

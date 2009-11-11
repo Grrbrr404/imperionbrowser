@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{E8138773-6E7C-4B60-BBB0-03966BAC836D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -118,7 +118,6 @@
     <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Windows.Forms.DataVisualization, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
