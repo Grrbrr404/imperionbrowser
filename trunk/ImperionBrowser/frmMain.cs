@@ -449,7 +449,7 @@ namespace ImperionBrowser
 
         #endregion
 
-        private void datenbankErzeugenPrüfenToolStripMenuItem_Click(object sender, EventArgs e)
+        private void datenbankErzeugenPruefenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SqLight.CheckDatabaseStructure();
         }

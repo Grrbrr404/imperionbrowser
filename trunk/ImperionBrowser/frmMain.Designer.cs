@@ -379,7 +379,7 @@
             this.datenbankErzeugenPrüfenToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
             this.datenbankErzeugenPrüfenToolStripMenuItem.Text = "Datenbank erzeugen / prüfen";
             this.datenbankErzeugenPrüfenToolStripMenuItem.ToolTipText = "Die Datenbank wird auf vollständigkeit Überprüft und fehlende Tabellen erzeugt";
-            this.datenbankErzeugenPrüfenToolStripMenuItem.Click += new System.EventHandler(this.datenbankErzeugenPrüfenToolStripMenuItem_Click);
+            this.datenbankErzeugenPrüfenToolStripMenuItem.Click += new System.EventHandler(this.datenbankErzeugenPruefenToolStripMenuItem_Click);
             // 
             // frmMain
             // 
