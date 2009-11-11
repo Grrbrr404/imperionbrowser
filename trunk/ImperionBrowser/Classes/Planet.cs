@@ -18,6 +18,11 @@ namespace ImperionBrowser
         public string _inhabitants;
         public string _alliance_status;
 
+        /// <summary>
+        /// Connect any object with this planet
+        /// </summary>
+        public object _tag;
+
         private PlanetType _PlanetType;
         private Climate _climate = new Climate();
         private Resources _resources = new Resources();
@@ -43,6 +48,11 @@ namespace ImperionBrowser
         public PlanetType Type
         {
             get { return _PlanetType; }
+        }
+
+        public bool HasOwner
+        {
+            get { return _player_name != ""; }
         }
 
         /// <summary>

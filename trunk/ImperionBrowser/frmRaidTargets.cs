@@ -30,13 +30,13 @@ namespace ImperionBrowser
 
             switch (iRace)
             {
-                case RaceTypes.rtTerran:
+                case RaceTypes.Terran:
                     pctrbxSprite.Load("Data/image/terranSprite.gif");
                     break;
-                case RaceTypes.rtTitan:
+                case RaceTypes.Titan:
                     pctrbxSprite.Load("Data/image/titanSprite.gif");
                     break;
-                case RaceTypes.rtXen:
+                case RaceTypes.Xen:
                     pctrbxSprite.Load("Data/image/xenSprite.gif");
                     break;
             }
@@ -66,7 +66,7 @@ namespace ImperionBrowser
                         continue;
 
                     //skip planet if it is a gas planet
-                    if (_GalaxyMap.Systems[i].Planets[j].Type == PlanetType.ptGas)
+                    if (_GalaxyMap.Systems[i].Planets[j].Type == PlanetType.Gas)
                         continue;
 
                     //skip planets if filter checkbox is unchecked
@@ -79,7 +79,6 @@ namespace ImperionBrowser
                     row["Flugzeit"] = FlightTime.GetFlightTime(_ownerForm._CurSystemId, _GalaxyMap.Systems[i]._system_id, _GalaxyMap.Systems[i].Planets[j]._planet_id, (int)TerranSpaceShip.ssKleinerTransporter, typeof(Planet));
                     row["LetzterAngriff"] = _GalaxyMap.Systems[i].Planets[j].GetLatestReportTimeAsString("dd.MM.yyyy HH:mm");
                     row["Object"] = _GalaxyMap.Systems[i].Planets[j];
-                    
                 }
 
                 progressBar.Value = i;
@@ -103,19 +102,19 @@ namespace ImperionBrowser
 
             switch (planetType)
             {
-                case PlanetType.ptDesert:
+                case PlanetType.Desert:
                     result = chckbxDesertFilter.Checked;
                     break;
-                case PlanetType.ptEarth:
+                case PlanetType.Earth:
                     result = chckbxEarthFilter.Checked;
                     break;
-                case PlanetType.ptIce:
+                case PlanetType.Ice:
                     result = chckbxIceFilter.Checked;
                     break;
-                case PlanetType.ptVulcan:
+                case PlanetType.Vulcan:
                     result = chckbxVulcanFilter.Checked;
                     break;
-                case PlanetType.ptWater:
+                case PlanetType.Water:
                     result = chckbxWaterFilter.Checked;
                     break;
                 default:

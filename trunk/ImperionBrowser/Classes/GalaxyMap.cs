@@ -8,6 +8,13 @@ using Jayrock.Json;
 
 namespace ImperionBrowser
 {
+    public enum PlanetFilterCondition
+    {
+        hasOwner,
+        isEmpty,
+        all
+    }
+    
     public class GalaxyMap
     {
         private List<GalaxySystem> _Systems = new List<GalaxySystem>();
@@ -45,6 +52,41 @@ namespace ImperionBrowser
 
             return null; //Comet coudnt be found
         }
-       
+
+
+        /// <summary>
+        /// Returs a List with all planets based on parameter conditions
+        /// </summary>
+        /// <param name="iFilter">Filter condition</param>
+        /// <param name="iPlanetType">only get planets of given types</param>
+        /// <returns>list of planets</returns>
+        public List<Planet> GetPlanets(PlanetFilterCondition iFilter, params PlanetType[] iPlanetType)
+        {
+            List<Planet> resultList = new List<Planet>();
+            List<PlanetType> AllowedPlanetTypes = new List<PlanetType>();
+
+            for (int i = 0; i < iPlanetType.Length; i++)
+            {
+                AllowedPlanetTypes.Add((PlanetType)iPlanetType.GetValue(i));
+            }
+
+            for (int i = 0; i < Systems.Count; i++)
+            {
+                for (int j = 0; j < Systems[i].Planets.Count; j++)
+                {
+                    if (iFilter == PlanetFilterCondition.hasOwner && Systems[i].Planets[j].HasOwner == false)
+                        continue;
+
+                    if (iFilter == PlanetFilterCondition.isEmpty && !Systems[i].Planets[j].HasOwner)
+                        continue;
+
+                    if (!AllowedPlanetTypes.Contains(Systems[i].Planets[j].Type))
+                        continue;
+
+                    resultList.Add(Systems[i].Planets[j]);
+                }
+            }
+            return resultList;
+        }
     }
 }

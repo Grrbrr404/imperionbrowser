@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPlanetGrowing));
             System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("Heute", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("Gestern", System.Windows.Forms.HorizontalAlignment.Left);
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
@@ -41,21 +40,22 @@
             "Planet 1",
             "Eis",
             "1000"}, -1);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPlanetGrowing));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.pnlProgress = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.DataListView = new System.Windows.Forms.ListView();
+            this.colOwner = new System.Windows.Forms.ColumnHeader();
+            this.colPlanet = new System.Windows.Forms.ColumnHeader();
+            this.colPlanetType = new System.Windows.Forms.ColumnHeader();
+            this.colPlanetPoints = new System.Windows.Forms.ColumnHeader();
+            this.colFlightTime = new System.Windows.Forms.ColumnHeader();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.DataListView = new System.Windows.Forms.ListView();
-            this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader3 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
-            this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -128,6 +128,64 @@
             this.progressBar.Size = new System.Drawing.Size(740, 23);
             this.progressBar.TabIndex = 0;
             // 
+            // DataListView
+            // 
+            this.DataListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.colOwner,
+            this.colPlanet,
+            this.colPlanetType,
+            this.colPlanetPoints,
+            this.colFlightTime});
+            this.DataListView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DataListView.FullRowSelect = true;
+            listViewGroup1.Header = "Heute";
+            listViewGroup1.Name = "Heute";
+            listViewGroup2.Header = "Gestern";
+            listViewGroup2.Name = "Gestern";
+            this.DataListView.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
+            listViewGroup1,
+            listViewGroup2});
+            listViewItem1.Group = listViewGroup2;
+            listViewItem1.StateImageIndex = 0;
+            listViewItem2.Group = listViewGroup1;
+            listViewItem2.StateImageIndex = 0;
+            this.DataListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1,
+            listViewItem2});
+            this.DataListView.LabelEdit = true;
+            this.DataListView.Location = new System.Drawing.Point(0, 0);
+            this.DataListView.Name = "DataListView";
+            this.DataListView.Size = new System.Drawing.Size(740, 357);
+            this.DataListView.TabIndex = 8;
+            this.DataListView.UseCompatibleStateImageBehavior = false;
+            this.DataListView.View = System.Windows.Forms.View.Details;
+            this.DataListView.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.DataListView_ColumnClick);
+            // 
+            // colOwner
+            // 
+            this.colOwner.Text = "Besitzer";
+            this.colOwner.Width = 95;
+            // 
+            // colPlanet
+            // 
+            this.colPlanet.Text = "Planet";
+            this.colPlanet.Width = 146;
+            // 
+            // colPlanetType
+            // 
+            this.colPlanetType.Text = "Typ";
+            this.colPlanetType.Width = 55;
+            // 
+            // colPlanetPoints
+            // 
+            this.colPlanetPoints.Text = "Punkte";
+            this.colPlanetPoints.Width = 114;
+            // 
+            // colFlightTime
+            // 
+            this.colFlightTime.Text = "Entfernung";
+            this.colFlightTime.Width = 70;
+            // 
             // toolStrip
             // 
             this.toolStrip.Dock = System.Windows.Forms.DockStyle.Right;
@@ -168,64 +226,6 @@
             this.toolStripButton3.Size = new System.Drawing.Size(21, 20);
             this.toolStripButton3.Text = "toolStripButton3";
             // 
-            // DataListView
-            // 
-            this.DataListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader3,
-            this.columnHeader1,
-            this.columnHeader2,
-            this.columnHeader4,
-            this.columnHeader5});
-            this.DataListView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.DataListView.FullRowSelect = true;
-            listViewGroup1.Header = "Heute";
-            listViewGroup1.Name = "Heute";
-            listViewGroup2.Header = "Gestern";
-            listViewGroup2.Name = "Gestern";
-            this.DataListView.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1,
-            listViewGroup2});
-            listViewItem1.Group = listViewGroup2;
-            listViewItem1.StateImageIndex = 0;
-            listViewItem2.Group = listViewGroup1;
-            listViewItem2.StateImageIndex = 0;
-            this.DataListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2});
-            this.DataListView.LabelEdit = true;
-            this.DataListView.Location = new System.Drawing.Point(0, 0);
-            this.DataListView.Name = "DataListView";
-            this.DataListView.Size = new System.Drawing.Size(740, 357);
-            this.DataListView.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.DataListView.TabIndex = 8;
-            this.DataListView.UseCompatibleStateImageBehavior = false;
-            this.DataListView.View = System.Windows.Forms.View.Details;
-            // 
-            // columnHeader1
-            // 
-            this.columnHeader1.Text = "Planet";
-            this.columnHeader1.Width = 146;
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.Text = "Typ";
-            this.columnHeader2.Width = 32;
-            // 
-            // columnHeader3
-            // 
-            this.columnHeader3.Text = "Besitzer";
-            this.columnHeader3.Width = 95;
-            // 
-            // columnHeader4
-            // 
-            this.columnHeader4.Text = "Punkte";
-            this.columnHeader4.Width = 114;
-            // 
-            // columnHeader5
-            // 
-            this.columnHeader5.Text = "Entfernung";
-            this.columnHeader5.Width = 70;
-            // 
             // frmPlanetGrowing
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -260,10 +260,10 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.ListView DataListView;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
-        private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ColumnHeader columnHeader2;
-        private System.Windows.Forms.ColumnHeader columnHeader4;
-        private System.Windows.Forms.ColumnHeader columnHeader5;
+        private System.Windows.Forms.ColumnHeader colPlanet;
+        private System.Windows.Forms.ColumnHeader colOwner;
+        private System.Windows.Forms.ColumnHeader colPlanetType;
+        private System.Windows.Forms.ColumnHeader colPlanetPoints;
+        private System.Windows.Forms.ColumnHeader colFlightTime;
     }
 }
