@@ -62,7 +62,7 @@ namespace ImperionBrowser
         public static int[] GetInputIds(RaceTypes race)
         {
             int[] inputIds = new int[12];
-            if (race == RaceTypes.rtTerran || race == RaceTypes.rtTitan)
+            if (race == RaceTypes.Terran || race == RaceTypes.Titan)
             {
                 inputIds[0] = (int)TerranSpaceShip.ssSonde;
                 inputIds[1] = (int)TerranSpaceShip.ssJaeger;
@@ -77,7 +77,7 @@ namespace ImperionBrowser
                 inputIds[10] = (int)TerranSpaceShip.ssRecycler;
                 inputIds[11] = (int)TerranSpaceShip.ssKolonieschiff;
             }
-            else if (race == RaceTypes.rtXen)
+            else if (race == RaceTypes.Xen)
             {
                 inputIds[0] = (int)XenSpaceShip.xsSonde;
                 inputIds[1] = (int)XenSpaceShip.xsJaeger;
@@ -106,22 +106,22 @@ namespace ImperionBrowser
             Image result;
             switch (iSourcePlanet.Type)
             {
-                case PlanetType.ptDesert:
+                case PlanetType.Desert:
                     result = Image.FromFile("Data/image/desert.gif");
                     break;
-                case PlanetType.ptEarth:
+                case PlanetType.Earth:
                     result = Image.FromFile("Data/image/earth.gif");
                     break;
-                case PlanetType.ptGas:
+                case PlanetType.Gas:
                     result = Image.FromFile("Data/image/gas.gif");
                     break;
-                case PlanetType.ptIce:
+                case PlanetType.Ice:
                     result = Image.FromFile("Data/image/ice.gif");
                     break;
-                case PlanetType.ptVulcan:
+                case PlanetType.Vulcan:
                     result = Image.FromFile("Data/image/vulcan.gif");
                     break;
-                case PlanetType.ptWater:
+                case PlanetType.Water:
                     result = Image.FromFile("Data/image/water.gif");
                     break;
                 default:

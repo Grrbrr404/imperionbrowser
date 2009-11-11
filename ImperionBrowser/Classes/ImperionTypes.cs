@@ -39,28 +39,28 @@ namespace ImperionBrowser
 
     public enum RaceTypes
     {
-        rtTerran,
-        rtXen,
-        rtTitan
+        Terran,
+        Xen,
+        Titan
     }
 
     public enum PlanetType
     {
-        ptGas = 1,
-        ptIce = 2,
-        ptWater = 3,
-        ptEarth = 4,
-        ptDesert = 5,
-        ptVulcan = 6
+        Gas = 1,
+        Ice = 2,
+        Water = 3,
+        Earth = 4,
+        Desert = 5,
+        Vulcan = 6
     }
 
     public enum MissionTypes
     {
-        mtAttack = 301,
-        mtRaid = 302,
-        mtSupport = 303,
-        mtSpy = 304,
-        mtHoldPosition = 306,
-        mtColonize = 307
+        Attack = 301,
+        Raid = 302,
+        Support = 303,
+        Spy = 304,
+        HoldPosition = 306,
+        Colonize = 307
     }
 }

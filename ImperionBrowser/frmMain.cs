@@ -23,7 +23,7 @@ namespace ImperionBrowser
         {
             InitializeComponent();
             _mouseHook.MouseDown += new MouseEventHandler(_mouseHook_MouseDown);
-            _mouseHook.Start();
+            //_mouseHook.Start();
         }
         #endregion
 
