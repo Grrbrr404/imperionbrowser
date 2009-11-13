@@ -6,104 +6,44 @@ using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
 using System.Collections;
+using System.Web.UI.WebControls;
 
 namespace ImperionBrowser
 {
     public partial class frmPlanetGrowing : Form
     {
+        #region members
         /// <summary>
-        /// This class is used to sort the ListView by columns
+        /// Contains Galaxy Map Data
         /// </summary>
-        public class ListViewColumnSorter : IComparer
-        {
-            /// <summary>
-            /// Specifies the column to be sorted
-            /// </summary>
-            private int ColumnToSort;
-            /// <summary>
-            /// Specifies the order in which to sort (i.e. 'Ascending').
-            /// </summary>
-            private SortOrder OrderOfSort;
-            /// <summary>
-            /// Case insensitive comparer object
-            /// </summary>
-            private CaseInsensitiveComparer ObjectCompare;
-
-            /// <summary>
-            /// Class constructor.  Initializes various elements
-            /// </summary>
-            public ListViewColumnSorter()
-            {
-                // Initialize the column to '0'
-                ColumnToSort = 0;
-
-                // Initialize the sort order to 'none'
-                OrderOfSort = SortOrder.None;
-
-                // Initialize the CaseInsensitiveComparer object
-                ObjectCompare = new CaseInsensitiveComparer();
-            }
-
-            /// <summary>
-            /// This method is inherited from the IComparer interface.  It compares the two objects passed using a case insensitive comparison.
-            /// </summary>
-            /// <param name="x">First object to be compared</param>
-            /// <param name="y">Second object to be compared</param>
-            /// <returns>The result of the comparison. "0" if equal, negative if 'x' is less than 'y' and positive if 'x' is greater than 'y'</returns>
-            public int Compare(object x, object y)
-            {
-                int compareResult;
-                ListViewItem listviewX, listviewY;
-
-                // Cast the objects to be compared to ListViewItem objects
-                listviewX = (ListViewItem)x;
-                listviewY = (ListViewItem)y;
-
-                // Compare the two items
-                compareResult = ObjectCompare.Compare(listviewX.SubItems[ColumnToSort].Text, listviewY.SubItems[ColumnToSort].Text);
-
-                // Calculate correct return value based on object comparison
-                if (OrderOfSort == SortOrder.Ascending)
-                {
-                    // Ascending sort is selected, return normal result of compare operation
-                    return compareResult;
-                }
-                else if (OrderOfSort == SortOrder.Descending)
-                {
-                    // Descending sort is selected, return negative result of compare operation
-                    return (-compareResult);
-                }
-                else
-                {
-                    // Return '0' to indicate they are equal
-                    return 0;
-                }
-            }
-
-            /// <summary>
-            /// Gets or sets the number of the column to which to apply the sorting operation (Defaults to '0').
-            /// </summary>
-            public int SortColumn
-            {
-                set { ColumnToSort = value; }
-                get { return ColumnToSort; }
-            }
-
-            /// <summary>
-            /// Gets or sets the order of sorting to apply (for example, 'Ascending' or 'Descending').
-            /// </summary>
-            public SortOrder Order
-            {
-                set { OrderOfSort = value; }
-                get { return OrderOfSort; }
-            }
-        }
-        
         private GalaxyMap _GalaxyMap;
+        
+        /// <summary>
+        /// reference to frmMain.cs Form object for callbacks
+        /// </summary>
         private frmMain _ownerForm;
-        private ListViewColumnSorter _lvwColumnSorter = new ListViewColumnSorter();
+
+        /// <summary>
+        /// Cache for Planets. Will also be used for sorting before data will be passed to list view component
+        /// </summary>
         private List<Planet> _lstPlanet;
         
+        /// <summary>
+        /// Reference to the last Column that has been sorted
+        /// </summary>
+        private ColumnHeader _LastSortedColumn;
+
+        /// <summary>
+        /// Last sorting direction of _LastSortedColumn
+        /// </summary>
+        private SortDirection _LastSortDirection = SortDirection.Ascending;
+        #endregion
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="iGalaxyMap">GalaxyMap with Data that should be shown in List View component</param>
+        /// <param name="iOwnerForm">reference to frmMain.cs Form object for callbacks</param>
         public frmPlanetGrowing(GalaxyMap iGalaxyMap, frmMain iOwnerForm)
         {
             InitializeComponent();
@@ -118,13 +58,11 @@ namespace ImperionBrowser
         {
             ListViewItem curItem;
 
-            pnlProgress.Visible = true;
-            progressBar.Value = 0;
-            progressBar.Maximum = _lstPlanet.Count;
-
+            
             DataListView.BeginUpdate();
             DataListView.Items.Clear();
-
+            
+            InitProgressBar("Daten werden vorbereitet", _lstPlanet.Count);
             for (int i = 0; i < _lstPlanet.Count; i++)
             {
                 curItem = DataListView.Items.Add(_lstPlanet[i]._player_name);
@@ -138,45 +76,146 @@ namespace ImperionBrowser
                 progressBar.Value = i;
                 Application.DoEvents();
             }
+            ResetProgressBar();
                 
             DataListView.EndUpdate();
             DataListView.Refresh();
             pnlProgress.Visible = false;
         }
 
+        /// <summary>
+        /// Sort the list view component by a given header coloum
+        /// </summary>
+        /// <param name="iSortColumn"></param>
         private void SortListByColumn(ColumnHeader iSortColumn)
         {
-            if (iSortColumn == colFlightTime)
-                _lstPlanet.Sort(delegate(Planet p1, Planet p2) { return p1._tag.ToString().CompareTo(p2._tag.ToString()); });
+            SortDirection iSorting = SortDirection.Ascending;
 
+            if (iSortColumn == _LastSortedColumn)
+                if (_LastSortDirection == SortDirection.Ascending)
+                    iSorting = SortDirection.Descending;
+                else
+                    iSorting = SortDirection.Ascending;
+
+            _LastSortedColumn = iSortColumn;
+            _LastSortDirection = iSorting;
+            
+            if (iSortColumn == colFlightTime)
+                _lstPlanet.Sort(delegate(Planet p1, Planet p2) {
+                    if (iSorting == SortDirection.Ascending)
+                        return p1._tag.ToString().CompareTo(p2._tag.ToString()); 
+                    else
+                        return p2._tag.ToString().CompareTo(p1._tag.ToString()); 
+                });
+
+            if (iSortColumn == colPlanet)
+                _lstPlanet.Sort(delegate(Planet p1, Planet p2)
+                {
+                    if (iSorting == SortDirection.Ascending)
+                        return p1._planet_name.CompareTo(p2._planet_name);
+                    else
+                        return p2._planet_name.CompareTo(p1._planet_name);
+                });
+            
             if (iSortColumn == colOwner)
-                _lstPlanet.Sort(delegate(Planet p1, Planet p2) { return p1._player_name.CompareTo(p2._player_name); });
+                _lstPlanet.Sort(delegate(Planet p1, Planet p2) {
+                    if (iSorting == SortDirection.Ascending)
+                        return p1._player_name.CompareTo(p2._player_name); 
+                    else
+                        return p2._player_name.CompareTo(p1._player_name); 
+                });
 
             if (iSortColumn == colPlanetPoints)
-                _lstPlanet.Sort(delegate(Planet p1, Planet p2) { return p1._inhabitants.CompareTo(p2._inhabitants); });
+                _lstPlanet.Sort(delegate(Planet p1, Planet p2) {
+                    if (iSorting == SortDirection.Ascending)
+                        return p1.Inhabitants.CompareTo(p2.Inhabitants);
+                    else
+                        return p2.Inhabitants.CompareTo(p1.Inhabitants); 
+                });
 
             InitListView();
         }
 
         private void frmPlanetGrowing_Load(object sender, EventArgs e)
         {
-            DataListView.ListViewItemSorter = _lvwColumnSorter;
-            
-            #region Collect data and do default sorting
+            LoadGalaxyData();
+            InitListView();
+        }
 
+        /// <summary>
+        /// Load all planets off GalaxyMap wich have an owner
+        /// </summary>
+        private void LoadGalaxyData()
+        {
+            
             _lstPlanet = _GalaxyMap.GetPlanets(PlanetFilterCondition.hasOwner, PlanetType.Desert, PlanetType.Earth, PlanetType.Ice, PlanetType.Vulcan, PlanetType.Water);
 
+            pnlProgress.Visible = true;
+
+            InitProgressBar("Loading Planet Data", _lstPlanet.Count);
             for (int i = 0; i < _lstPlanet.Count; i++)
             {
                 //store flight time at planet because of sorting reasons
                 _lstPlanet[i]._tag = FlightTime.GetFlightTime(_ownerForm._CurSystemId, _lstPlanet[i]._system_id, _lstPlanet[i]._planet_id, (int)TerranSpaceShip.ssKleinerTransporter, typeof(Planet));
+                progressBar.Value = i;
+                Application.DoEvents();
             }
+            ResetProgressBar();
 
             SortListByColumn(colFlightTime);
-            InitListView();
 
-            #endregion
+            SaveGalaxyDataInDatabase();
         }
+
+        private void InitProgressBar(string iProgressText, int iMaxValue)
+        {
+            pnlProgress.Visible = true;
+            lblProgress.Text = iProgressText;
+            progressBar.Maximum = iMaxValue;
+        }
+
+        private void ResetProgressBar()
+        {
+            pnlProgress.Visible = false;
+            progressBar.Value = 0;
+        }
+
+        /// <summary>
+        /// Save the data of List<Planet> _lstPlanet into the sql light datatable PlanetGrowing
+        /// </summary>
+        private void SaveGalaxyDataInDatabase()
+        {
+            using (SqLight sqlight = new SqLight())
+            {
+                //remove todays data to replace it with actual new one
+                if (!IsFirstGalaxyScanToday())
+                    DeleteTodaysCollectedData();
+
+                
+            }
+        }
+
+        /// <summary>
+        /// returns true if table PlanetGrowing does not containing data from today
+        /// </summary>
+        /// <returns>bool</returns>
+        private bool IsFirstGalaxyScanToday()
+        {
+            bool result = false;
+            using (SqLight sqlight = new SqLight())
+            {
+                string sql = "select count(id) from PlanetGrowing where ScanDate = '" + DateTime.Now.ToString("dd.MM.yyyy") + "'";
+                result = sqlight.SqlGetIntValue(sql) == 0;
+            }
+            return result;
+        }
+
+
+        private void DeleteTodaysCollectedData()
+        {
+            throw new NotImplementedException();
+        }
+        
 
         private void DataListView_ColumnClick(object sender, ColumnClickEventArgs e)
         {

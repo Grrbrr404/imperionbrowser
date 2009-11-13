@@ -23,11 +23,12 @@ namespace ImperionBrowser
         {
             InitializeComponent();
             _mouseHook.MouseDown += new MouseEventHandler(_mouseHook_MouseDown);
-            //_mouseHook.Start();
+            _mouseHook.Start();
         }
         #endregion
 
         #region mouse hooks
+        //Mousehoook events are registered in default constructor of frmMain
         void _mouseHook_MouseDown(object sender, MouseEventArgs e)
         {
             if (ActiveForm != null && e.Button == MouseButtons.Right)

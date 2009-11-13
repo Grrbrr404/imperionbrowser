@@ -29,7 +29,7 @@ namespace ImperionBrowser
         }
 
         /// <summary>
-        /// Use this for one single sql, fore more than one better use ExecutePreparedSql
+        /// Use this for one single sql, fore more than one better prepared sql statements
         /// </summary>
         /// <param name="iSql"></param>
         public void ExecuteSql(string iSql)
@@ -43,19 +43,9 @@ namespace ImperionBrowser
             }
         }
 
-        public void ExecutePreparedSql(string iPreparedSql, params SQLiteParameter[] iSQLiteParams)
+        public SQLiteTransaction BeginTransaction()
         {
-            using (SQLiteTransaction mytransaction = _Conn.BeginTransaction())
-            {
-                using (SQLiteCommand mycommand = new SQLiteCommand(_Conn))
-                {
-                    SQLiteParameter myparam = new SQLiteParameter();
-
-                    mycommand.CommandText = iPreparedSql;
-                    mycommand.Parameters.Add(myparam);
-                }
-                mytransaction.Commit();
-            } 
+            return _Conn.BeginTransaction();
         }
 
         public SQLiteDataReader ExecuteQuery(string sql)
@@ -68,6 +58,22 @@ namespace ImperionBrowser
             SQLiteCommand cmd = new SQLiteCommand(sql, _Conn);
 
             return reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+        }
+
+        public string SqlGetStrValue(string iSql)
+        {
+            SQLiteDataReader reader = ExecuteQuery(iSql);
+            reader.Read();
+            string result = reader.GetValue(0).ToString();
+            reader.Close();
+            reader.Dispose();
+
+            return result;
+        }
+
+        public int SqlGetIntValue(string iSql)
+        {
+            return int.Parse(SqlGetStrValue(iSql));
         }
 
         public void Dispose()
@@ -115,7 +121,7 @@ namespace ImperionBrowser
                         [PlanetPoints] integer,
                         [OwnerId] varchar(20),
                         [OwnerName] varchar(50),
-                        [OwnerAllianceName varchar(50),
+                        [OwnerAllianceName] varchar(50),
                         [ScanDate] DateTime);";
 
                 sqlight.ExecuteSql(sql);

@@ -16,6 +16,8 @@ namespace ImperionBrowser
         public string _kind_id;
         public string _planet_name;
         public string _inhabitants;
+
+        
         public string _alliance_status;
 
         /// <summary>
@@ -27,6 +29,25 @@ namespace ImperionBrowser
         private Climate _climate = new Climate();
         private Resources _resources = new Resources();
         private List<Report> _reports = new List<Report>();
+
+        
+        /// <summary>
+        /// convert the _inhabitants into integer. -1 on error
+        /// </summary>
+        public int Inhabitants
+        {
+            get
+            {
+                try
+                {
+                    return int.Parse(_inhabitants);
+                }
+                catch
+                {
+                    return -1;
+                }
+            }
+        }
         
         public Resources Resources
         {

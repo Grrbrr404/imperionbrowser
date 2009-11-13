@@ -44,7 +44,7 @@
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.pnlProgress = new System.Windows.Forms.Panel();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblProgress = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.DataListView = new System.Windows.Forms.ListView();
             this.colOwner = new System.Windows.Forms.ColumnHeader();
@@ -102,7 +102,7 @@
             // 
             this.pnlProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.pnlProgress.Controls.Add(this.label2);
+            this.pnlProgress.Controls.Add(this.lblProgress);
             this.pnlProgress.Controls.Add(this.progressBar);
             this.pnlProgress.Location = new System.Drawing.Point(0, 140);
             this.pnlProgress.Name = "pnlProgress";
@@ -110,15 +110,15 @@
             this.pnlProgress.TabIndex = 3;
             this.pnlProgress.Visible = false;
             // 
-            // label2
+            // lblProgress
             // 
-            this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(0, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(740, 21);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Daten werden vorbereitet, bitte habe einen Moment geduld";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblProgress.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblProgress.Location = new System.Drawing.Point(0, 0);
+            this.lblProgress.Name = "lblProgress";
+            this.lblProgress.Size = new System.Drawing.Size(740, 21);
+            this.lblProgress.TabIndex = 1;
+            this.lblProgress.Text = "Daten werden vorbereitet, bitte habe einen Moment geduld";
+            this.lblProgress.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // progressBar
             // 
@@ -257,7 +257,7 @@
         private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
         private System.Windows.Forms.Panel pnlProgress;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblProgress;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.ListView DataListView;
         private System.Windows.Forms.ColumnHeader colPlanet;
