@@ -37,11 +37,11 @@ namespace ImperionBrowser
             _Hotkeys.AddHotKey(Keys.R, HotKey.MODKEY.MOD_CONTROL, "hkRaid");
             _Hotkeys.AddHotKey(Keys.W, HotKey.MODKEY.MOD_CONTROL, "hkPlanetGrowing");
             _Hotkeys.AddHotKey(Keys.H, HotKey.MODKEY.MOD_CONTROL, "hkSmsAlert");
-            
-        }
-        #endregion
 
-        #region hotkey actions
+        }
+        #endregion Constructor
+
+        #region HotKey Actions
         void _Hotkeys_HotKeyPressed(string HotKeyID)
         {
             if (ActiveForm == this)
@@ -61,7 +61,7 @@ namespace ImperionBrowser
         }
         #endregion
 
-        #region mouse hooks
+        #region Mouse Hooks
         //Mousehoook events are registered in default constructor of frmMain
         void _mouseHook_MouseDown(object sender, MouseEventArgs e)
         {
@@ -71,7 +71,7 @@ namespace ImperionBrowser
 
         #endregion
 
-        #region generel interface
+        #region General Interface
         private void tabControl_Selecting(object sender, TabControlCancelEventArgs e)
         {
             AddNewBrowserTab(e);
@@ -318,13 +318,9 @@ namespace ImperionBrowser
         {
             edtAdress.Width = ContentContainer.Panel1.Width - 130;
         }
+        #endregion General Interface
 
-
-
-        #endregion
-
-        #region browser events
-
+        #region Browser Events
         private WebBrowser CreateCommonWebBrowserElement()
         {
             WebBrowser newBrowser = new WebBrowser();
@@ -376,10 +372,9 @@ namespace ImperionBrowser
         {
             e.Handled = true;
         }
-        
-        #endregion
+        #endregion Browser Events
 
-        #region Comet parsing
+        #region Comet Parsing
         private void btnFindComets_Click(object sender, EventArgs e)
         {
             WebBrowser browser = GetCurrentBrowser();
@@ -410,9 +405,9 @@ namespace ImperionBrowser
             frmRecyclerTargets frmRT = new frmRecyclerTargets(parser.GetGalaxyMap(), this);
             frmRT.Show();
         }  
-        #endregion
+        #endregion Comet Parsing
 
-        #region Raid Parsing        
+        #region Raid Parsing
         private void btnFindEmptyNotRaidedPlanets_Click(object sender, EventArgs e)
         {
             WebBrowser browser = GetCurrentBrowser();
@@ -442,10 +437,10 @@ namespace ImperionBrowser
             ImperionParser parser = new ImperionParser(browser);
             frmRaidTargets frmRT = new frmRaidTargets(parser.GetGalaxyMap(), this);
             frmRT.Show();
-        }        
-        #endregion
+        }
+        #endregion Raid Parsing
 
-        #region GoogleSms
+        #region Google SMS
         private void btnSMSAlert_Click(object sender, EventArgs e)
         {
             if (Properties.Settings.Default.gAccount == "" ||
@@ -500,17 +495,16 @@ namespace ImperionBrowser
             }
 
         }
-        #endregion
+        #endregion Google SMS
 
-        #region Fleetcenter parsing
-
+        #region Fleetcenter Parsing
         private void ParseFleetBaseAndShowResourceInformationTooltip()
         {
             lblStatus.Text = ImperionParser.ParseFleetBaseAndGetResourceSum(GetCurrentBrowser().Document);
         }
-        #endregion
+        #endregion Fleetcenter Parsing
 
-        #region Planet Growing
+        #region Planet Growth
         private void btnGrowingStatistic_Click(object sender, EventArgs e)
         {
             WebBrowser browser = GetCurrentBrowser();
@@ -541,7 +535,7 @@ namespace ImperionBrowser
             frmPlanetGrowing frmPG = new frmPlanetGrowing(parser.GetGalaxyMap(), this);
             frmPG.Show();
         }
-        #endregion
+        #endregion Planet Growth
 
         private void datenbankErzeugenPruefenToolStripMenuItem_Click(object sender, EventArgs e)
         {
