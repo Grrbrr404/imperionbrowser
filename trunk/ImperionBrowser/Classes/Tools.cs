@@ -168,7 +168,7 @@ namespace ImperionBrowser
         }
 
         public static bool UniverseMapIsLoaded(WebBrowser browser)
-        {
+        {            
             if (browser.ReadyState != WebBrowserReadyState.Complete)
             {
                 MessageBox.Show("Das Universum ist noch nicht komplett geladen, bitte Vorgang später wiederholen", "Universum noch nicht bereit...", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -179,7 +179,7 @@ namespace ImperionBrowser
             {
                 DialogResult res = MessageBox.Show("Für diese Funktion muss zur Universumskarte navigiert werden. Navigation durchführen?", "Navigation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (res == DialogResult.Yes)
-                    browser.Navigate("http://u1.imperion.de/map/index");
+                    browser.Navigate("http://u1.imperion.de/map/index");                
 
                 return false;
             }
