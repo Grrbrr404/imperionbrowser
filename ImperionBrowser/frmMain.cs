@@ -412,8 +412,7 @@ namespace ImperionBrowser
         }  
         #endregion
 
-        #region Raid Parsing
-        
+        #region Raid Parsing        
         private void btnFindEmptyNotRaidedPlanets_Click(object sender, EventArgs e)
         {
             WebBrowser browser = GetCurrentBrowser();
@@ -443,8 +442,7 @@ namespace ImperionBrowser
             ImperionParser parser = new ImperionParser(browser);
             frmRaidTargets frmRT = new frmRaidTargets(parser.GetGalaxyMap(), this);
             frmRT.Show();
-        }
-        
+        }        
         #endregion
 
         #region GoogleSms
@@ -513,18 +511,36 @@ namespace ImperionBrowser
         #endregion
 
         #region Planet Growing
-
         private void btnGrowingStatistic_Click(object sender, EventArgs e)
         {
             WebBrowser browser = GetCurrentBrowser();
+
+            browser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(browser_PlanetGrowDocumentCompleted);
+
             if (Tools.UniverseMapIsLoaded(browser))
             {
-                ImperionParser parser = new ImperionParser(browser);
-                frmPlanetGrowing frmPG = new frmPlanetGrowing(parser.GetGalaxyMap(), this);
-                frmPG.Show();
+                ShowPlanetGrow(browser);
+            }
+            else if (browser.ReadyState == WebBrowserReadyState.Complete)
+            {
+                browser.DocumentCompleted -= new WebBrowserDocumentCompletedEventHandler(browser_PlanetGrowDocumentCompleted);
             }
         }
 
+        void browser_PlanetGrowDocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            WebBrowser browser = (WebBrowser)sender;
+            ShowPlanetGrow(browser);
+        }
+
+        void ShowPlanetGrow(WebBrowser browser)
+        {
+            browser.DocumentCompleted -= new WebBrowserDocumentCompletedEventHandler(browser_PlanetGrowDocumentCompleted);
+
+            ImperionParser parser = new ImperionParser(browser);
+            frmPlanetGrowing frmPG = new frmPlanetGrowing(parser.GetGalaxyMap(), this);
+            frmPG.Show();
+        }
         #endregion
 
         private void datenbankErzeugenPruefenToolStripMenuItem_Click(object sender, EventArgs e)
