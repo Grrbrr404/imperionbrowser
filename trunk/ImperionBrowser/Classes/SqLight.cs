@@ -123,6 +123,7 @@ namespace ImperionBrowser
             #endregion
 
             #region Table PlanetGrowing
+
             if (!sqlight.TableExist("PlanetGrowing"))
             {
                 sql = @"CREATE TABLE [PlanetGrowing] (
