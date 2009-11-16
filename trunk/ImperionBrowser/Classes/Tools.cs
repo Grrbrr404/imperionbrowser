@@ -198,7 +198,18 @@ namespace ImperionBrowser
             column.Unique = unique;
 
             return column;
-        } 
+        }
 
+
+        /// <summary>
+        /// Open 'Send Fleet' page of Fleedbase building
+        /// </summary>
+        /// <param name="iWebBrowser">The browser wich should open the send fleet page</param>
+        /// <param name="iPlanet">planet target</param>
+        public static void OpenFleetBaseOfPlanet(WebBrowser iWebBrowser, Planet iPlanet)
+        {
+            string url = String.Format("http://u1.imperion.de/fleetBase/mission/1/planetId/{0}/m/302", iPlanet._planet_id);
+            iWebBrowser.Navigate(url);
+        }
     }
 }

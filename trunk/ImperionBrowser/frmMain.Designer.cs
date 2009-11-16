@@ -47,20 +47,19 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabMain = new System.Windows.Forms.TabPage();
             this.tabNewPage = new System.Windows.Forms.TabPage();
-            this.toolBarRight = new System.Windows.Forms.ToolStrip();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnFindComets = new System.Windows.Forms.ToolStripButton();
-            this.btnFindEmptyNotRadedPlanets = new System.Windows.Forms.ToolStripButton();
-            this.btnGrowingStatistic = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSMSAlert = new System.Windows.Forms.ToolStripButton();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extrasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.timerHandyAlert = new System.Windows.Forms.Timer(this.components);
             this.datenbankErzeugenPrüfenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timerHandyAlert = new System.Windows.Forms.Timer(this.components);
+            this.toolBarRight = new System.Windows.Forms.ToolStrip();
+            this.btnFindComets = new System.Windows.Forms.ToolStripButton();
+            this.btnRaidOverview = new System.Windows.Forms.ToolStripButton();
+            this.btnGrowingStatistic = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSMSAlert = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -70,8 +69,8 @@
             this.ContentContainer.Panel2.SuspendLayout();
             this.ContentContainer.SuspendLayout();
             this.tabControl.SuspendLayout();
-            this.toolBarRight.SuspendLayout();
             this.mainMenu.SuspendLayout();
+            this.toolBarRight.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -125,6 +124,7 @@
             // 
             // toolBarTop
             // 
+            this.toolBarTop.CanOverflow = false;
             this.toolBarTop.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
             this.toolBarTop.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripSeparator2,
@@ -199,7 +199,6 @@
             // 
             this.ContentContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ContentContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.ContentContainer.IsSplitterFixed = true;
             this.ContentContainer.Location = new System.Drawing.Point(0, 0);
             this.ContentContainer.Name = "ContentContainer";
             // 
@@ -211,7 +210,7 @@
             // 
             this.ContentContainer.Panel2.Controls.Add(this.toolBarRight);
             this.ContentContainer.Size = new System.Drawing.Size(942, 499);
-            this.ContentContainer.SplitterDistance = 906;
+            this.ContentContainer.SplitterDistance = 913;
             this.ContentContainer.TabIndex = 0;
             // 
             // tabControl
@@ -224,7 +223,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(906, 499);
+            this.tabControl.Size = new System.Drawing.Size(913, 499);
             this.tabControl.TabIndex = 4;
             this.tabControl.Selecting += new System.Windows.Forms.TabControlCancelEventHandler(this.tabControl_Selecting);
             this.tabControl.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.tabControl_MouseDoubleClick);
@@ -235,7 +234,7 @@
             this.tabMain.Location = new System.Drawing.Point(4, 22);
             this.tabMain.Name = "tabMain";
             this.tabMain.Padding = new System.Windows.Forms.Padding(3);
-            this.tabMain.Size = new System.Drawing.Size(898, 473);
+            this.tabMain.Size = new System.Drawing.Size(905, 473);
             this.tabMain.TabIndex = 0;
             this.tabMain.Text = "Main";
             this.tabMain.UseVisualStyleBackColor = true;
@@ -245,86 +244,9 @@
             this.tabNewPage.Location = new System.Drawing.Point(4, 22);
             this.tabNewPage.Name = "tabNewPage";
             this.tabNewPage.Padding = new System.Windows.Forms.Padding(3);
-            this.tabNewPage.Size = new System.Drawing.Size(898, 473);
+            this.tabNewPage.Size = new System.Drawing.Size(905, 473);
             this.tabNewPage.TabIndex = 1;
             this.tabNewPage.UseVisualStyleBackColor = true;
-            // 
-            // toolBarRight
-            // 
-            this.toolBarRight.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.toolBarRight.GripMargin = new System.Windows.Forms.Padding(0);
-            this.toolBarRight.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolBarRight.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.toolStripSeparator1,
-            this.btnFindComets,
-            this.btnFindEmptyNotRadedPlanets,
-            this.btnGrowingStatistic,
-            this.toolStripSplitButton1,
-            this.btnSMSAlert});
-            this.toolBarRight.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.toolBarRight.Location = new System.Drawing.Point(0, 0);
-            this.toolBarRight.Margin = new System.Windows.Forms.Padding(0, 20, 2, 0);
-            this.toolBarRight.Name = "toolBarRight";
-            this.toolBarRight.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolBarRight.Size = new System.Drawing.Size(32, 499);
-            this.toolBarRight.Stretch = true;
-            this.toolBarRight.TabIndex = 0;
-            this.toolBarRight.Text = "toolStrip2";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Margin = new System.Windows.Forms.Padding(0, 20, 0, 0);
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(30, 6);
-            // 
-            // btnFindComets
-            // 
-            this.btnFindComets.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnFindComets.Image = ((System.Drawing.Image)(resources.GetObject("btnFindComets.Image")));
-            this.btnFindComets.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnFindComets.Margin = new System.Windows.Forms.Padding(0);
-            this.btnFindComets.Name = "btnFindComets";
-            this.btnFindComets.Padding = new System.Windows.Forms.Padding(2);
-            this.btnFindComets.Size = new System.Drawing.Size(30, 24);
-            this.btnFindComets.Text = "toolStripButton1";
-            this.btnFindComets.ToolTipText = "Aktuelle Map nach Kometen durchsuchen";
-            this.btnFindComets.Click += new System.EventHandler(this.btnFindComets_Click);
-            // 
-            // btnFindEmptyNotRadedPlanets
-            // 
-            this.btnFindEmptyNotRadedPlanets.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnFindEmptyNotRadedPlanets.Image = ((System.Drawing.Image)(resources.GetObject("btnFindEmptyNotRadedPlanets.Image")));
-            this.btnFindEmptyNotRadedPlanets.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnFindEmptyNotRadedPlanets.Name = "btnFindEmptyNotRadedPlanets";
-            this.btnFindEmptyNotRadedPlanets.Size = new System.Drawing.Size(30, 20);
-            this.btnFindEmptyNotRadedPlanets.Text = "Leere Planeten anzeigen, die heute noch nicht geraidet wurden";
-            this.btnFindEmptyNotRadedPlanets.Click += new System.EventHandler(this.btnFindEmptyNotRadedPlanets_Click);
-            // 
-            // btnGrowingStatistic
-            // 
-            this.btnGrowingStatistic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnGrowingStatistic.Image = ((System.Drawing.Image)(resources.GetObject("btnGrowingStatistic.Image")));
-            this.btnGrowingStatistic.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnGrowingStatistic.Name = "btnGrowingStatistic";
-            this.btnGrowingStatistic.Size = new System.Drawing.Size(30, 20);
-            this.btnGrowingStatistic.Text = "toolStripButton1";
-            this.btnGrowingStatistic.Click += new System.EventHandler(this.btnGrowingStatistic_Click);
-            // 
-            // toolStripSplitButton1
-            // 
-            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
-            this.toolStripSplitButton1.Size = new System.Drawing.Size(30, 6);
-            // 
-            // btnSMSAlert
-            // 
-            this.btnSMSAlert.CheckOnClick = true;
-            this.btnSMSAlert.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.btnSMSAlert.Image = ((System.Drawing.Image)(resources.GetObject("btnSMSAlert.Image")));
-            this.btnSMSAlert.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSMSAlert.Name = "btnSMSAlert";
-            this.btnSMSAlert.Size = new System.Drawing.Size(30, 20);
-            this.btnSMSAlert.Text = "Handybenarchichtigung jetzt einschalten";
-            this.btnSMSAlert.Click += new System.EventHandler(this.btnSMSAlert_Click);
             // 
             // mainMenu
             // 
@@ -368,11 +290,6 @@
             this.einstellungenToolStripMenuItem.Text = "&Einstellungen...";
             this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.einstellungenToolStripMenuItem_Click);
             // 
-            // timerHandyAlert
-            // 
-            this.timerHandyAlert.Interval = 30000;
-            this.timerHandyAlert.Tick += new System.EventHandler(this.timerHandyAlert_Tick);
-            // 
             // datenbankErzeugenPrüfenToolStripMenuItem
             // 
             this.datenbankErzeugenPrüfenToolStripMenuItem.Name = "datenbankErzeugenPrüfenToolStripMenuItem";
@@ -380,6 +297,80 @@
             this.datenbankErzeugenPrüfenToolStripMenuItem.Text = "Datenbank erzeugen / prüfen";
             this.datenbankErzeugenPrüfenToolStripMenuItem.ToolTipText = "Die Datenbank wird auf vollständigkeit Überprüft und fehlende Tabellen erzeugt";
             this.datenbankErzeugenPrüfenToolStripMenuItem.Click += new System.EventHandler(this.datenbankErzeugenPruefenToolStripMenuItem_Click);
+            // 
+            // timerHandyAlert
+            // 
+            this.timerHandyAlert.Interval = 30000;
+            this.timerHandyAlert.Tick += new System.EventHandler(this.timerHandyAlert_Tick);
+            // 
+            // toolBarRight
+            // 
+            this.toolBarRight.CanOverflow = false;
+            this.toolBarRight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolBarRight.GripMargin = new System.Windows.Forms.Padding(0);
+            this.toolBarRight.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolBarRight.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnFindComets,
+            this.btnRaidOverview,
+            this.btnGrowingStatistic,
+            this.toolStripSplitButton1,
+            this.btnSMSAlert});
+            this.toolBarRight.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.toolBarRight.Location = new System.Drawing.Point(0, 0);
+            this.toolBarRight.Margin = new System.Windows.Forms.Padding(2);
+            this.toolBarRight.MinimumSize = new System.Drawing.Size(32, 0);
+            this.toolBarRight.Name = "toolBarRight";
+            this.toolBarRight.Padding = new System.Windows.Forms.Padding(0, 20, 1, 0);
+            this.toolBarRight.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolBarRight.Size = new System.Drawing.Size(32, 499);
+            this.toolBarRight.TabIndex = 1;
+            this.toolBarRight.TabStop = true;
+            this.toolBarRight.Text = "toolStrip2";
+            // 
+            // btnFindComets
+            // 
+            this.btnFindComets.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnFindComets.Image = ((System.Drawing.Image)(resources.GetObject("btnFindComets.Image")));
+            this.btnFindComets.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnFindComets.Margin = new System.Windows.Forms.Padding(0);
+            this.btnFindComets.Name = "btnFindComets";
+            this.btnFindComets.Padding = new System.Windows.Forms.Padding(2);
+            this.btnFindComets.Size = new System.Drawing.Size(23, 24);
+            this.btnFindComets.Text = "Kometen finden (strg+C)";
+            this.btnFindComets.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            // 
+            // btnRaidOverview
+            // 
+            this.btnRaidOverview.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnRaidOverview.Image = ((System.Drawing.Image)(resources.GetObject("btnRaidOverview.Image")));
+            this.btnRaidOverview.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnRaidOverview.Name = "btnRaidOverview";
+            this.btnRaidOverview.Size = new System.Drawing.Size(23, 20);
+            this.btnRaidOverview.ToolTipText = "Raid Übersicht (strg+R)";
+            // 
+            // btnGrowingStatistic
+            // 
+            this.btnGrowingStatistic.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnGrowingStatistic.Image = ((System.Drawing.Image)(resources.GetObject("btnGrowingStatistic.Image")));
+            this.btnGrowingStatistic.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnGrowingStatistic.Name = "btnGrowingStatistic";
+            this.btnGrowingStatistic.Size = new System.Drawing.Size(23, 20);
+            this.btnGrowingStatistic.ToolTipText = "Planeten wachstum (strg+W)";
+            // 
+            // toolStripSplitButton1
+            // 
+            this.toolStripSplitButton1.Name = "toolStripSplitButton1";
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(23, 6);
+            // 
+            // btnSMSAlert
+            // 
+            this.btnSMSAlert.CheckOnClick = true;
+            this.btnSMSAlert.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnSMSAlert.Image = ((System.Drawing.Image)(resources.GetObject("btnSMSAlert.Image")));
+            this.btnSMSAlert.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSMSAlert.Name = "btnSMSAlert";
+            this.btnSMSAlert.Size = new System.Drawing.Size(23, 20);
+            this.btnSMSAlert.ToolTipText = "Handybenarchichtigung bei Angriff (strg+h)";
             // 
             // frmMain
             // 
@@ -393,7 +384,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenu;
             this.Name = "frmMain";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Imperion Browser";
             this.TransparencyKey = System.Drawing.Color.Purple;
             this.Load += new System.EventHandler(this.frmMain_Load);
@@ -412,10 +402,10 @@
             this.ContentContainer.Panel2.PerformLayout();
             this.ContentContainer.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
-            this.toolBarRight.ResumeLayout(false);
-            this.toolBarRight.PerformLayout();
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
+            this.toolBarRight.ResumeLayout(false);
+            this.toolBarRight.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -432,28 +422,27 @@
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabMain;
         private System.Windows.Forms.TabPage tabNewPage;
-        private System.Windows.Forms.ToolStrip toolBarRight;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton Zurück;
         private System.Windows.Forms.ToolStripButton btnHistoryForward;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripLabel lblAdress;
         private System.Windows.Forms.ToolStripTextBox edtAdress;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripButton btnFindComets;
         private System.Windows.Forms.MenuStrip mainMenu;
         private System.Windows.Forms.ToolStripMenuItem dateiToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem beendenToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem extrasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem einstellungenToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSplitButton1;
-        private System.Windows.Forms.ToolStripButton btnSMSAlert;
         private System.Windows.Forms.Timer timerHandyAlert;
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
         private System.Windows.Forms.ToolStripButton btnRefreshBrowser;
-        private System.Windows.Forms.ToolStripButton btnFindEmptyNotRadedPlanets;
-        private System.Windows.Forms.ToolStripButton btnGrowingStatistic;
         private System.Windows.Forms.ToolStripMenuItem datenbankErzeugenPrüfenToolStripMenuItem;
+        private System.Windows.Forms.ToolStrip toolBarRight;
+        private System.Windows.Forms.ToolStripButton btnFindComets;
+        private System.Windows.Forms.ToolStripButton btnRaidOverview;
+        private System.Windows.Forms.ToolStripButton btnGrowingStatistic;
+        private System.Windows.Forms.ToolStripSeparator toolStripSplitButton1;
+        private System.Windows.Forms.ToolStripButton btnSMSAlert;
     }
 }
 

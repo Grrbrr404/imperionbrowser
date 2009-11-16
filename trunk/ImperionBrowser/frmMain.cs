@@ -15,6 +15,7 @@ namespace ImperionBrowser
         #region Member
         private List<string> _AllreadySendedAttacks = new List<string>();
         private MouseHook _mouseHook = new MouseHook();
+        private HotKey _Hotkeys;
         public string _CurSystemId;
         #endregion
 
@@ -22,8 +23,41 @@ namespace ImperionBrowser
         public frmMain()
         {
             InitializeComponent();
+            
+            //Init mousehooks
             _mouseHook.MouseDown += new MouseEventHandler(_mouseHook_MouseDown);
             _mouseHook.Start();
+
+            //Init Hotkeys
+            _Hotkeys = new HotKey();
+            _Hotkeys.OwnerForm = this;
+            _Hotkeys.HotKeyPressed += new HotKey.HotKeyPressedEventHandler(_Hotkeys_HotKeyPressed);
+
+            _Hotkeys.AddHotKey(Keys.C, HotKey.MODKEY.MOD_CONTROL, "hkComet");
+            _Hotkeys.AddHotKey(Keys.R, HotKey.MODKEY.MOD_CONTROL, "hkRaid");
+            _Hotkeys.AddHotKey(Keys.W, HotKey.MODKEY.MOD_CONTROL, "hkPlanetGrowing");
+            _Hotkeys.AddHotKey(Keys.H, HotKey.MODKEY.MOD_CONTROL, "hkSmsAlert");
+            
+        }
+        #endregion
+
+        #region hotkey actions
+        void _Hotkeys_HotKeyPressed(string HotKeyID)
+        {
+            if (ActiveForm == this)
+            {
+                if (HotKeyID == "hkComet")
+                    btnFindComets.PerformClick();
+
+                if (HotKeyID == "hkRaid")
+                    btnRaidOverview.PerformClick();
+
+                if (HotKeyID == "hkPlanetGrowing")
+                    btnGrowingStatistic.PerformClick();
+
+                if (HotKeyID == "hkSmsAlert")
+                    btnSMSAlert.PerformClick();
+            }
         }
         #endregion
 
@@ -34,6 +68,7 @@ namespace ImperionBrowser
             if (ActiveForm != null && e.Button == MouseButtons.Right)
                 GetCurrentBrowser().GoBack();
         }
+
         #endregion
 
         #region generel interface
@@ -227,6 +262,8 @@ namespace ImperionBrowser
         private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             _mouseHook.Stop();
+            _Hotkeys.Dispose();
+
             SaveOpendRegister();
             SaveWindowPosition();
         }

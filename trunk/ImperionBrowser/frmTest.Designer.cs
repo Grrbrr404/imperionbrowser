@@ -131,6 +131,7 @@
             this.Name = "frmTest";
             this.Text = "frmTest";
             this.Load += new System.EventHandler(this.frmTest_Load);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmTest_FormClosing);
             this.ResumeLayout(false);
 
         }
