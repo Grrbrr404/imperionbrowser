@@ -281,7 +281,7 @@
             this.btnFindComets.Name = "btnFindComets";
             this.btnFindComets.Padding = new System.Windows.Forms.Padding(2);
             this.btnFindComets.Size = new System.Drawing.Size(21, 24);
-            this.btnFindComets.Text = "Kometen finden (strg+C)";
+            this.btnFindComets.Text = "Kometen finden (strg+K)";
             this.btnFindComets.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
             this.btnFindComets.Click += new System.EventHandler(this.btnFindComets_Click);
             // 
@@ -293,7 +293,7 @@
             this.btnRaidOverview.Name = "btnRaidOverview";
             this.btnRaidOverview.Size = new System.Drawing.Size(21, 20);
             this.btnRaidOverview.ToolTipText = "Raid Übersicht (strg+R)";
-            this.btnRaidOverview.Click += new System.EventHandler(this.btnFindEmptyNotRadedPlanets_Click);
+            this.btnRaidOverview.Click += new System.EventHandler(this.btnFindEmptyNotRaidedPlanets_Click);
             // 
             // btnGrowingStatistic
             // 

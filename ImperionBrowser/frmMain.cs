@@ -33,7 +33,7 @@ namespace ImperionBrowser
             _Hotkeys.OwnerForm = this;
             _Hotkeys.HotKeyPressed += new HotKey.HotKeyPressedEventHandler(_Hotkeys_HotKeyPressed);
 
-            _Hotkeys.AddHotKey(Keys.C, HotKey.MODKEY.MOD_CONTROL, "hkComet");
+            _Hotkeys.AddHotKey(Keys.K, HotKey.MODKEY.MOD_CONTROL, "hkComet");
             _Hotkeys.AddHotKey(Keys.R, HotKey.MODKEY.MOD_CONTROL, "hkRaid");
             _Hotkeys.AddHotKey(Keys.W, HotKey.MODKEY.MOD_CONTROL, "hkPlanetGrowing");
             _Hotkeys.AddHotKey(Keys.H, HotKey.MODKEY.MOD_CONTROL, "hkSmsAlert");
@@ -383,26 +383,66 @@ namespace ImperionBrowser
         private void btnFindComets_Click(object sender, EventArgs e)
         {
             WebBrowser browser = GetCurrentBrowser();
+
+            browser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(browser_CometDocumentCompleted);
+            
             if (Tools.UniverseMapIsLoaded(browser))
             {
-                ImperionParser parser = new ImperionParser(browser);
-                frmRecyclerTargets frmRT = new frmRecyclerTargets(parser.GetGalaxyMap(), this);
-                frmRT.Show();
+                ShowRecyclertargets(browser);
+            }
+            else if (browser.ReadyState == WebBrowserReadyState.Complete)
+            {
+                browser.DocumentCompleted -= new WebBrowserDocumentCompletedEventHandler(browser_CometDocumentCompleted);
             }
         }
+
+        void browser_CometDocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            WebBrowser browser = GetCurrentBrowser();
+
+            ShowRecyclertargets(browser);
+        }
+
+        void ShowRecyclertargets(WebBrowser browser)
+        {
+            browser.DocumentCompleted -= new WebBrowserDocumentCompletedEventHandler(browser_CometDocumentCompleted);
+            ImperionParser parser = new ImperionParser(browser);
+            frmRecyclerTargets frmRT = new frmRecyclerTargets(parser.GetGalaxyMap(), this);
+            frmRT.Show();
+        }  
         #endregion
 
         #region Raid Parsing
         
-        private void btnFindEmptyNotRadedPlanets_Click(object sender, EventArgs e)
+        private void btnFindEmptyNotRaidedPlanets_Click(object sender, EventArgs e)
         {
             WebBrowser browser = GetCurrentBrowser();
+
+            browser.DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(browser_RaidDocumentCompleted);
+
             if (Tools.UniverseMapIsLoaded(browser))
             {
-                ImperionParser parser = new ImperionParser(browser);
-                frmRaidTargets frmRT = new frmRaidTargets(parser.GetGalaxyMap(), this);
-                frmRT.Show();
+                ShowRaidTargets(browser);
             }
+            else if (browser.ReadyState == WebBrowserReadyState.Complete)
+            {
+                browser.DocumentCompleted -= new WebBrowserDocumentCompletedEventHandler(browser_RaidDocumentCompleted);
+            }
+        }
+
+        void browser_RaidDocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            WebBrowser browser = (WebBrowser)sender;
+            ShowRaidTargets(browser);
+        }
+
+        void ShowRaidTargets(WebBrowser browser)
+        {
+            browser.DocumentCompleted -= new WebBrowserDocumentCompletedEventHandler(browser_RaidDocumentCompleted);
+
+            ImperionParser parser = new ImperionParser(browser);
+            frmRaidTargets frmRT = new frmRaidTargets(parser.GetGalaxyMap(), this);
+            frmRT.Show();
         }
         
         #endregion
