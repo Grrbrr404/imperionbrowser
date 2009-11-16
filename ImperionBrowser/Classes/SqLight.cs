@@ -29,7 +29,7 @@ namespace ImperionBrowser
         }
 
         /// <summary>
-        /// Use this for one single sql, fore more than one better prepared sql statements
+        /// Use this for one single sql, fore more than one better use prepared sql statements
         /// </summary>
         /// <param name="iSql"></param>
         public void ExecuteSql(string iSql)
@@ -45,7 +45,15 @@ namespace ImperionBrowser
 
         public SQLiteTransaction BeginTransaction()
         {
+            if (_Conn.State != System.Data.ConnectionState.Open)
+                _Conn.Open();
+
             return _Conn.BeginTransaction();
+        }
+
+        public SQLiteCommand NewCommand()
+        {
+            return _Conn.CreateCommand();
         }
 
         public SQLiteDataReader ExecuteQuery(string sql)
@@ -64,7 +72,9 @@ namespace ImperionBrowser
         {
             SQLiteDataReader reader = ExecuteQuery(iSql);
             reader.Read();
+            
             string result = reader.GetValue(0).ToString();
+            
             reader.Close();
             reader.Dispose();
 
@@ -119,9 +129,12 @@ namespace ImperionBrowser
                         [ID] guid NOT NULL,
                         [PlanetId] varchar(50),
                         [PlanetPoints] integer,
+                        [PlanetName] varchar(50),
+                        [PlanetType] varchar(20),
                         [OwnerId] varchar(20),
                         [OwnerName] varchar(50),
                         [OwnerAllianceName] varchar(50),
+                        [FlightTime] varchar(20),
                         [ScanDate] DateTime);";
 
                 sqlight.ExecuteSql(sql);

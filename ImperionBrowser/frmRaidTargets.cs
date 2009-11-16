@@ -130,8 +130,10 @@ namespace ImperionBrowser
             Planet planet = (Planet)dataGrid.Rows[e.RowIndex].Cells["Object"].Value;
             string url = String.Format("http://u1.imperion.de/fleetBase/mission/1/planetId/{0}/m/302", planet._planet_id);
 
-            _ownerForm.GetCurrentBrowser().Navigate(new Uri(url));
+            //Navigate the browser
+            Tools.OpenFleetBaseOfPlanet(_ownerForm.GetCurrentBrowser(), planet);
 
+            //Add document completed events to automatically add ships
             _ownerForm.GetCurrentBrowser().DocumentCompleted += new WebBrowserDocumentCompletedEventHandler(frmRaidTargets_DocumentCompleted);
         }
 

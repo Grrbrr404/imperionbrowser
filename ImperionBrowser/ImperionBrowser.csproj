@@ -127,6 +127,7 @@
     <Compile Include="Classes\Debris.cs" />
     <Compile Include="Classes\FlightTime.cs" />
     <Compile Include="Classes\GoogleSms.cs" />
+    <Compile Include="Classes\Hotkeys.cs" />
     <Compile Include="Classes\ImperionTypes.cs" />
     <Compile Include="Classes\MouseGestureFilter.cs" />
     <Compile Include="Classes\Report.cs" />
