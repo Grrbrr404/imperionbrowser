@@ -491,6 +491,5 @@ namespace ImperionBrowser
         {
             SqLight.CheckDatabaseStructure();
         }
-
     }
 }

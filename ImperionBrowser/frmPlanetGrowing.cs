@@ -54,14 +54,39 @@ namespace ImperionBrowser
         public frmPlanetGrowing(GalaxyMap iGalaxyMap, frmMain iOwnerForm)
         {
             InitializeComponent();
+
             _GalaxyMap = iGalaxyMap;
             _ownerForm = iOwnerForm;
         }
 
-        private void frmPlanetGrowing_Load(object sender, EventArgs e)
+        /// <summary>
+        /// Init Hotkeywrapper and define hotkeys
+        /// </summary>
+        private void InitHotkeys()
         {
-            LoadGalaxyData();
-            InitListView();
+            _Hotkeys = new HotKey();
+            _Hotkeys.OwnerForm = this;
+            _Hotkeys.HotKeyPressed += new HotKey.HotKeyPressedEventHandler(_Hotkeys_HotKeyPressed);
+            
+            _Hotkeys.AddHotKey(Keys.R, HotKey.MODKEY.MOD_CONTROL, "hkResetView");
+            _Hotkeys.AddHotKey(Keys.B, HotKey.MODKEY.MOD_CONTROL, "hkUserFilter");
+        }
+
+        /// <summary>
+        /// Hotkey event that will be fired if a predefined hotkey was pressed. Take a
+        /// look at InitHotkeys() to define a new hotkey
+        /// </summary>
+        /// <param name="HotKeyID"></param>
+        void _Hotkeys_HotKeyPressed(string HotKeyID)
+        {
+            if (ActiveForm == this)
+            {
+                if (HotKeyID == "hkResetView")
+                    btnResetView.PerformClick();
+
+                if (HotKeyID == "hkUserFilter")
+                    btnUserFilter.PerformClick();
+            }
         }
 
         /// <summary>
@@ -344,9 +369,6 @@ namespace ImperionBrowser
             SortListByColumn(DataListView.Columns[e.Column]);
         }
 
-        /// <summary>
-        /// Show only Planets from users wich are currently selected
-        /// </summary>
         private void btnUserFilter_Click(object sender, EventArgs e)
         {
             if (DataListView.SelectedItems.Count == 0)
@@ -392,6 +414,17 @@ namespace ImperionBrowser
         private void btnResetView_Click(object sender, EventArgs e)
         {
             InitListView();
+        }
+
+        private void frmPlanetGrowing_Shown(object sender, EventArgs e)
+        {
+            LoadGalaxyData();
+            InitListView();
+        }
+
+        private void frmPlanetGrowing_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            _Hotkeys.Dispose();
         }
     }
 }
