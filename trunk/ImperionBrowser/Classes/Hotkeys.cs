@@ -118,6 +118,9 @@ namespace ImperionBrowser
         {
             if (mHotKeyIDList.ContainsKey(HotKeyID) == true) return; // TODO: might not be correct. Was : Exit Sub
 
+            if (OwnerForm == null)
+                throw new Exception("OwnerForm cant be null");
+
             short ID = GlobalAddAtom(HotKeyID);
             mHotKeyIDList.Add(HotKeyID, ID);
             mHotKeyList.Add(ID, new HotKeyObject(KeyCode, Modifiers, HotKeyID));
@@ -131,6 +134,9 @@ namespace ImperionBrowser
         public void RemoveHotKey(string HotKeyID)
         {
             if (mHotKeyIDList.ContainsKey(HotKeyID) == false) return; // TODO: might not be correct. Was : Exit Sub
+
+            if (OwnerForm == null)
+                throw new Exception("OwnerForm cant be null");
 
             short ID = mHotKeyIDList[HotKeyID];
             mHotKeyIDList.Remove(HotKeyID);
@@ -158,6 +164,9 @@ namespace ImperionBrowser
 
         public bool PreFilterMessage(ref Message m)
         {
+
+            if (Form.ActiveForm != mForm) return false;
+
             if (m.Msg == WM_HOTKEY)
             {
                 if (HotKeyPressed != null)

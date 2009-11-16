@@ -28,20 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewGroup listViewGroup22 = new System.Windows.Forms.ListViewGroup("Heute", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup23 = new System.Windows.Forms.ListViewGroup("Gestern", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup24 = new System.Windows.Forms.ListViewGroup("Vor 2 Tagen", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup25 = new System.Windows.Forms.ListViewGroup("Vor 3 Tagen", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup26 = new System.Windows.Forms.ListViewGroup("Vor 4 Tagen", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup27 = new System.Windows.Forms.ListViewGroup("Vor 5 Tagen", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewGroup listViewGroup28 = new System.Windows.Forms.ListViewGroup("Vor 6 Tagen", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewItem listViewItem7 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewGroup listViewGroup8 = new System.Windows.Forms.ListViewGroup("Heute", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup9 = new System.Windows.Forms.ListViewGroup("Gestern", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup10 = new System.Windows.Forms.ListViewGroup("Vor 2 Tagen", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup11 = new System.Windows.Forms.ListViewGroup("Vor 3 Tagen", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup12 = new System.Windows.Forms.ListViewGroup("Vor 4 Tagen", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup13 = new System.Windows.Forms.ListViewGroup("Vor 5 Tagen", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup14 = new System.Windows.Forms.ListViewGroup("Vor 6 Tagen", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem(new string[] {
             "Grrbrr",
             "~ID~",
             "Planet 1",
             "Eis",
             "800"}, -1);
-            System.Windows.Forms.ListViewItem listViewItem8 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem(new string[] {
             "Grrbrr",
             "~ID~",
             "Planet 1",
@@ -60,10 +60,12 @@
             this.colPlanetType = new System.Windows.Forms.ColumnHeader();
             this.colPlanetPoints = new System.Windows.Forms.ColumnHeader();
             this.colFlightTime = new System.Windows.Forms.ColumnHeader();
+            this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.btnUserFilter = new System.Windows.Forms.ToolStripButton();
             this.btnResetView = new System.Windows.Forms.ToolStripButton();
             this.toolStripButton3 = new System.Windows.Forms.ToolStripButton();
-            this.toolStrip = new System.Windows.Forms.ToolStrip();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -153,35 +155,35 @@
             this.colFlightTime});
             this.DataListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.DataListView.FullRowSelect = true;
-            listViewGroup22.Header = "Heute";
-            listViewGroup22.Name = "Today";
-            listViewGroup23.Header = "Gestern";
-            listViewGroup23.Name = "Yesterday";
-            listViewGroup24.Header = "Vor 2 Tagen";
-            listViewGroup24.Name = "TwoDaysAgo";
-            listViewGroup25.Header = "Vor 3 Tagen";
-            listViewGroup25.Name = "ThreeDaysAgo";
-            listViewGroup26.Header = "Vor 4 Tagen";
-            listViewGroup26.Name = "FourDaysAgo";
-            listViewGroup27.Header = "Vor 5 Tagen";
-            listViewGroup27.Name = "FiveDaysAgo";
-            listViewGroup28.Header = "Vor 6 Tagen";
-            listViewGroup28.Name = "SixDaysAgo";
+            listViewGroup8.Header = "Heute";
+            listViewGroup8.Name = "Today";
+            listViewGroup9.Header = "Gestern";
+            listViewGroup9.Name = "Yesterday";
+            listViewGroup10.Header = "Vor 2 Tagen";
+            listViewGroup10.Name = "TwoDaysAgo";
+            listViewGroup11.Header = "Vor 3 Tagen";
+            listViewGroup11.Name = "ThreeDaysAgo";
+            listViewGroup12.Header = "Vor 4 Tagen";
+            listViewGroup12.Name = "FourDaysAgo";
+            listViewGroup13.Header = "Vor 5 Tagen";
+            listViewGroup13.Name = "FiveDaysAgo";
+            listViewGroup14.Header = "Vor 6 Tagen";
+            listViewGroup14.Name = "SixDaysAgo";
             this.DataListView.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup22,
-            listViewGroup23,
-            listViewGroup24,
-            listViewGroup25,
-            listViewGroup26,
-            listViewGroup27,
-            listViewGroup28});
-            listViewItem7.Group = listViewGroup23;
-            listViewItem7.StateImageIndex = 0;
-            listViewItem8.Group = listViewGroup22;
-            listViewItem8.StateImageIndex = 0;
+            listViewGroup8,
+            listViewGroup9,
+            listViewGroup10,
+            listViewGroup11,
+            listViewGroup12,
+            listViewGroup13,
+            listViewGroup14});
+            listViewItem3.Group = listViewGroup9;
+            listViewItem3.StateImageIndex = 0;
+            listViewItem4.Group = listViewGroup8;
+            listViewItem4.StateImageIndex = 0;
             this.DataListView.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem7,
-            listViewItem8});
+            listViewItem3,
+            listViewItem4});
             this.DataListView.Location = new System.Drawing.Point(0, 0);
             this.DataListView.Name = "DataListView";
             this.DataListView.Size = new System.Drawing.Size(740, 417);
@@ -221,6 +223,24 @@
             this.colFlightTime.Text = "Entfernung";
             this.colFlightTime.Width = 208;
             // 
+            // toolStrip
+            // 
+            this.toolStrip.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator1,
+            this.btnResetView,
+            this.btnUserFilter,
+            this.toolStripButton3,
+            this.toolStripSeparator2});
+            this.toolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
+            this.toolStrip.Location = new System.Drawing.Point(0, 0);
+            this.toolStrip.Name = "toolStrip";
+            this.toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.toolStrip.Size = new System.Drawing.Size(25, 417);
+            this.toolStrip.TabIndex = 1;
+            this.toolStrip.Text = "toolStrip1";
+            // 
             // btnUserFilter
             // 
             this.btnUserFilter.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -228,7 +248,7 @@
             this.btnUserFilter.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnUserFilter.Name = "btnUserFilter";
             this.btnUserFilter.Size = new System.Drawing.Size(23, 20);
-            this.btnUserFilter.Text = "Zeige nur Planeten von ausgewählten Benutzern (strg+B)";
+            this.btnUserFilter.Text = "Zeige nur Planeten von ausgewählten Benutzern";
             this.btnUserFilter.Click += new System.EventHandler(this.btnUserFilter_Click);
             // 
             // btnResetView
@@ -239,7 +259,7 @@
             this.btnResetView.Name = "btnResetView";
             this.btnResetView.Size = new System.Drawing.Size(23, 20);
             this.btnResetView.Text = "toolStripButton2";
-            this.btnResetView.ToolTipText = "Ansicht zurücksetzen (strg+Z)";
+            this.btnResetView.ToolTipText = "Ansicht neu laden";
             this.btnResetView.Click += new System.EventHandler(this.btnResetView_Click);
             // 
             // toolStripButton3
@@ -250,22 +270,17 @@
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(23, 20);
             this.toolStripButton3.Text = "toolStripButton3";
+            this.toolStripButton3.Visible = false;
             // 
-            // toolStrip
+            // toolStripSeparator1
             // 
-            this.toolStrip.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.toolStrip.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
-            this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnUserFilter,
-            this.btnResetView,
-            this.toolStripButton3});
-            this.toolStrip.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.VerticalStackWithOverflow;
-            this.toolStrip.Location = new System.Drawing.Point(0, 0);
-            this.toolStrip.Name = "toolStrip";
-            this.toolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
-            this.toolStrip.Size = new System.Drawing.Size(25, 417);
-            this.toolStrip.TabIndex = 1;
-            this.toolStrip.Text = "toolStrip1";
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(23, 6);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(23, 6);
             // 
             // frmPlanetGrowing
             // 
@@ -273,10 +288,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(769, 417);
             this.Controls.Add(this.splitContainer1);
+            this.MaximizeBox = false;
             this.Name = "frmPlanetGrowing";
             this.Text = "Planeten wachstum";
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.frmPlanetGrowing_Load);
+            this.Shown += new System.EventHandler(this.frmPlanetGrowing_Shown);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmPlanetGrowing_FormClosing);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);
@@ -308,5 +325,7 @@
         private System.Windows.Forms.ToolStripButton btnUserFilter;
         private System.Windows.Forms.ToolStripButton btnResetView;
         private System.Windows.Forms.ToolStripButton toolStripButton3;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }

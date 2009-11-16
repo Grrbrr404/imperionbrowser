@@ -96,8 +96,8 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.pnlProgress);
             this.splitContainer1.Panel2.Controls.Add(this.dataGrid);
-            this.splitContainer1.Size = new System.Drawing.Size(648, 420);
-            this.splitContainer1.SplitterDistance = 177;
+            this.splitContainer1.Size = new System.Drawing.Size(648, 472);
+            this.splitContainer1.SplitterDistance = 181;
             this.splitContainer1.TabIndex = 1;
             // 
             // grpbxFilter
@@ -110,7 +110,7 @@
             this.grpbxFilter.Controls.Add(this.chckbxEarthFilter);
             this.grpbxFilter.Location = new System.Drawing.Point(16, 125);
             this.grpbxFilter.Name = "grpbxFilter";
-            this.grpbxFilter.Size = new System.Drawing.Size(507, 47);
+            this.grpbxFilter.Size = new System.Drawing.Size(507, 49);
             this.grpbxFilter.TabIndex = 9;
             this.grpbxFilter.TabStop = false;
             this.grpbxFilter.Text = "Ich möchte folgende Planetentypen anzeigen";
@@ -130,12 +130,14 @@
             this.chckbxWaterFilter.AutoSize = true;
             this.chckbxWaterFilter.Checked = true;
             this.chckbxWaterFilter.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chckbxWaterFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chckbxWaterFilter.Image = global::ImperionBrowser.Properties.Resources.water;
             this.chckbxWaterFilter.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.chckbxWaterFilter.Location = new System.Drawing.Point(170, 19);
+            this.chckbxWaterFilter.Location = new System.Drawing.Point(165, 19);
             this.chckbxWaterFilter.Name = "chckbxWaterFilter";
-            this.chckbxWaterFilter.Size = new System.Drawing.Size(32, 17);
+            this.chckbxWaterFilter.Size = new System.Drawing.Size(32, 24);
             this.chckbxWaterFilter.TabIndex = 13;
+            this.chckbxWaterFilter.Text = " ";
             this.chckbxWaterFilter.UseVisualStyleBackColor = true;
             // 
             // chckbxVulcanFilter
@@ -143,12 +145,14 @@
             this.chckbxVulcanFilter.AutoSize = true;
             this.chckbxVulcanFilter.Checked = true;
             this.chckbxVulcanFilter.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chckbxVulcanFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chckbxVulcanFilter.Image = global::ImperionBrowser.Properties.Resources.vulcan;
             this.chckbxVulcanFilter.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.chckbxVulcanFilter.Location = new System.Drawing.Point(132, 19);
+            this.chckbxVulcanFilter.Location = new System.Drawing.Point(127, 19);
             this.chckbxVulcanFilter.Name = "chckbxVulcanFilter";
-            this.chckbxVulcanFilter.Size = new System.Drawing.Size(32, 17);
+            this.chckbxVulcanFilter.Size = new System.Drawing.Size(32, 24);
             this.chckbxVulcanFilter.TabIndex = 12;
+            this.chckbxVulcanFilter.Text = " ";
             this.chckbxVulcanFilter.UseVisualStyleBackColor = true;
             // 
             // chckbxIceFilter
@@ -156,12 +160,14 @@
             this.chckbxIceFilter.AutoSize = true;
             this.chckbxIceFilter.Checked = true;
             this.chckbxIceFilter.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chckbxIceFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chckbxIceFilter.Image = global::ImperionBrowser.Properties.Resources.ice;
             this.chckbxIceFilter.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.chckbxIceFilter.Location = new System.Drawing.Point(91, 19);
+            this.chckbxIceFilter.Location = new System.Drawing.Point(89, 19);
             this.chckbxIceFilter.Name = "chckbxIceFilter";
-            this.chckbxIceFilter.Size = new System.Drawing.Size(32, 17);
+            this.chckbxIceFilter.Size = new System.Drawing.Size(32, 24);
             this.chckbxIceFilter.TabIndex = 11;
+            this.chckbxIceFilter.Text = " ";
             this.chckbxIceFilter.UseVisualStyleBackColor = true;
             // 
             // chckbxDesertFilter
@@ -169,12 +175,14 @@
             this.chckbxDesertFilter.AutoSize = true;
             this.chckbxDesertFilter.Checked = true;
             this.chckbxDesertFilter.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chckbxDesertFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chckbxDesertFilter.Image = global::ImperionBrowser.Properties.Resources.desert;
             this.chckbxDesertFilter.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.chckbxDesertFilter.Location = new System.Drawing.Point(50, 19);
+            this.chckbxDesertFilter.Location = new System.Drawing.Point(51, 19);
             this.chckbxDesertFilter.Name = "chckbxDesertFilter";
-            this.chckbxDesertFilter.Size = new System.Drawing.Size(32, 17);
+            this.chckbxDesertFilter.Size = new System.Drawing.Size(32, 24);
             this.chckbxDesertFilter.TabIndex = 10;
+            this.chckbxDesertFilter.Text = " ";
             this.chckbxDesertFilter.UseVisualStyleBackColor = true;
             // 
             // chckbxEarthFilter
@@ -182,12 +190,14 @@
             this.chckbxEarthFilter.AutoSize = true;
             this.chckbxEarthFilter.Checked = true;
             this.chckbxEarthFilter.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chckbxEarthFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chckbxEarthFilter.Image = global::ImperionBrowser.Properties.Resources.earth;
             this.chckbxEarthFilter.ImageAlign = System.Drawing.ContentAlignment.BottomRight;
-            this.chckbxEarthFilter.Location = new System.Drawing.Point(12, 19);
+            this.chckbxEarthFilter.Location = new System.Drawing.Point(13, 19);
             this.chckbxEarthFilter.Name = "chckbxEarthFilter";
-            this.chckbxEarthFilter.Size = new System.Drawing.Size(32, 17);
+            this.chckbxEarthFilter.Size = new System.Drawing.Size(32, 24);
             this.chckbxEarthFilter.TabIndex = 9;
+            this.chckbxEarthFilter.Text = " ";
             this.chckbxEarthFilter.UseVisualStyleBackColor = true;
             // 
             // grpbxShip
@@ -326,7 +336,7 @@
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.pnlProgress.Controls.Add(this.label2);
             this.pnlProgress.Controls.Add(this.progressBar);
-            this.pnlProgress.Location = new System.Drawing.Point(0, 61);
+            this.pnlProgress.Location = new System.Drawing.Point(0, 103);
             this.pnlProgress.Name = "pnlProgress";
             this.pnlProgress.Size = new System.Drawing.Size(648, 44);
             this.pnlProgress.TabIndex = 2;
@@ -360,7 +370,7 @@
             this.dataGrid.MultiSelect = false;
             this.dataGrid.Name = "dataGrid";
             this.dataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGrid.Size = new System.Drawing.Size(648, 239);
+            this.dataGrid.Size = new System.Drawing.Size(648, 287);
             this.dataGrid.TabIndex = 1;
             this.dataGrid.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGrid_CellDoubleClick);
             // 
@@ -368,7 +378,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(648, 420);
+            this.ClientSize = new System.Drawing.Size(648, 472);
             this.Controls.Add(this.splitContainer1);
             this.Name = "frmRaidTargets";
             this.Text = "Raid Ziele...";
