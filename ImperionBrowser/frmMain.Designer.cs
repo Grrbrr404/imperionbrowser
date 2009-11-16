@@ -47,6 +47,12 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabMain = new System.Windows.Forms.TabPage();
             this.tabNewPage = new System.Windows.Forms.TabPage();
+            this.toolBarRight = new System.Windows.Forms.ToolStrip();
+            this.btnFindComets = new System.Windows.Forms.ToolStripButton();
+            this.btnRaidOverview = new System.Windows.Forms.ToolStripButton();
+            this.btnGrowingStatistic = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSeparator();
+            this.btnSMSAlert = new System.Windows.Forms.ToolStripButton();
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.dateiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.beendenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,12 +60,6 @@
             this.einstellungenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.datenbankErzeugenPrüfenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.timerHandyAlert = new System.Windows.Forms.Timer(this.components);
-            this.toolBarRight = new System.Windows.Forms.ToolStrip();
-            this.btnFindComets = new System.Windows.Forms.ToolStripButton();
-            this.btnRaidOverview = new System.Windows.Forms.ToolStripButton();
-            this.btnGrowingStatistic = new System.Windows.Forms.ToolStripButton();
-            this.toolStripSplitButton1 = new System.Windows.Forms.ToolStripSeparator();
-            this.btnSMSAlert = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -69,8 +69,8 @@
             this.ContentContainer.Panel2.SuspendLayout();
             this.ContentContainer.SuspendLayout();
             this.tabControl.SuspendLayout();
-            this.mainMenu.SuspendLayout();
             this.toolBarRight.SuspendLayout();
+            this.mainMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -184,7 +184,7 @@
             // lblAdress
             // 
             this.lblAdress.Name = "lblAdress";
-            this.lblAdress.Size = new System.Drawing.Size(46, 22);
+            this.lblAdress.Size = new System.Drawing.Size(48, 22);
             this.lblAdress.Text = "Adresse";
             // 
             // edtAdress
@@ -192,7 +192,7 @@
             this.edtAdress.AutoSize = false;
             this.edtAdress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.edtAdress.Name = "edtAdress";
-            this.edtAdress.Size = new System.Drawing.Size(776, 21);
+            this.edtAdress.Size = new System.Drawing.Size(776, 23);
             this.edtAdress.KeyUp += new System.Windows.Forms.KeyEventHandler(this.edtAdress_KeyUp);
             // 
             // ContentContainer
@@ -248,61 +248,6 @@
             this.tabNewPage.TabIndex = 1;
             this.tabNewPage.UseVisualStyleBackColor = true;
             // 
-            // mainMenu
-            // 
-            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.dateiToolStripMenuItem,
-            this.extrasToolStripMenuItem});
-            this.mainMenu.Location = new System.Drawing.Point(0, 0);
-            this.mainMenu.Name = "mainMenu";
-            this.mainMenu.Size = new System.Drawing.Size(942, 24);
-            this.mainMenu.TabIndex = 5;
-            this.mainMenu.Text = "menuStrip1";
-            // 
-            // dateiToolStripMenuItem
-            // 
-            this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.beendenToolStripMenuItem});
-            this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
-            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.dateiToolStripMenuItem.Text = "&Datei";
-            // 
-            // beendenToolStripMenuItem
-            // 
-            this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
-            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
-            this.beendenToolStripMenuItem.Text = "B&eenden";
-            this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
-            // 
-            // extrasToolStripMenuItem
-            // 
-            this.extrasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.einstellungenToolStripMenuItem,
-            this.datenbankErzeugenPrüfenToolStripMenuItem});
-            this.extrasToolStripMenuItem.Name = "extrasToolStripMenuItem";
-            this.extrasToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
-            this.extrasToolStripMenuItem.Text = "E&xtras";
-            // 
-            // einstellungenToolStripMenuItem
-            // 
-            this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
-            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.einstellungenToolStripMenuItem.Text = "&Einstellungen...";
-            this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.einstellungenToolStripMenuItem_Click);
-            // 
-            // datenbankErzeugenPrüfenToolStripMenuItem
-            // 
-            this.datenbankErzeugenPrüfenToolStripMenuItem.Name = "datenbankErzeugenPrüfenToolStripMenuItem";
-            this.datenbankErzeugenPrüfenToolStripMenuItem.Size = new System.Drawing.Size(227, 22);
-            this.datenbankErzeugenPrüfenToolStripMenuItem.Text = "Datenbank erzeugen / prüfen";
-            this.datenbankErzeugenPrüfenToolStripMenuItem.ToolTipText = "Die Datenbank wird auf vollständigkeit Überprüft und fehlende Tabellen erzeugt";
-            this.datenbankErzeugenPrüfenToolStripMenuItem.Click += new System.EventHandler(this.datenbankErzeugenPruefenToolStripMenuItem_Click);
-            // 
-            // timerHandyAlert
-            // 
-            this.timerHandyAlert.Interval = 30000;
-            this.timerHandyAlert.Tick += new System.EventHandler(this.timerHandyAlert_Tick);
-            // 
             // toolBarRight
             // 
             this.toolBarRight.CanOverflow = false;
@@ -320,7 +265,7 @@
             this.toolBarRight.Margin = new System.Windows.Forms.Padding(2);
             this.toolBarRight.MinimumSize = new System.Drawing.Size(32, 0);
             this.toolBarRight.Name = "toolBarRight";
-            this.toolBarRight.Padding = new System.Windows.Forms.Padding(0, 20, 1, 0);
+            this.toolBarRight.Padding = new System.Windows.Forms.Padding(0, 20, 10, 0);
             this.toolBarRight.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.toolBarRight.Size = new System.Drawing.Size(32, 499);
             this.toolBarRight.TabIndex = 1;
@@ -335,9 +280,10 @@
             this.btnFindComets.Margin = new System.Windows.Forms.Padding(0);
             this.btnFindComets.Name = "btnFindComets";
             this.btnFindComets.Padding = new System.Windows.Forms.Padding(2);
-            this.btnFindComets.Size = new System.Drawing.Size(23, 24);
+            this.btnFindComets.Size = new System.Drawing.Size(21, 24);
             this.btnFindComets.Text = "Kometen finden (strg+C)";
             this.btnFindComets.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
+            this.btnFindComets.Click += new System.EventHandler(this.btnFindComets_Click);
             // 
             // btnRaidOverview
             // 
@@ -345,8 +291,9 @@
             this.btnRaidOverview.Image = ((System.Drawing.Image)(resources.GetObject("btnRaidOverview.Image")));
             this.btnRaidOverview.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnRaidOverview.Name = "btnRaidOverview";
-            this.btnRaidOverview.Size = new System.Drawing.Size(23, 20);
+            this.btnRaidOverview.Size = new System.Drawing.Size(21, 20);
             this.btnRaidOverview.ToolTipText = "Raid Übersicht (strg+R)";
+            this.btnRaidOverview.Click += new System.EventHandler(this.btnFindEmptyNotRadedPlanets_Click);
             // 
             // btnGrowingStatistic
             // 
@@ -354,13 +301,14 @@
             this.btnGrowingStatistic.Image = ((System.Drawing.Image)(resources.GetObject("btnGrowingStatistic.Image")));
             this.btnGrowingStatistic.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnGrowingStatistic.Name = "btnGrowingStatistic";
-            this.btnGrowingStatistic.Size = new System.Drawing.Size(23, 20);
+            this.btnGrowingStatistic.Size = new System.Drawing.Size(21, 20);
             this.btnGrowingStatistic.ToolTipText = "Planeten wachstum (strg+W)";
+            this.btnGrowingStatistic.Click += new System.EventHandler(this.btnGrowingStatistic_Click);
             // 
             // toolStripSplitButton1
             // 
             this.toolStripSplitButton1.Name = "toolStripSplitButton1";
-            this.toolStripSplitButton1.Size = new System.Drawing.Size(23, 6);
+            this.toolStripSplitButton1.Size = new System.Drawing.Size(21, 6);
             // 
             // btnSMSAlert
             // 
@@ -369,8 +317,64 @@
             this.btnSMSAlert.Image = ((System.Drawing.Image)(resources.GetObject("btnSMSAlert.Image")));
             this.btnSMSAlert.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.btnSMSAlert.Name = "btnSMSAlert";
-            this.btnSMSAlert.Size = new System.Drawing.Size(23, 20);
+            this.btnSMSAlert.Size = new System.Drawing.Size(21, 20);
             this.btnSMSAlert.ToolTipText = "Handybenarchichtigung bei Angriff (strg+h)";
+            this.btnSMSAlert.Click += new System.EventHandler(this.btnSMSAlert_Click);
+            // 
+            // mainMenu
+            // 
+            this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.dateiToolStripMenuItem,
+            this.extrasToolStripMenuItem});
+            this.mainMenu.Location = new System.Drawing.Point(0, 0);
+            this.mainMenu.Name = "mainMenu";
+            this.mainMenu.Size = new System.Drawing.Size(942, 24);
+            this.mainMenu.TabIndex = 5;
+            this.mainMenu.Text = "menuStrip1";
+            // 
+            // dateiToolStripMenuItem
+            // 
+            this.dateiToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.beendenToolStripMenuItem});
+            this.dateiToolStripMenuItem.Name = "dateiToolStripMenuItem";
+            this.dateiToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.dateiToolStripMenuItem.Text = "&Datei";
+            // 
+            // beendenToolStripMenuItem
+            // 
+            this.beendenToolStripMenuItem.Name = "beendenToolStripMenuItem";
+            this.beendenToolStripMenuItem.Size = new System.Drawing.Size(120, 22);
+            this.beendenToolStripMenuItem.Text = "B&eenden";
+            this.beendenToolStripMenuItem.Click += new System.EventHandler(this.beendenToolStripMenuItem_Click);
+            // 
+            // extrasToolStripMenuItem
+            // 
+            this.extrasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.einstellungenToolStripMenuItem,
+            this.datenbankErzeugenPrüfenToolStripMenuItem});
+            this.extrasToolStripMenuItem.Name = "extrasToolStripMenuItem";
+            this.extrasToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.extrasToolStripMenuItem.Text = "E&xtras";
+            // 
+            // einstellungenToolStripMenuItem
+            // 
+            this.einstellungenToolStripMenuItem.Name = "einstellungenToolStripMenuItem";
+            this.einstellungenToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.einstellungenToolStripMenuItem.Text = "&Einstellungen...";
+            this.einstellungenToolStripMenuItem.Click += new System.EventHandler(this.einstellungenToolStripMenuItem_Click);
+            // 
+            // datenbankErzeugenPrüfenToolStripMenuItem
+            // 
+            this.datenbankErzeugenPrüfenToolStripMenuItem.Name = "datenbankErzeugenPrüfenToolStripMenuItem";
+            this.datenbankErzeugenPrüfenToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
+            this.datenbankErzeugenPrüfenToolStripMenuItem.Text = "Datenbank erzeugen / prüfen";
+            this.datenbankErzeugenPrüfenToolStripMenuItem.ToolTipText = "Die Datenbank wird auf vollständigkeit Überprüft und fehlende Tabellen erzeugt";
+            this.datenbankErzeugenPrüfenToolStripMenuItem.Click += new System.EventHandler(this.datenbankErzeugenPruefenToolStripMenuItem_Click);
+            // 
+            // timerHandyAlert
+            // 
+            this.timerHandyAlert.Interval = 30000;
+            this.timerHandyAlert.Tick += new System.EventHandler(this.timerHandyAlert_Tick);
             // 
             // frmMain
             // 
@@ -402,10 +406,10 @@
             this.ContentContainer.Panel2.PerformLayout();
             this.ContentContainer.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
-            this.mainMenu.ResumeLayout(false);
-            this.mainMenu.PerformLayout();
             this.toolBarRight.ResumeLayout(false);
             this.toolBarRight.PerformLayout();
+            this.mainMenu.ResumeLayout(false);
+            this.mainMenu.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
