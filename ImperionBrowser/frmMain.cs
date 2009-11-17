@@ -65,7 +65,7 @@ namespace ImperionBrowser
         //Mousehoook events are registered in default constructor of frmMain
         void _mouseHook_MouseDown(object sender, MouseEventArgs e)
         {
-            if (ActiveForm != null && e.Button == MouseButtons.Right)
+            if (ActiveForm != null && ActiveForm == this && e.Button == MouseButtons.Right)
                 GetCurrentBrowser().GoBack();
         }
 

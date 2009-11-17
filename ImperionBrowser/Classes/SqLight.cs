@@ -68,6 +68,11 @@ namespace ImperionBrowser
             return reader = cmd.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
         }
 
+        /// <summary>
+        /// Returns first column in sql result as string
+        /// </summary>
+        /// <param name="iSql">sql statement</param>
+        /// <returns>string</returns>
         public string SqlGetStrValue(string iSql)
         {
             SQLiteDataReader reader = ExecuteQuery(iSql);
@@ -81,6 +86,11 @@ namespace ImperionBrowser
             return result;
         }
 
+        /// <summary>
+        /// Returns first column in sql result as int
+        /// </summary>
+        /// <param name="iSql">sql statement</param>
+        /// <returns>int</returns>
         public int SqlGetIntValue(string iSql)
         {
             return int.Parse(SqlGetStrValue(iSql));
