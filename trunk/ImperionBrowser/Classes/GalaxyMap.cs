@@ -33,12 +33,18 @@ namespace ImperionBrowser
             set { /* set the specified index to value here */ }
         }
 
+
         public void AddNewSystem(string iSystemId)
         {
             GalaxySystem gs = new GalaxySystem(iSystemId);
             _Systems.Add(gs);
         }
 
+        /// <summary>
+        /// Find a specific Comet by Id
+        /// </summary>
+        /// <param name="iIdOfComet">id of comet object</param>
+        /// <returns>Comet</returns>
         public Comet FindComet(string iIdOfComet)
         {
             for (int i = 0; i < Systems.Count; i++)
@@ -53,6 +59,24 @@ namespace ImperionBrowser
             return null; //Comet coudnt be found
         }
 
+        /// <summary>
+        /// Find a specific planet by Id
+        /// </summary>
+        /// <param name="iIdOfPplanet">id of planet object</param>
+        /// <returns>Planet</returns>
+        public Planet FindPlanet(string iIdOfPplanet)
+        {
+            for (int i = 0; i < Systems.Count; i++)
+            {
+                for (int j = 0; j < Systems[i].Planets.Count; j++)
+                {
+                    if (Systems[i].Planets[j]._planet_id == iIdOfPplanet)
+                        return Systems[i].Planets[j];
+                }
+            }
+
+            return null; //Comet coudnt be found
+        }
 
         /// <summary>
         /// Returs a List with all planets based on parameter conditions

@@ -107,11 +107,14 @@ namespace ImperionBrowser
                 curItem.SubItems.Add(_lstPlanet[i]._planet_name);
                 curItem.SubItems.Add(_lstPlanet[i].Type.ToString("g"));
                 curItem.SubItems.Add(_lstPlanet[i]._inhabitants);
-                curItem.SubItems.Add(_lstPlanet[i]._tag.ToString()); //_tag should be the flighttime duration, definition above
                 
-                //store the index of source list for later use
-                ListViewItem.ListViewSubItem SoureListIndexItem = new ListViewItem.ListViewSubItem(curItem,i.ToString());
-                SoureListIndexItem.Name = "index";
+                //_tag should be the flighttime duration, defined in LoadGalaxyData()
+                curItem.SubItems.Add(_lstPlanet[i]._tag.ToString());
+                
+                //store the planet object for later use
+                ListViewItem.ListViewSubItem SoureListIndexItem = new ListViewItem.ListViewSubItem();
+                SoureListIndexItem.Name = "PlanetObject";
+                SoureListIndexItem.Tag = _lstPlanet[i];
                 curItem.SubItems.Add(SoureListIndexItem); 
                 
                 curItem.Group = DataListView.Groups[0];
@@ -160,6 +163,7 @@ namespace ImperionBrowser
                 using (SQLiteDataReader reader = sqlight.ExecuteQuery(sql))
                 {
                     ListViewItem curItem;
+                    ListViewItem.ListViewSubItem SubItem_PlanetObject;
                     while (reader.Read())
                     {
                         curItem = DataListView.Items.Add(reader["OwnerName"].ToString());
@@ -167,9 +171,13 @@ namespace ImperionBrowser
                         curItem.SubItems.Add(reader["PlanetName"].ToString());
                         curItem.SubItems.Add(reader["PlanetType"].ToString());
                         curItem.SubItems.Add(reader["PlanetPoints"].ToString());
-                        curItem.SubItems.Add(reader["FlightTime"].ToString()); //_tag should be the flighttime duration, definition above
+                        curItem.SubItems.Add(reader["FlightTime"].ToString());
 
-                        //Todo: Add planet object into hidden subitem element
+                        SubItem_PlanetObject = new ListViewItem.ListViewSubItem();
+                        SubItem_PlanetObject.Name = "PlanetObject";
+                        SubItem_PlanetObject.Tag = _GalaxyMap.FindPlanet(reader["PlanetId"].ToString());
+
+                        curItem.SubItems.Add(SubItem_PlanetObject);
                         
                         curItem.Group = iDestinationGroup;
                     }
@@ -362,7 +370,7 @@ namespace ImperionBrowser
         }
 
         /// <summary>
-        /// Open Fleet Base
+        /// Sort list by column
         /// </summary>
         private void DataListView_ColumnClick(object sender, ColumnClickEventArgs e)
         {
@@ -407,8 +415,9 @@ namespace ImperionBrowser
         private void DataListView_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             ListViewItem clickedItem = DataListView.GetItemAt(e.X, e.Y);
+            
             if (clickedItem != null)
-                Tools.OpenFleetBaseOfPlanet(_ownerForm.GetCurrentBrowser() ,_lstPlanet[int.Parse(clickedItem.SubItems["index"].Text)]);
+                Tools.OpenFleetBaseOfPlanet(_ownerForm.GetCurrentBrowser() , (Planet)clickedItem.SubItems["PlanetObject"].Tag);
         }
 
         private void btnResetView_Click(object sender, EventArgs e)
@@ -425,6 +434,55 @@ namespace ImperionBrowser
         private void frmPlanetGrowing_FormClosing(object sender, FormClosingEventArgs e)
         {
             _Hotkeys.Dispose();
+        }
+
+        private void btnShowChartOfSelectedUsers_Click(object sender, EventArgs e)
+        {
+            if (DataListView.SelectedItems.Count == 0)
+            {
+                MessageBox.Show("Es sind keine Einträge in der Liste markiert", "Fehler", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            List<string> UniqueUserIds = ExtractUserIdsOfListViewSelection();
+
+            if (UniqueUserIds.Count > 10)
+            {
+                MessageBox.Show("Es wird momentan nicht unterstützt, mehr als 10 Benutzer gleichzeitig an zu zeigen."
+                                + "Bitte weniger selektieren", "Achtung", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                return;
+            }
+
+            frmPlanetGrowingGraph frmGraph = new frmPlanetGrowingGraph();
+
+            //Load all selected users into the form
+            for (int i = 0; i < UniqueUserIds.Count; i++)
+                frmGraph.AddUserId(UniqueUserIds[i]);
+
+            //Paint the Graph
+            frmGraph.CreateGraphOfUsers();
+
+            //finally show the form
+            frmGraph.ShowDialog();
+            frmGraph.Dispose();
+        }
+
+        private List<string> ExtractUserIdsOfListViewSelection()
+        {
+            List<string> result = new List<string>();
+            
+            
+            Planet tempPlanet;
+            
+            for (int i = 0; i < DataListView.SelectedItems.Count; i++)
+            {
+                tempPlanet = (Planet)DataListView.SelectedItems[i].SubItems["PlanetObject"].Tag;
+                if (!result.Contains(tempPlanet._user_id))
+                    result.Add(tempPlanet._user_id);
+            }
+
+            return result;
         }
     }
 }

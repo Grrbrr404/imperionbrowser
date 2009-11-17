@@ -9,6 +9,17 @@ namespace ImperionBrowser
 {
     class FlightTime
     {
+        /// <summary>
+        /// This method can calculate the flight time from a sourcesystem, to a destination system.
+        /// This is done by a webrequest, if the flight time was never calculated before. If
+        /// it was calculated before, the flighttime will be extracted out of the sql light table 'FlightTimeCache'
+        /// </summary>
+        /// <param name="iSourceSystem">the source system where a ship would start</param>
+        /// <param name="iDestinationSystem">the destination system, where the ship target (planet, comet, asteroid etc) is inside</param>
+        /// <param name="iIdOfTarget">the target id of asterod</param>
+        /// <param name="iSlowestShip">the slowest ship</param>
+        /// <param name="iTargetType">Comet / Asteroid / Debris / Planet</param>
+        /// <returns>Flight Time</returns>
         public static string GetFlightTime(string iSourceSystem, string iDestinationSystem, string iIdOfTarget, int iSlowestShip, Type iTargetType)
         {
             FlightTime ft = new FlightTime();
