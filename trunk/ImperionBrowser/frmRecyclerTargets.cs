@@ -84,6 +84,9 @@ namespace ImperionBrowser
         
         private void dataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            //Row index -1 is the header column, dont do anything here
+            if (e.RowIndex == -1) return;
+
             Object target = dataGrid.Rows[e.RowIndex].Cells["object"].Value;
 
             Comet comet;
