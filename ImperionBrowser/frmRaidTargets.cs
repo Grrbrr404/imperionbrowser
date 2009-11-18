@@ -127,6 +127,9 @@ namespace ImperionBrowser
 
         private void dataGrid_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
+            //Row index -1 is the header column, dont do anything here
+            if (e.RowIndex == -1) return;
+            
             Planet planet = (Planet)dataGrid.Rows[e.RowIndex].Cells["Object"].Value;
             string url = String.Format("http://u1.imperion.de/fleetBase/mission/1/planetId/{0}/m/302", planet._planet_id);
 
