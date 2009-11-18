@@ -335,26 +335,115 @@ namespace ImperionBrowser
 
         public static string json_extractFlightTime(string jsonData)
         {
+            string RetVal = "00:00:00";
+
             JsonTextReader jsonReader = new JsonTextReader(new StringReader(jsonData));
 
             while (jsonReader.Read())
             {
                 if (jsonReader.Text == "duration")
                 {
-                    string text = json_readMemberIntoString(jsonReader);
-                    return text;
+                    RetVal = json_readMemberIntoString(jsonReader);
+                    break;
                 }
             }
 
-            return "00:00:00";
+            return RetVal;
+        }
+
+        public static string ParseFleetBaseAndGetFleetSum(HtmlDocument htmlDocument)
+        {
+            string RetVal = string.Empty;
+
+            int sumSonde = 0;
+            int sumJaeger = 0;
+            int sumSchlachtschiff = 0;
+            int sumZerstoerer = 0;
+            int sumSchwKreuzer = 0;
+            int sumPulsar = 0;
+            int sumBomber = 0;
+            int sumTankschiff = 0;
+            int sumKlTranporter = 0;
+            int sumGroRecycler = 0;
+            int sumRecycler = 0;
+            int sumKolonieschiff = 0;
+                        
+            HtmlElement divFleetBase = htmlDocument.GetElementById("fleetBase");
+            HtmlElement divFleetSlots = divFleetBase.Children[0];
+
+            HtmlElementCollection headerOnes = divFleetBase.GetElementsByTagName("h1");
+
+            HtmlElement divFleetOnPlanet = null;
+
+            if (headerOnes.Count > 0)
+            {
+                foreach (HtmlElement headerOne in headerOnes)
+                {
+                    if (headerOne.InnerText == "Flotten auf diesen Planeten")
+                        divFleetOnPlanet = headerOne.NextSibling;
+                }
+            }
+
+            if (divFleetOnPlanet != null)
+            {
+                //Schiffe <tr>
+
+                HtmlElementCollection tableCells = divFleetOnPlanet.GetElementsByTagName("td");
+                List<HtmlElement> ResourceTableCells = new List<HtmlElement>();
+
+                HtmlElement trSchiffe = null;
+
+                if (tableCells.Count > 0)
+                {
+                    foreach (HtmlElement cell in tableCells)
+                    {
+                        if (cell.InnerText == "Schiffe")
+                            trSchiffe = cell.Parent;
+                    }
+                }
+
+                if (trSchiffe != null)
+                {
+                    sumSonde =              int.Parse(trSchiffe.Children[1].InnerText);
+                    sumJaeger =             int.Parse(trSchiffe.Children[2].InnerText);
+                    sumSchlachtschiff =     int.Parse(trSchiffe.Children[3].InnerText);
+                    sumZerstoerer =         int.Parse(trSchiffe.Children[4].InnerText);
+                    sumSchwKreuzer =        int.Parse(trSchiffe.Children[5].InnerText);
+                    sumPulsar =             int.Parse(trSchiffe.Children[6].InnerText);
+                    sumBomber =             int.Parse(trSchiffe.Children[7].InnerText);
+                    sumTankschiff =         int.Parse(trSchiffe.Children[8].InnerText);
+                    sumKlTranporter =       int.Parse(trSchiffe.Children[9].InnerText);
+                    sumGroRecycler =        int.Parse(trSchiffe.Children[10].InnerText);
+                    sumRecycler =           int.Parse(trSchiffe.Children[11].InnerText);
+                    sumKolonieschiff =      int.Parse(trSchiffe.Children[12].InnerText);
+                }
+
+                //if (ResourceTableCells.Count > 0)
+                //{
+                //    for (int i = 0; i < ResourceTableCells.Count; i++)
+                //    {
+                //        sumMetal += int.Parse(ResourceTableCells[i].Children[0].GetElementsByTagName("li")[0].InnerText);
+                //        sumCrystal += int.Parse(ResourceTableCells[i].Children[0].GetElementsByTagName("li")[1].InnerText);
+                //        sumDeut += int.Parse(ResourceTableCells[i].Children[0].GetElementsByTagName("li")[2].InnerText);
+                //    }
+                //}
+                //else
+                //{
+                //    return "Es kommen momentan keine Resourcen zurück";
+                //}
+            }
+
+            return RetVal; //String.Format("Es kommen insgesamt {0} Metall, {1} Kristall und {2} Deterium", sumMetal, sumCrystal, sumDeut);
         }
 
         public static string ParseFleetBaseAndGetResourceSum(HtmlDocument htmlDocument)
         {
-            float sumMetal = 0;
-            float sumCrystal = 0;
-            float sumDeut = 0;
+            int sumMetal = 0;
+            int sumCrystal = 0;
+            int sumDeut = 0;
+
             
+
             HtmlElement divFleetBase = htmlDocument.GetElementById("fleetBase");
             HtmlElement divFleetSlots = divFleetBase.Children[0];
 
@@ -374,17 +463,17 @@ namespace ImperionBrowser
             {
                 for (int i = 0; i < ResourceTableCells.Count; i++)
                 {
-                    sumMetal += float.Parse(ResourceTableCells[i].Children[0].GetElementsByTagName("li")[0].InnerText);
-                    sumCrystal += float.Parse(ResourceTableCells[i].Children[0].GetElementsByTagName("li")[1].InnerText);
-                    sumDeut += float.Parse(ResourceTableCells[i].Children[0].GetElementsByTagName("li")[2].InnerText);
+                    sumMetal +=     int.Parse(ResourceTableCells[i].Children[0].GetElementsByTagName("li")[0].InnerText);
+                    sumCrystal +=   int.Parse(ResourceTableCells[i].Children[0].GetElementsByTagName("li")[1].InnerText);
+                    sumDeut +=      int.Parse(ResourceTableCells[i].Children[0].GetElementsByTagName("li")[2].InnerText);
                 }
             }
             else
             {
                 return "Es kommen momentan keine Resourcen zurück";
             }
-            
-            
+
+
             return String.Format("Es kommen insgesamt {0} Metall, {1} Kristall und {2} Deterium", sumMetal, sumCrystal, sumDeut);
         }
 
