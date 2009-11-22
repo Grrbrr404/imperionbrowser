@@ -37,7 +37,6 @@ namespace ImperionBrowser
             _Hotkeys.AddHotKey(Keys.R, HotKey.MODKEY.MOD_CONTROL, "hkRaid");
             _Hotkeys.AddHotKey(Keys.W, HotKey.MODKEY.MOD_CONTROL, "hkPlanetGrowing");
             _Hotkeys.AddHotKey(Keys.H, HotKey.MODKEY.MOD_CONTROL, "hkSmsAlert");
-
         }
         #endregion Constructor
 
@@ -285,7 +284,12 @@ namespace ImperionBrowser
                 Width = Properties.Settings.Default.formWidth;
                 Height = Properties.Settings.Default.formHeight;
                 Left = Properties.Settings.Default.formLeft;
-                Top = Properties.Settings.Default.formTop;
+                
+                if (Left < 0)
+                    Left = 0;
+
+                if (Top < 0)
+                    Top = 0;
             }
         }
 
@@ -501,8 +505,7 @@ namespace ImperionBrowser
         private void ParseFleetBaseAndShowResourceInformationTooltip()
         {
             lblStatus.Text = ImperionParser.ParseFleetBaseAndGetResourceSum(GetCurrentBrowser().Document);
-
-            //lblStatus.Text = ImperionParser.ParseFleetBaseAndGetFleetSum(GetCurrentBrowser().Document);
+            lblStatus.Text += ImperionParser.ParseFleetBaseAndGetFleetSum(GetCurrentBrowser().Document);
         }
         #endregion Fleetcenter Parsing
 
