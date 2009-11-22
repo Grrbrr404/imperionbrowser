@@ -159,7 +159,8 @@ namespace ImperionBrowser
         {
             using (SqLight sqlight = new SqLight())
             {
-                string sql = "Select * from PlanetGrowing where ScanDate = '" + iDateOfScan.ToString("dd.MM.yyyy") + "'";
+                string sql = @"Select * from PlanetGrowing where ScanDate = '" + iDateOfScan.ToString("dd.MM.yyyy") + "'";
+
                 using (SQLiteDataReader reader = sqlight.ExecuteQuery(sql))
                 {
                     ListViewItem curItem;
