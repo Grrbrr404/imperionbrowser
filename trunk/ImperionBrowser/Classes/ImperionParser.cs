@@ -438,11 +438,9 @@ namespace ImperionBrowser
 
         public static string ParseFleetBaseAndGetResourceSum(HtmlDocument htmlDocument)
         {
-            int sumMetal = 0;
-            int sumCrystal = 0;
-            int sumDeut = 0;
-
-            
+            float sumMetal = 0;
+            float sumCrystal = 0;
+            float sumDeut = 0;
 
             HtmlElement divFleetBase = htmlDocument.GetElementById("fleetBase");
             HtmlElement divFleetSlots = divFleetBase.Children[0];
@@ -463,16 +461,15 @@ namespace ImperionBrowser
             {
                 for (int i = 0; i < ResourceTableCells.Count; i++)
                 {
-                    sumMetal +=     int.Parse(ResourceTableCells[i].Children[0].GetElementsByTagName("li")[0].InnerText);
-                    sumCrystal +=   int.Parse(ResourceTableCells[i].Children[0].GetElementsByTagName("li")[1].InnerText);
-                    sumDeut +=      int.Parse(ResourceTableCells[i].Children[0].GetElementsByTagName("li")[2].InnerText);
+                    sumMetal += float.Parse(ResourceTableCells[i].Children[0].GetElementsByTagName("li")[0].InnerText);
+                    sumCrystal += float.Parse(ResourceTableCells[i].Children[0].GetElementsByTagName("li")[1].InnerText);
+                    sumDeut += float.Parse(ResourceTableCells[i].Children[0].GetElementsByTagName("li")[2].InnerText);
                 }
             }
             else
             {
                 return "Es kommen momentan keine Resourcen zurück";
             }
-
 
             return String.Format("Es kommen insgesamt {0} Metall, {1} Kristall und {2} Deterium", sumMetal, sumCrystal, sumDeut);
         }
