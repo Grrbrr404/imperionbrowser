@@ -111,13 +111,40 @@ namespace ImperionBrowser
             using (SqLight sqlight = new SqLight())
             {
                 DateTime currentDate;
+                string PriorPlanetPoints = "0";
                 string PlanetPoints;
                 string sql = String.Empty;
                 
                 //collect data from the last 6 days
-                for (int i = 6; i > -1; i--)
+                //for (int i = 6; i > -1; i--)
+                //{
+                //    currentDate = DateTime.Now.AddDays(- i); 
+
+                //    sql = "select Sum(PlanetPoints) from PlanetGrowing "
+                //        + " where OwnerId = '" + iUserId + "' "
+                //        + " and ScanDate = '" + currentDate.ToString("dd.MM.yyyy") + "'";
+
+                //    PlanetPoints = sqlight.SqlGetStrValue(sql);
+
+                //    //set points to zero if no data could be found
+                //    //this could happen if a user dosnt make a scan every day
+                //    if (String.IsNullOrEmpty(PlanetPoints))
+                //    {
+                //        PlanetPoints = PriorPlanetPoints;//"0";
+                //    }
+                //    else
+                //    {
+                //        PriorPlanetPoints = PlanetPoints;
+                //    }
+                        
+                //    result.Add(i, float.Parse(PlanetPoints));
+                //}
+
+                double Wachtumsfaktor = 0.9; //ggf. auch nochmal zu ermitteln!
+                
+                for (int i = 0; i <= 6; i++)
                 {
-                    currentDate = DateTime.Now.AddDays(- i); 
+                    currentDate = DateTime.Now.AddDays(-i);
 
                     sql = "select Sum(PlanetPoints) from PlanetGrowing "
                         + " where OwnerId = '" + iUserId + "' "
@@ -128,12 +155,21 @@ namespace ImperionBrowser
                     //set points to zero if no data could be found
                     //this could happen if a user dosnt make a scan every day
                     if (String.IsNullOrEmpty(PlanetPoints))
-                        PlanetPoints = "0";
-                        
-                    result.Add(i, float.Parse(PlanetPoints));
-                    
+                    {
+                        PlanetPoints = PriorPlanetPoints;//"0";
+                        PriorPlanetPoints = (Math.Floor(double.Parse(PriorPlanetPoints) * Wachtumsfaktor)).ToString();
+                    }
+                    else
+                    {                        
+                        PriorPlanetPoints = (Math.Floor(double.Parse(PlanetPoints) * Wachtumsfaktor)).ToString();
+                        Wachtumsfaktor = double.Parse(PriorPlanetPoints) / double.Parse(PlanetPoints);
+                    }
+
+                    result.Add(i, float.Parse(PlanetPoints));                                      
                 }
             }
+
+            result.Reverse();
 
             return result;
         }

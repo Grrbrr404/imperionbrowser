@@ -500,9 +500,9 @@ namespace ImperionBrowser
         #region Fleetcenter Parsing
         private void ParseFleetBaseAndShowResourceInformationTooltip()
         {
-            //lblStatus.Text = ImperionParser.ParseFleetBaseAndGetResourceSum(GetCurrentBrowser().Document);
+            lblStatus.Text = ImperionParser.ParseFleetBaseAndGetResourceSum(GetCurrentBrowser().Document);
 
-            lblStatus.Text = ImperionParser.ParseFleetBaseAndGetFleetSum(GetCurrentBrowser().Document);
+            //lblStatus.Text = ImperionParser.ParseFleetBaseAndGetFleetSum(GetCurrentBrowser().Document);
         }
         #endregion Fleetcenter Parsing
 
