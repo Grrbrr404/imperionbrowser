@@ -284,8 +284,7 @@ namespace ImperionBrowser
                 Width = Properties.Settings.Default.formWidth;
                 Height = Properties.Settings.Default.formHeight;
                 Left = Properties.Settings.Default.formLeft;
-                Top = Properties.Settings.Default.formTop;
-
+                
                 if (Left < 0)
                     Left = 0;
 
