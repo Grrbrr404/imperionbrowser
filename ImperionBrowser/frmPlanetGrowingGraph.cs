@@ -116,33 +116,7 @@ namespace ImperionBrowser
                 string sql = String.Empty;
                 
                 //collect data from the last 6 days
-                //for (int i = 6; i > -1; i--)
-                //{
-                //    currentDate = DateTime.Now.AddDays(- i); 
-
-                //    sql = "select Sum(PlanetPoints) from PlanetGrowing "
-                //        + " where OwnerId = '" + iUserId + "' "
-                //        + " and ScanDate = '" + currentDate.ToString("dd.MM.yyyy") + "'";
-
-                //    PlanetPoints = sqlight.SqlGetStrValue(sql);
-
-                //    //set points to zero if no data could be found
-                //    //this could happen if a user dosnt make a scan every day
-                //    if (String.IsNullOrEmpty(PlanetPoints))
-                //    {
-                //        PlanetPoints = PriorPlanetPoints;//"0";
-                //    }
-                //    else
-                //    {
-                //        PriorPlanetPoints = PlanetPoints;
-                //    }
-                        
-                //    result.Add(i, float.Parse(PlanetPoints));
-                //}
-
-                double Wachtumsfaktor = 0.9; //ggf. auch nochmal zu ermitteln!
-                
-                for (int i = 0; i <= 6; i++)
+                for (int i = 6; i > -1; i--)
                 {
                     currentDate = DateTime.Now.AddDays(-i);
 
@@ -156,22 +130,63 @@ namespace ImperionBrowser
                     //this could happen if a user dosnt make a scan every day
                     if (String.IsNullOrEmpty(PlanetPoints))
                     {
-                        PlanetPoints = PriorPlanetPoints;//"0";
-                        PriorPlanetPoints = (Math.Floor(double.Parse(PriorPlanetPoints) * Wachtumsfaktor)).ToString();
+                        PlanetPoints = PriorPlanetPoints;
                     }
                     else
-                    {                        
-                        PriorPlanetPoints = (Math.Floor(double.Parse(PlanetPoints) * Wachtumsfaktor)).ToString();
-                        Wachtumsfaktor = double.Parse(PriorPlanetPoints) / double.Parse(PlanetPoints);
+                    {
+                        PriorPlanetPoints = PlanetPoints;
                     }
 
-                    result.Add(i, float.Parse(PlanetPoints));                                      
+                    result.Add(i, float.Parse(PlanetPoints));
                 }
-            }
 
-            result.Reverse();
+                //result.Reverse();
+
+                //double LastVal = 0;
+                //double GrowthPerDay = 0;
+                //foreach (PointPair item in result)
+                //{
+                //    if (item.Y > 0)
+                //    {
+                //        LastVal = item.Y;
+                //    }
+                //    else
+                //    {
+                //        GrowthPerDay = GetGrowthPerDay(result, (int)item.X, LastVal);
+                //        //ermittle den "GrowthPerDay" 
+                //        item.Y = LastVal - GrowthPerDay;
+                //    }
+                //}
+
+                //result.Reverse();
+                                
+            }            
 
             return result;
+        }
+
+        private double GetGrowthPerDay(PointPairList pplPlanetPoints, int GapBeginIndex, double GapBeginValue)
+        {
+            double RetVal = 0;
+
+            double GapEndValue = 0;            
+
+            for (int i = pplPlanetPoints.Count - GapBeginIndex; i < pplPlanetPoints.Count; i++)
+            {
+                if (pplPlanetPoints[i].Y > 0)
+                {
+                    GapEndValue = pplPlanetPoints[i].Y;
+
+                    RetVal = (GapBeginValue - GapEndValue) / i;
+                    break;
+                }
+                else
+                {
+                    RetVal = GapBeginValue / i;
+                }
+            }            
+
+            return RetVal;
         }
 
         /// <summary>
