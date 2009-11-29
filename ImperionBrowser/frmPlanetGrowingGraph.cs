@@ -20,24 +20,6 @@ namespace ImperionBrowser
             InitializeComponent();
         }
 
-        private void frmGraph_Resize(object sender, EventArgs e)
-        {
-            SetSize();
-        }
-
-        private void SetSize()
-        {
-            //zedGraph_PlanetGrowing.Location = new Point(10, 10);
-            // Leave a small margin around the outside of the control
-            //zedGraph_PlanetGrowing.Size = new Size(ClientRectangle.Width - 20, ClientRectangle.Height - 20);
-        }
-
-        private void frmGraph_Load(object sender, EventArgs e)
-        {
-            // Size the control to fill the form with a margin
-            SetSize();
-        }
-        
         /// <summary>
         /// Adds a new user to the user list, duplications are filtered automatically
         /// </summary>
@@ -126,67 +108,63 @@ namespace ImperionBrowser
 
                     PlanetPoints = sqlight.SqlGetStrValue(sql);
 
-                    //set points to zero if no data could be found
-                    //this could happen if a user dosnt make a scan every day
+                    //If a user dosnt make a scan every day, the missing data should be interpolated
                     if (String.IsNullOrEmpty(PlanetPoints))
                     {
-                        PlanetPoints = PriorPlanetPoints;
+                        PlanetPoints = "-1";
                     }
                     else
                     {
                         PriorPlanetPoints = PlanetPoints;
                     }
 
+                    
                     result.Add(i, float.Parse(PlanetPoints));
                 }
 
-                //result.Reverse();
+                //interpolate -1 values after all data is collected in result
+                #region interpolate data
+                double latestMinPoints = 0;
+                double earliestMaxPoints = 0;
+                double PointDifference = 0;
+                double PointsForEachDayWithoutData = 0;
+                double DaysWithoutData = 0;
+                for (int i = 0; i < result.Count; i++)
+                {
+                    if (result[i].Y == -1)
+                    {
+                        if (i == 0)
+                            latestMinPoints = 0;
+                        else
+                            latestMinPoints = result[i - 1].Y;
 
-                //double LastVal = 0;
-                //double GrowthPerDay = 0;
-                //foreach (PointPair item in result)
-                //{
-                //    if (item.Y > 0)
-                //    {
-                //        LastVal = item.Y;
-                //    }
-                //    else
-                //    {
-                //        GrowthPerDay = GetGrowthPerDay(result, (int)item.X, LastVal);
-                //        //ermittle den "GrowthPerDay" 
-                //        item.Y = LastVal - GrowthPerDay;
-                //    }
-                //}
+                        for (int j = i+1; j < result.Count; j++)
+                        {
+                            if (result[j].Y != -1)
+                            {
+                                earliestMaxPoints = result[j].Y;
+                                DaysWithoutData++;
+                                break;
+                            }
+                            DaysWithoutData++;
+                        }
 
-                //result.Reverse();
-                                
+                        PointDifference = earliestMaxPoints - latestMinPoints;
+                        PointsForEachDayWithoutData = Math.Round(PointDifference / DaysWithoutData, 0);
+
+                        for (int j = i; j < result.Count; j++)
+                        {
+                            if (result[j].Y != -1) break;
+
+                            result[j].Y = latestMinPoints + PointsForEachDayWithoutData / 2;
+                            latestMinPoints = result[j].Y;
+                        }
+                    }
+                }
+                #endregion
             }            
 
             return result;
-        }
-
-        private double GetGrowthPerDay(PointPairList pplPlanetPoints, int GapBeginIndex, double GapBeginValue)
-        {
-            double RetVal = 0;
-
-            double GapEndValue = 0;            
-
-            for (int i = pplPlanetPoints.Count - GapBeginIndex; i < pplPlanetPoints.Count; i++)
-            {
-                if (pplPlanetPoints[i].Y > 0)
-                {
-                    GapEndValue = pplPlanetPoints[i].Y;
-
-                    RetVal = (GapBeginValue - GapEndValue) / i;
-                    break;
-                }
-                else
-                {
-                    RetVal = GapBeginValue / i;
-                }
-            }            
-
-            return RetVal;
         }
 
         /// <summary>
