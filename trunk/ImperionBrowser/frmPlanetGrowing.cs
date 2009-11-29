@@ -253,7 +253,6 @@ namespace ImperionBrowser
         /// </summary>
         private void LoadGalaxyData()
         {
-            
             _lstPlanet = _GalaxyMap.GetPlanets(PlanetFilterCondition.hasOwner, PlanetType.Desert, PlanetType.Earth, PlanetType.Ice, PlanetType.Vulcan, PlanetType.Water);
 
             pnlProgress.Visible = true;

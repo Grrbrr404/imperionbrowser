@@ -241,6 +241,25 @@ namespace ImperionBrowser
             return json_parseMap(json_ExtractMapdata());
         }
 
+        /// <summary>
+        /// Loads a Galaxy Data Json string from a source file and returns galaxy object
+        /// </summary>
+        /// <param name="iSourceFile">file with json data</param>
+        /// <returns></returns>
+        public GalaxyMap GetGalaxyMap(string iSourceFile)
+        {
+            StringBuilder sb = new StringBuilder();
+            using (StreamReader sr = new StreamReader(iSourceFile))
+            {
+
+                sb.Append(sr.ReadToEnd());
+                sr.Close();
+            }
+            sb = sb.Replace(Environment.NewLine, "");
+            ImperionParser p = new ImperionParser(new WebBrowser());
+            return p.json_parseMap(sb);
+        }
+
         private StringBuilder json_ExtractMapdata()
         {
             return json_ExtractMapdata(mBrowser.DocumentText);

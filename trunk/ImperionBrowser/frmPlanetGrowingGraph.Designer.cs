@@ -91,8 +91,6 @@
             this.Name = "frmPlanetGrowingGraph";
             this.Text = "Planeten wachstum";
             this.TopMost = true;
-            this.Load += new System.EventHandler(this.frmGraph_Load);
-            this.Resize += new System.EventHandler(this.frmGraph_Resize);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
