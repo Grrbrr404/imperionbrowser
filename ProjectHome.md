@@ -1,0 +1,1 @@
+An Application to work with jsons strings
